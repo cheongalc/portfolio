@@ -1,3 +1,5 @@
+var modvMatZTranslation = -6.0;
+
 main();
 
 
@@ -125,7 +127,7 @@ function drawScene(gl, programInfo, buffers) {
 	const modvMat = mat4.create();
 
 	// .translate(destination, matrix to translate, amount to translate)
-	mat4.translate(modvMat, modvMat, [-0.0, 0.0, -6.0]); // X=-0.0, Y=0.0, Z=-6.0
+	mat4.translate(modvMat, modvMat, [-0.0, 0.0, modvMatZTranslation]); // X=-0.0, Y=0.0, Z=-6.0
 
 	{
 		const numComponents = 2; // pull out 2 values per iteration
