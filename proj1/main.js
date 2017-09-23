@@ -117,5 +117,48 @@ function drawScene(gl, programInfo, buffers) {
 	const aspectRatio = gl.canvas.clientWidth / gl.canvas.clientHeight;
 	const zNear = 0.1;
 	const zFar = 100.0; // sets bounds of z coords to draw
-	const projMat = mat4.create();
+	const projMat = mat4.create(); // create 4D matrix acting as projection matrix
+
+	//glMatrix always has first argument as the destination to receive resulting matrix
+	mat4.perspective(projMat, fov, aspectRatio, zNear, zFar);
+
+	const modvMat = mat4.create();
+
+	// .translate(destination, matrix to translate, amount to translate)
+	mat4.translate(modvMat, modvMat, [-0.0, 0.0, -6.0]); // X=-0.0, Y=0.0, Z=-6.0
+
+	{
+		const numComponents = 2; // pull out 2 values per iteration
+		const type = gl.FLOAT;	 // buffer data is Float32
+		const normalize = false;
+		const stride = 0;
+		const offset = 0;
+		gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
+		gl.vertexAttribPointer(
+			programInfo.attribLocations.vertexPosition,
+			numComponents,
+			type,
+			normalize,
+			stride,
+			offset
+		);
+		gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+	}
+
+	gl.useProgram(programInfo.program);
+
+	gl.uniformMatrix4fv(
+		programInfo.uniformLocations.projMat,
+		false,
+		projMat);
+	gl.uniformMatrix4fv(
+		programInfo.uniformLocations.modvMat,
+		false,
+		modvMat);
+
+	{
+		const offset = 0;
+		const vertexCount = 4;
+		gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
+	}
 }
