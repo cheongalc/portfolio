@@ -15,8 +15,9 @@
 			position: fixed;
 			top: 10px;
 			left: 0px;
+			background-color: rgba(0,0,0,0.5);
 		}
-		.zTranslationTitle {
+		.translationTitle {
 			width: 100%;
 			font-family: 'Consolas';
 			color: #fff;
@@ -46,16 +47,59 @@
 		    background: #FFF;
 		    cursor: pointer;
 		}
+
+		.valsContainer {
+			z-index: 2;
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+			border: 1px solid #fff;
+			table-layout: fixed;
+			background-color: rgba(0,0,0, 0.5)
+		}
+
+		.valsContainer td {
+			width: 50%;
+		}
+
+		.valText {
+			font-family: 'Consolas';
+			color: #fff;
+			text-align: right;
+		}
 	</style>
 </head>
 <body>
 	<div id="slideContainer">
-		<div class="zTranslationTitle" id="zTranslationTitle">ZTranslate : -6.0</div>
+		<div class="translationTitle" id="xTranslationTitle">xTranslate : 0.0</div>
+		<input type="range" min="-12" max="12" value="0" class="slider" id="xTranslationSliderRange">
+		<div class="translationTitle" id="yTranslationTitle">yTranslate : 0.0</div>
+		<input type="range" min="-12" max="12" value="0" class="slider" id="yTranslationSliderRange">
+		<div class="translationTitle" id="zTranslationTitle">ZTranslate : -6.0</div>
 		<input type="range" min="-100" max="10" value="-6.0" class="slider" id="zTranslationSliderRange">
 	</div>
 	<canvas id="glCanvas" width="1280" height="680"></canvas>
+	<table class="valsContainer">
+		<tr>
+			<td class="valText">Top Left Vertex <span id="valText_01">(-1.0, 1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_0"><input type="text" placeholder="yVal" id="input_vertexVal_1"><button onclick="update(0, 1)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Bottom Left Vertex <span id="valText_23">(-1.0, -1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_2"><input type="text" placeholder="yVal" id="input_vertexVal_3"><button onclick="update(2, 3)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Bottom Right Vertex <span id="valText_45">(1.0, -1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_4"><input type="text" placeholder="yVal" id="input_vertexVal_5"><button onclick="update(4, 5)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Top Right Vertex <span id="valText_67">(1.0, 1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_6"><input type="text" placeholder="yVal" id="input_vertexVal_7"><button onclick="update(6, 7)">Update</button></td>
+		</tr>
+	</table>
 	<script src="../gl-matrix.js"></script>
 	<script src="main.js"></script>
 	<script src="slider.js"></script>
+	<script src="polyshape.js"></script>
 </body>
 </html>

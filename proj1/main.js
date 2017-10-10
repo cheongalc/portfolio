@@ -1,4 +1,13 @@
-var modvMatZTranslation = -6.0;
+var modvMatXTranslation = 0.0,
+	modvMatYTranslation = 0.0,
+	modvMatZTranslation = -6.0;
+
+var manipulatedBufferPos = [
+	1.0,  1.0,
+   -1.0,  1.0,
+    1.0, -1.0,
+   -1.0, -1.0,
+];
 
 main();
 
@@ -93,12 +102,7 @@ function initBuffers(gl) {
 	const sqPosBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, sqPosBuffer);
 
-	const bufferPos = [
-		1.0,  1.0,
-	   -1.0,  1.0,
-	    1.0, -1.0,
-	   -1.0, -1.0,
-	];
+	const bufferPos = manipulatedBufferPos;
 
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(bufferPos), gl.STATIC_DRAW);
 
@@ -127,7 +131,7 @@ function drawScene(gl, programInfo, buffers) {
 	const modvMat = mat4.create();
 
 	// .translate(destination, matrix to translate, amount to translate)
-	mat4.translate(modvMat, modvMat, [-0.0, 0.0, modvMatZTranslation]); // X=-0.0, Y=0.0, Z=-6.0
+	mat4.translate(modvMat, modvMat, [modvMatXTranslation, modvMatYTranslation, modvMatZTranslation]); // X=-0.0, Y=0.0, Z=-6.0
 
 	{
 		const numComponents = 2; // pull out 2 values per iteration
