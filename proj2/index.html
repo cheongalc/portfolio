@@ -46,26 +46,50 @@
 			color: #fff;
 			text-align: right;
 		}
+		.backDiv {
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			padding:16px;
+		}
+		/* Rules for sizing the icon. */
+		.material-icons.md-18 { font-size: 18px; }
+		.material-icons.md-24 { font-size: 24px; }
+		.material-icons.md-36 { font-size: 36px; }
+		.material-icons.md-48 { font-size: 48px; }
+
+		/* Rules for using icons as black on a light background. */
+		.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+		.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+		/* Rules for using icons as white on a dark background. */
+		.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+		.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+		.material-icons:hover {
+			cursor: pointer;
+		}
 	</style>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 	<canvas id="glCanvas" width="1280" height="680"></canvas>
+	<div class="backDiv"><i class="material-icons md-light md-36" onclick="window.location = '../index.html';">arrow_back</i></div>
 	<table class="valsContainer">
 		<tr>
-			<td class="valText">Top Left Vertex: <span id="valText_0123">rgba(1, 0, 0, 1)</span></td>
+			<td class="valText">Top Right Vertex: <span id="valText_0123">rgba(1.00, 1.00, 1.00, 1.00)</span></td>
 			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_0"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_1"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_2"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_3"><button onclick="update(0, 1, 2, 3)">Update</button></td>
 		</tr>
 		<tr>
-			<td class="valText">Bottom Left Vertex: <span id="valText_4567">rgba(0, 0, 1, 1)</span></td>
-			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_4"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_5"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_6"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_7"><button onclick="update(4, 5, 6, 7)">Update</button></td>
+			<td class="valText">Top Left Vertex: <span id="valText_4567">rgba(1.00, 0.00, 0.00, 1.00)</span></td>
+			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_4"><input value="0" type="text" placeholder="gVal" id="input_vertexVal_5"><input value="0" type="text" placeholder="bVal" id="input_vertexVal_6"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_7"><button onclick="update(4, 5, 6, 7)">Update</button></td>
 		</tr>
 		<tr>
-			<td class="valText">Bottom Right Vertex: <span id="valText_89AB">rgba(0, 1, 0, 1)</span></td>
-			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_8"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_9"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_A"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_B"><button onclick="update(8, 9, 'A', 'B')">Update</button></td>
+			<td class="valText">Bottom Right Vertex: <span id="valText_89AB">rgba(0.00, 1.00, 0.00, 1.00)</span></td>
+			<td><input value="0" type="text" placeholder="rVal" id="input_vertexVal_8"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_9"><input value="0" type="text" placeholder="bVal" id="input_vertexVal_A"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_B"><button onclick="update(8, 9, 'A', 'B')">Update</button></td>
 		</tr>
 		<tr>
-			<td class="valText">Top Right Vertex: <span id="valText_CDEF">rgba(1, 1, 1, 1)</span></td>
-			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_C"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_D"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_E"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_F"><button onclick="update('C', 'D', 'E', 'F')">Update</button></td>
+			<td class="valText">Bottom Left Vertex: <span id="valText_CDEF">rgba(0.00, 0.00, 1.00, 1.00)</span></td>
+			<td><input value="0" type="text" placeholder="rVal" id="input_vertexVal_C"><input value="0" type="text" placeholder="gVal" id="input_vertexVal_D"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_E"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_F"><button onclick="update('C', 'D', 'E', 'F')">Update</button></td>
 		</tr>
 	</table>
 	<script src="../gl-matrix.js"></script>

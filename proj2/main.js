@@ -151,7 +151,7 @@ function drawScene(gl, programInfo, buffers) {
 
 	mat4.translate(modelViewMatrix,
 				   modelViewMatrix,
-				   [0.0, 0.0, -5.0]); // [x, y, z]
+				   [0.0, 0.0, -4.0]); // [x, y, z]
 
 	{
 		const numComponents = 2; 	// pull 2 uniforms from shader program per iteration
