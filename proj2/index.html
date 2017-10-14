@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>proj-webgl_2</title>
+	<style type="text/css">
+		html, body {
+			height: 100%;
+			margin: 0px;
+		}
+		canvas {
+			width: 100vw;
+			height: 100vh;
+			margin: 0px;
+			display: block;
+		}
+		.valsContainer {
+			z-index: 2;
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+			border: 1px solid #fff;
+			table-layout: fixed;
+			background-color: rgba(0,0,0, 0.5)
+		}
+
+		.valsContainer td {
+			width: 50%;
+		}
+		.valsContainer input {
+			padding-left: 16px;
+			width: 100px;
+			font-family: 'Consolas';
+			color: #fff;
+			background-color: #000;
+			border: 0px;
+		}
+		.valsContainer button {
+			background-color: #000;
+			color: #fff;
+			font-family: 'Consolas';
+			border: 1px solid white;
+			border-radius: 4px;
+		}
+		.valText {
+			font-family: 'Consolas';
+			color: #fff;
+			text-align: right;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="glCanvas" width="1280" height="680"></canvas>
+	<table class="valsContainer">
+		<tr>
+			<td class="valText">Top Left Vertex: <span id="valText_0123">rgba(1, 0, 0, 1)</span></td>
+			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_0"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_1"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_2"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_3"><button onclick="update(0, 1, 2, 3)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Bottom Left Vertex: <span id="valText_4567">rgba(0, 0, 1, 1)</span></td>
+			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_4"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_5"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_6"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_7"><button onclick="update(4, 5, 6, 7)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Bottom Right Vertex: <span id="valText_89AB">rgba(0, 1, 0, 1)</span></td>
+			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_8"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_9"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_A"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_B"><button onclick="update(8, 9, 'A', 'B')">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Top Right Vertex: <span id="valText_CDEF">rgba(1, 1, 1, 1)</span></td>
+			<td><input value="255" type="text" placeholder="rVal" id="input_vertexVal_C"><input value="255" type="text" placeholder="gVal" id="input_vertexVal_D"><input value="255" type="text" placeholder="bVal" id="input_vertexVal_E"><input value="255" type="text" placeholder="aVal" id="input_vertexVal_F"><button onclick="update('C', 'D', 'E', 'F')">Update</button></td>
+		</tr>
+	</table>
+	<script src="../gl-matrix.js"></script>
+	<script src="main.js"></script>
+	<script src="colorify.js"></script>
+</body>
+</html>
