@@ -21,7 +21,39 @@ function update(pos1, pos2, pos3, pos4) {
 	bufferColors[pos3] = val3;
 	bufferColors[pos4] = val4;
 
+	updateHash();
+
 	outputVertex.innerHTML = "rgba(" + val1.toFixed(2).toString() + ", " + val2.toFixed(2).toString() + ", " + val3.toFixed(2).toString() + ", "+ val4.toFixed(2).toString() + ")";
 	main();
 
+}
+
+function updateHash() {
+	var hash = "#";
+	var section1 = "color1=",
+		section2 = "color2=",
+		section3 = "color3=",
+		section4 = "color4=";
+
+	for (i = 0; i < 4; i++) {
+		section1 = section1 + ":" + (bufferColors[i] * 255).toString();
+	}
+
+	for (i = 4; i < 8; i++) {
+		section2 = section2 + ":" + (bufferColors[i] * 255).toString();
+	}
+
+	for (i = 8; i < 12; i++) {
+		section3 = section3 + ":" + (bufferColors[i] * 255).toString();
+	}
+
+	for (i = 12; i < 16; i++) {
+		section4 = section4 + ":" + (bufferColors[i] * 255).toString();
+	}
+
+	hash = hash + section1 + "&" + section2 + "&" + section3 + "&" + section4;
+
+	window.history.replaceState(null, null, hash);
+
+	console.log(hash);
 }
