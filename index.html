@@ -2,34 +2,219 @@
 <html>
 <head>
 	<title>Home</title>
+	<meta content="width=device-width, initial-scale=1" name="viewport" />
 	<style type="text/css">
-		*, html {
+		html {
 			box-sizing: border-box;
-			margin: 0px;
-			padding: 0px;
-			background-color: #000;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 		}
-		.tag {
-			background-color: #003399;
-			color: #fff;
-			font-family: 'Consolas';
-			padding:4px;
-			margin: 4px;
-			border-radius: 4px;
+		*, *::before, *::after {
+			box-sizing: inherit;
+			margin: 0;
+			padding: 0;
+		}
+		nav {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			background-color: #000;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+		}
+		.nav-icon {
+			height: 48px;
+			margin: 8px;
 		}
 
-		li {
+		.nav-links {
+			display: flex;
+			list-style: none;
+			align-items: center;
+			height: 100%;
+		}
+		.nav-links a {
+			text-decoration: none;
+			display: block;
+  			padding: 1em;
+  			color: white;
+		}
+		.active {
+			background-color: #212121;
+		}
+		.nav-links li {
+			height: 64px;
+			display: flex;
+			align-items: center;
+			transition: 0.3s ease-in-out;
+		}
+		.nav-links li:hover {
+			background-color: #212121;
+		}
+
+		.cards-container {
+			display: flex;
+			padding: 0px;
+			margin: 64px 0px 0px 0px;
+			flex-flow: row wrap;
+			justify-content: space-around;
+		}
+
+		.card {
+			background: #F5F5F5;
+			border-radius: 12px;
+			box-shadow: 0 4px 4px rgba(0, 0, 0, .15);
+			margin: 16px 16px 0px 16px;
+			padding: 16px;
+			width: 31vw;
+			cursor: pointer;
+			display: flex;
+			justify-content: space-between;
+			flex-flow: column wrap;
+		}
+
+		h1 {
+			font-size: 24px;
 			margin-bottom: 16px;
+		}
+
+		hr {
+			margin: 16px 0px 16px 0px;
+		}
+		
+		.tag {
+			padding: 8px;
+			font-weight: bold;
+			background-color: #212121;
+			border-radius: 12px;
+			color: #fff;
+			box-shadow: 0px 4px 4px rgba(0, 0, 0, .15);
+		}
+
+		.info-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.timestamp-container {
+			display: flex;
+			align-items: center;
+		}
+
+		.timestamp {
+			margin-left: 8px;
+		}
+
+
+
+		@media screen and (max-width: 800px) {
+			nav {
+				justify-content: center;
+			}
+			.card {
+				width: 100%;
+			}
+		}
+
+		@media screen and (max-width: 600px) {
+			nav {
+				position: initial;
+				flex-flow: column wrap;
+			}
+
+			.nav-links {
+				flex-flow: column wrap;
+				width: 100%;
+				align-items: initial;
+			}
+
+			.nav-links a {
+				text-align: center;
+				padding: 16px;
+    			border-top: 1px solid rgba(255, 255, 255, 0.3);
+			}
+
+			.nav-links li {
+				height: auto;
+				display: initial;
+			}
+
+			.nav-links li:last-of-type a {
+				border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+			}
+
+			.cards-container {
+				margin: 0;
+				flex-flow: column wrap;
+			}
+			.card {
+				width: auto;
+			}
 		}
 	</style>
 </head>
 <body>
-	<h1><code>WebGL</code> Projects</h1>
-	<ul>
-		<li><a href="proj1/index.html">Project 1</a>: Any 3 to 5 sided figure (<span class="tag">x-translation</span><span class="tag">y-translation</span><span class="tag">z-translation</span>)</li>
-		<li><a href="proj2/index.html">Project 2</a>: Coloured 2D Structure (<span class="tag">color-r</span><span class="tag">color-g</span><span class="tag">color-b</span><span class="tag">color-a</span>)</li>
-		<li><a href="proj3/index.html">Project 3</a>: 3D Rotating Cube (<span class="tag">3d-rotation</span>)</li>
-		<li><a href="Snek/index.html">Snek</a>: Not really WebGL but bah (<span class="tag">HTML5 Canvas</span>)</li>
-	</ul>
+	<nav class="navbar">
+		<img class="nav-icon" src="img/icon.jpeg"/>
+		<ul class="nav-links">
+			<li class="active"><a href="#">web projects</a></li>
+			<li><a href="#">AI projects</a></li>
+			<li><a href="#">app projects</a></li>
+			<li><a href="#">school projects</a></li>
+		</ul>
+	</nav>
+	<div id="web-projects-container" class="cards-container">
+		<div class="card" onclick="location.href='proj1/'">
+			<h1>WebGL Polygon Generator</h1>
+			<p>First venture into manual WebGL, allows translation of a 2D object in 3 dimensions and redefining of its vertices to create any polygon.</p>
+			<hr>
+			<div class="info-container">
+				<div class="timestamp-container">
+					<img class="calendar-icon" src="img/calendar.svg">
+					<span class="timestamp">2018</span>
+				</div>
+				<span class="tag">webgl</span>
+			</div>
+		</div>
+		<div class="card" onclick="location.href='proj2/'">
+			<h1>Colour Gradient Generator</h1>
+			<p>Second venture into manual WebGL. Based on rgba colour input, WebGL will style the corners of square and blend the colours.</p>
+			<hr>
+			<div class="info-container">
+				<div class="timestamp-container">
+					<img class="calendar-icon" src="img/calendar.svg">
+					<span class="timestamp">2018</span>
+				</div>
+				<span class="tag">webgl</span>
+			</div>
+		</div>
+		<div class="card" onclick="location.href='proj3/'">
+			<h1>3D Rotating Cube</h1>
+			<p>Third venture into manual WebGL. Renders a 3D cube that rotates.</p>
+			<hr>
+			<div class="info-container">
+				<div class="timestamp-container">
+					<img class="calendar-icon" src="img/calendar.svg">
+					<span class="timestamp">2018</span>
+				</div>
+				<span class="tag">webgl</span>
+			</div>
+		</div>
+		<div class="card" onclick="location.href='proj4/'">
+			<h1>snek</h1>
+			<p>Snake Game made using HTML5 Canvas</p>
+			<hr>
+			<div class="info-container">
+				<div class="timestamp-container">
+					<img class="calendar-icon" src="img/calendar.svg">
+					<span class="timestamp">2019</span>
+				</div>
+				<span class="tag">canvas</span>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
