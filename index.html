@@ -25,7 +25,11 @@
 			}
 			.card {
 				cursor: pointer;
-				border: none !important;
+				border: 1px solid #eee !important;
+				width: 100%;
+			}
+			.badge-holder {
+				padding: 0 1.25rem 1.25rem 0;
 			}
 		</style>
 	</head>
@@ -41,8 +45,14 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item mr-sm-2">
-							<a class="nav-link" href="#web">web</a>
+						<li class="nav-item dropdown mr-sm-2">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">web</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" href="#p1.1">webgl/3D/babylonjs</a>
+								<a class="dropdown-item" href="#p1.2">css experiments</a>
+								<a class="dropdown-item" href="#p1.3">standalone sites</a>
+								<a class="dropdown-item" href="#p1.4">school commissions</a>
+							</div>
 						</li>
 						<li class="nav-item mr-sm-2">
 							<a class="nav-link" href="#">AI/ML</a>
@@ -51,7 +61,7 @@
 							<a class="nav-link" href="#">app</a>
 						</li>
 						<li class="nav-item mr-sm-2">
-							<a class="nav-link" href="#">3D/VR/AR/MR</a>
+							<a class="nav-link" href="#">VR/AR/MR</a>
 						</li>
 						<li class="nav-item mr-sm-2">
 							<a class="nav-link" href="#">crypto</a>
@@ -73,47 +83,71 @@
 
 		<div class="container">
 
-			<h1><a class="anchor" id="web"></a>web projects</h1>
-			<br>
+			<h1 class="mb-4"><a class="anchor" id="p1"></a>web projects</h1>
+			<h3 class="mb-2"><a class="anchor" id="p1.1"></a>webgl/3D/babylonjs</h3>
+
 			<div class="row">
-				<div class="col-md d-flex align-items-stretch">
+				<div class="col-md d-flex align-items-stretch mt-2">
 					<div class="card shadow-sm">
-						<div class="card-body" onclick="location.href='proj1/'">
+						<div class="card-body" onclick="location.href='p/1/1/1'">
 							<h5 class="card-title">polygon maker</h5>
 							<h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> sometime, 2017</h6>
 							<p class="card-text">first ever <code>webgl</code> project. allows you to do xyz translation and define 4 vertices of a polygon.</p>
-							<div class="d-flex justify-content-end">
-								<span class="badge badge-primary">webgl</span>
-							</div>
+						</div>
+						<div class="badge-holder d-flex justify-content-end align-self-end">
+							<span class="badge badge-primary">webgl</span>
 						</div>
 					</div>
 				</div>
-				<div class="col-md d-flex align-items-stretch">
+				<div class="col-md d-flex align-items-stretch mt-2">
 					<div class="card shadow-sm">
-						<div class="card-body" onclick="location.href='proj2/'">
+						<div class="card-body" onclick="location.href='p/1/1/2'">
 							<h5 class="card-title">gradient generator</h5>
 							<h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> later, 2017</h6>
 							<p class="card-text">second <code>webgl</code> project. allows you to define <code>rgba()</code> values for 4 vertices of a square and blends the colours naturally. useful for creating colour wallpapers.</p>
-							<div class="d-flex justify-content-end">
-								<span class="badge badge-primary mr-2">webgl</span>
-								<span class="badge badge-primary">colour</span>
-							</div>
+						</div>
+						<div class="badge-holder d-flex justify-content-end">
+							<span class="badge badge-primary mr-2">webgl</span>
+							<span class="badge badge-primary">colour</span>
 						</div>
 					</div>
 				</div>
-				<div class="col-md d-flex align-items-stretch">
+				<div class="col-md d-flex align-items-stretch mt-2">
 					<div class="card shadow-sm">
-						<div class="card-body" onclick="location.href='proj3/'">
+						<div class="card-body" onclick="location.href='p/1/1/3'">
 							<h5 class="card-title">spinning cube</h5>
 							<h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> later, 2017</h6>
 							<p class="card-text">third <code>webgl</code> project. renders a 3D rotating cube. </p>
-							<div class="d-flex justify-content-end">
-								<span class="badge badge-primary">webgl</span>
-							</div>
+						</div>
+						<div class="badge-holder d-flex justify-content-end">
+							<span class="badge badge-primary">webgl</span>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<h3 class="mt-4 mb-2"><a class="anchor" id="p1.2"></a>css experiments</h3>
+
+			<h3 class="mt-4 mb-2"><a class="anchor" id="p1.3"></a>standalone sites</h3>
+
+			<div class="row">
+				<div class="col-md d-flex align-items-stretch mt-2">
+					<div class="card shadow-sm">
+						<div class="card-body" onclick="location.href='p/1/3/1'">
+							<h5 class="card-title">snek</h5>
+							<h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> 2018</h6>
+							<p class="card-text">snake game created with HTML5 canvas</p>
+						</div>
+						<div class="badge-holder d-flex justify-content-end align-self-end">
+							<span class="badge badge-primary mr-2">html5</span>
+							<span class="badge badge-primary">canvas</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h3 class="mt-4 mb-2"><a class="anchor" id="p1.4"></a>school projects</h3>
+
 			<div style="height: 5000px;"></div>
 		</div>
 	</body>
