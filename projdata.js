@@ -94,7 +94,7 @@ function generateProjectCards(projObjRef, i, j=null) {
         }
         let currProj = projObjRef[numProjsProcessed+1];
         let currProjLink = projObjRef[numProjsProcessed+1]['link'];
-        let currProjFilePath = (currProjLink) ? currProjLink : `p/${i}/${j}/${numProjsProcessed+1}`;
+        let currProjFilePath = (currProjLink) ? currProjLink : (j) ? `p/${i}/${j}/${numProjsProcessed+1}` : `p/${i}/${numProjsProcessed+1}`;
         let currProjName = currProj['name'];
         let currProjTimestamp = currProj['timestamp'];
         let currProjDesc = currProj['description'];
@@ -129,5 +129,13 @@ function generateProjectCards(projObjRef, i, j=null) {
         currRow.appendChild(cardWrapperDiv);
 
         numProjsProcessed++;
+    }
+
+    if (numProjs == 0) {
+        let noProjsDiv = document.createElement('div');
+        noProjsDiv.classList.add('mx-auto');
+        noProjsDiv.classList.add('mb-4');
+        noProjsDiv.appendChild(document.createTextNode('No projects at the moment'));
+        PROJDIV.appendChild(noProjsDiv);
     }
 }
