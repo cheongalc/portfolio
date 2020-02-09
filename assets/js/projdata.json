@@ -1,0 +1,79 @@
+{
+    "1": {
+        "href": "#",
+        "name": "web",
+        "sublinks": {
+            "1": {
+                "name": "webgl/3D/babylonjs",
+                "subprojs": {
+                    "1": {
+                        "name": "polygon maker",
+                        "timestamp": "sometime, 2017",
+                        "description": "first ever <code>webgl</code> project. allows you to do xyz translation and define 4 vertices of a polygon.",
+                        "tags": ["webgl"] 
+                    },
+                    "2": {
+                        "name": "gradient generator",
+                        "timestamp": "later, 2017",
+                        "description": "second <code>webgl</code> project. allows you to define <code>rgba()</code> values for 4 vertices of a square and blends the colours naturally. useful for creating colour wallpapers.",
+                        "tags": ["webgl", "colour"] 
+                    },
+                    "3": {
+                        "name": "spinning cube",
+                        "timestamp": "later, 2017",
+                        "description": "third <code>webgl</code> project. renders a 3D rotating cube.",
+                        "tags": ["webgl"]
+                    }
+                }
+            },
+            "2": {
+                "name": "css experiments",
+                "subprojs": {}
+            },
+            "3": {
+                "name": "standalone sites",
+                "subprojs": {
+                    "1": {
+                        "name": "snek",
+                        "timestamp": "2018",
+                        "description": "snake game created with HTML5 canvas",
+                        "tags": ["html5", "canvas"]
+                    }
+                }
+            },
+            "4": {
+                "name": "school commissions",
+                "subprojs": {}
+            }
+        }
+    },
+    "2": {
+        "href": "#",
+        "name": "AI/ML",
+        "subprojs": {}
+    },
+    "3": {
+        "href": "#",
+        "name": "app",
+        "sublinks": {
+            "1": {
+                "name": "android",
+                "subprojs": {}
+            },
+            "2": {
+                "name": "react",
+                "subprojs": {}
+            }
+        }
+    },
+    "4": {
+        "href": "#",
+        "name": "VR/AR/MR",
+        "subprojs": {}
+    },
+    "5": {
+        "href": "#",
+        "name": "fintech",
+        "subprojs": {}
+    }
+}
