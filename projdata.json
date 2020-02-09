@@ -23,7 +23,7 @@
                     "3": {
                         "name": "tours.hci.edu.sg",
                         "timestamp": "dec 2019 - ongoing",
-                        "description": "a completely revamped version of 情牵华岗. we got feedback after the 100th anniversary heritage trail that school management liked the website and wanted to expand it for future use to cover ALL tours, including SOO, teachers induction, JC orientaiton, HSC investiture, etc... The old interface has been preserved but is now a subpage of the new website. The new website's landing page shows ALL tours instead of landmarks. There is also a new Maps interface.",
+                        "description": "a completely revamped version of 情牵华岗. we got feedback after the 100th anniversary heritage trail that school management liked the website and wanted to expand it for future use to cover ALL tours, including SOO, teachers induction, JC orientation, HSC investiture, etc... The old interface has been preserved but is now a subpage of the new website. The new website's landing page shows ALL tours instead of landmarks. There is also a new Maps interface.",
                         "tags": ["commission", "openlayers", "WIP"],
                         "link": "https://zerui18.github.io/HCITours"                   
                     }
