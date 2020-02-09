@@ -89,7 +89,6 @@ function generateProjectCards(projObjRef, i, j=null) {
         if (numProjsProcessed % 3 == 0) {
             currRow = document.createElement('div');
             currRow.classList.add('row');
-            currRow.classList.add('mb-4');
             PROJDIV.appendChild(currRow);
         }
         let currProj = projObjRef[numProjsProcessed+1];
@@ -112,7 +111,7 @@ function generateProjectCards(projObjRef, i, j=null) {
 
         let cardHTML = 
         `
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mb-4">
             <div class="card-body" onclick="${currProjTimestamp == "future" ? '' : `location.href='${currProjFilePath}`}'">
                 <h5 class="card-title">${currProjName}</h5>
                 <h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> ${currProjTimestamp}</h6>
