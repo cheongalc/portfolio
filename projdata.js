@@ -1,7 +1,7 @@
 const PROJDIV = document.getElementById('projDiv');
 const MAINLINKSLIST = document.getElementById('mainLinksList');
 
-fetch('assets/js/projdata.json')
+fetch('projdata.json')
 .then((res) => {return res.json()})
 .then((PROJDATA) => {
     console.log(PROJDATA);

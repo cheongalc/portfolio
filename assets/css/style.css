@@ -1,0 +1,21 @@
+.bg-black {
+    background-color: #000;
+}
+img.icon {
+    margin-right: 8px;
+}
+body {
+    padding-top: 100px;
+}
+.anchor {
+    position: relative;
+    top: -64px;
+}
+.card {
+    cursor: pointer;
+    border: 1px solid #eee !important;
+    width: 100%;
+}
+.badge-holder {
+    padding: 0 1.25rem 1.25rem 0;
+}
