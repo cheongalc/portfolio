@@ -113,7 +113,7 @@ function generateProjectCards(projObjRef, i, j=null) {
         let cardHTML = 
         `
         <div class="card shadow-sm">
-            <div class="card-body" onclick="location.href='${currProjFilePath}'">
+            <div class="card-body" onclick="${currProjTimestamp == "future" ? '' : `location.href='${currProjFilePath}`}'">
                 <h5 class="card-title">${currProjName}</h5>
                 <h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> ${currProjTimestamp}</h6>
                 <p class="card-text">${currProjDesc}</p>

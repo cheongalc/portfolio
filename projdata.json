@@ -142,7 +142,7 @@
         }
     },
     "2": {
-        "href": "#",
+        "href": "#p2",
         "name": "AI/ML",
         "subprojs": {
             "1": {
@@ -213,7 +213,7 @@
                     "1": {
                         "name": "pocketloopstation",
                         "timestamp": "future",
-                        "description": "going to attempt to make a loopstation emulator in react for cross platform support, as the existing apps for loopstation aren't that great and GarageBand isn't solely for loopstation.",
+                        "description": "loopstation emulator in react for cross platform support. Existing apps for loopstation aren't that great. You do have garageband but the learning curve for that is quite steep. Try to mimic a professional loopstation using user friendly features.",
                         "tags": ["react", "bbx", "WIP"]
                     }
                 }
@@ -221,12 +221,12 @@
         }
     },
     "4": {
-        "href": "#",
+        "href": "#p4",
         "name": "VR/AR/MR",
         "subprojs": {}
     },
     "5": {
-        "href": "#",
+        "href": "#p5",
         "name": "fintech",
         "subprojs": {}
     }
