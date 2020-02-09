@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Astro Duel</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<style type="text/css">
+		@font-face {
+			font-family: bitFont;
+			src: url(fonts/8bit.ttf);
+		}
+
+		body {
+			font-family: bitfont;
+			color: #fff;
+		}
+
+		h1.centre-heading {
+			margin: 4vh;
+		}
+
+		.centre-table {
+			position: absolute;
+			top: 50%; 
+			left: 50%;
+			transform: translate(-50%, -50%);
+			table-layout: fixed;
+			color: white;
+			width: 60vw;
+			white-space: nowrap;
+		}
+	</style>
+</head>
+<body>
+	<img class="background" src="img/space-background.png">
+	<table class="centre-table">
+		<tr>
+			<td colspan="2" class="text-m">SELECT GAMEMODE</td>
+		</tr>
+		<tr>
+			<td class="cell-half"><img class="gamemode-btn disabled" width="100%" src="img/button-online.png"></td>
+			<td class="cell-half"><img class="gamemode-btn" width="100%" src="img/button-local.png"></td>
+		</tr>
+		<tr>
+			<td class="cell-half text-s">ONLINE 1v1</td>
+			<td class="cell-half text-s">LOCAL MATCH</td>
+		</tr>
+	</table>
+</body>
+</html>

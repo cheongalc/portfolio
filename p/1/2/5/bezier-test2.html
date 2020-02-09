@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bezier test 2</title>
+  <style type="text/css">
+      .demo-dot {
+        animation: xAxis 2.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);
+      }
+
+      .demo-dot::after {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        background-color: #000;
+        animation: yAxis 2.5s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+      }
+
+      @keyframes yAxis {
+        50% {
+          animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+          transform: translateY(-100px);xx
+        }
+      }
+
+      @keyframes xAxis {
+        50% {
+          animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+          transform: translateX(100px);
+        }
+      }
+  </style>
+</head>
+<body>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="demo-dot"></div>
+</body>
+</html>

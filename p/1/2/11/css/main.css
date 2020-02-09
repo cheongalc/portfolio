@@ -1,0 +1,107 @@
+html, body {
+	margin: 0px;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+/*ANIM*/
+
+@keyframes backgroundAnim {
+	0%   {top: 0px;}
+    25%  {top: -600px;}
+    37%  {left: -600px;}
+    50%  {top: -1200px;}
+    60%  {left: -350px;}
+    75%  {top: -600px;}
+    87%  {left: 0px;}
+    100% {top: 0px;}
+}
+
+/*IMAGES*/
+.background {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: -1;
+	animation-name: backgroundAnim;
+	animation-duration: 30s;
+	animation-iteration-count: infinite;
+}
+
+.title-image {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -75%);
+	width: 60vw;
+}
+
+img.disabled {
+	-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+
+
+/*BUTTONS*/
+
+.home-btn {
+	border: 3px solid #FFF;
+	background-color: #0E72FB;
+}
+
+.gamemode-btn {
+	display: block;
+	vertical-align: bottom;
+	/*height: 30vh;*/
+}
+
+/*TABLES*/
+
+.centre-table {
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+	transform: translate(-50%, 75%);
+	table-layout: fixed;
+	color: white;
+	width: 60vw;
+	white-space: nowrap;
+}
+
+.centre-table td {
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 2vh;
+	cursor: pointer;
+}
+
+td.cell-third {
+	width: 30%;
+	text-align: center;
+}
+
+td.cell-half {
+	width: 50%;
+	text-align: center;
+}
+
+/*TEXT*/
+.text-s {
+	font-size: 1.5vw;
+	text-align: center;
+}
+
+.text-m {
+	font-size: 2vw;
+	text-align: center;
+}
+
+
+.centre-heading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -600%);	
+}

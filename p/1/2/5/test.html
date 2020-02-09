@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bezier test</title>
+	<style type="text/css">
+		.sun {
+			animation: xSunMovement 14s infinite linear;
+			position: absolute;
+			bottom: -20vh;
+			left: 50vw;
+			height: 50vw;
+			transform: rotate(-150deg);
+			border: 1px solid red;
+		}
+		.sun::after {
+			content: "";
+			display: block;
+			width: 20px;
+			height: 20px;
+			border-radius: 20px;
+			background-color: #000;
+			animation: ySunMovement 14s infinite ;
+		}
+
+		@keyframes ySunMovement {
+		}
+		@keyframes xSunMovement {
+			0% {
+				height: 60vw;
+			}
+			50% {
+				transform: rotate(0deg);
+				height: 50vw;
+			}
+			100% {
+				/*animation-timing-function: cubic-bezier(.34,.04,.79,.89);*/
+				transform: rotate(150deg);
+				height: 60vw;
+			}
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="sun"></div>
+</body>
+</html>

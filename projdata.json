@@ -4,46 +4,126 @@
         "name": "web",
         "sublinks": {
             "1": {
-                "name": "webgl/3D/babylonjs",
+                "name": "school commissions",
                 "subprojs": {
                     "1": {
-                        "name": "polygon maker",
-                        "timestamp": "sometime, 2017",
-                        "description": "first ever <code>webgl</code> project. allows you to do xyz translation and define 4 vertices of a polygon.",
-                        "tags": ["webgl"] 
+                        "name": "mBoggle 2.0 (Ikan Oh Ikan)",
+                        "timestamp": "dec 2017 - may 2019",
+                        "description": "We developed a new Malay word game to replace the existing one in the annual HCI Malay Boggle (mBoggle) competition. Players control a fish that pops alphabet bubbles to spell out Malay words. This is a fun and interactive way to engage MSP students, improve their Malay vocabulary, and promote greater interest in the Malay language. The mBoggle competition attracts about 200 MSP students from different schools in Singapore. From 2019 onwards, Ikan oh Ikan will be the game used in the competition. <e>*** the link works only on the school network</e>",
+                        "tags": ["commission"],
+                        "link": "https://mboggle.hci.edu.sg"
                     },
                     "2": {
-                        "name": "gradient generator",
-                        "timestamp": "later, 2017",
-                        "description": "second <code>webgl</code> project. allows you to define <code>rgba()</code> values for 4 vertices of a square and blends the colours naturally. useful for creating colour wallpapers.",
-                        "tags": ["webgl", "colour"] 
+                        "name": "情牵华岗",
+                        "timestamp": "feb - mar 2019",
+                        "description": "情牵华岗 is a website created for the Hwa Chong 100th Anniversary Heritage Tour, held on 9 March 2019. Using location services, it detects, highlights, and gives a brief introduction on Hwa Chong landmarks that are in close proximity to the visitor. It also acts as a guestbook that allows visitors to pen down messages as a record of the visit.",
+                        "tags": ["commission"],
+                        "link": "https://meeps123.github.io/hc100webapp/"
                     },
                     "3": {
-                        "name": "spinning cube",
-                        "timestamp": "later, 2017",
-                        "description": "third <code>webgl</code> project. renders a 3D rotating cube.",
-                        "tags": ["webgl"]
+                        "name": "tours.hci.edu.sg",
+                        "timestamp": "dec 2019 - ongoing",
+                        "description": "a completely revamped version of 情牵华岗. we got feedback after the 100th anniversary heritage trail that school management liked the website and wanted to expand it for future use to cover ALL tours, including SOO, teachers induction, JC orientaiton, HSC investiture, etc... The old interface has been preserved but is now a subpage of the new website. The new website's landing page shows ALL tours instead of landmarks. There is also a new Maps interface.",
+                        "tags": ["commission", "WIP"],
+                        "link": "https://zerui18.github.io/HCITours"                   
                     }
                 }
             },
             "2": {
-                "name": "css experiments",
-                "subprojs": {}
-            },
-            "3": {
                 "name": "standalone sites",
                 "subprojs": {
                     "1": {
+                        "name": "local storage example",
+                        "timestamp": "jan 2017",
+                        "description": "first time getting in touch with <code>localStorage</code>. the page remembers what color you have set the background to.",
+                        "tags": ["localStorage"]
+                    },
+                    "2": {
+                        "name": "periodic table",
+                        "timestamp": "jan 2017",
+                        "description": "attempt at recreating the ptable found in <a href='ptable.org'>ptable.org</a>",
+                        "tags": ["recreate", "WIP"]
+                    },
+                    "3": {
+                        "name": "win10 start screen",
+                        "timestamp": "feb 2017",
+                        "description": "attempt at recreating the win10 start screen",
+                        "tags": ["recreate"]
+                    },
+                    "4": {
+                        "name": "damn counter",
+                        "timestamp": "mar 2017",
+                        "description": "another project that makes use of <code>localStorage</code>. a half useless damn counter that allows you to give X number of damns about a certain topic",
+                        "tags": ["localStorage"]
+                    },
+                    "5": {
+                        "name": "the 25th hour",
+                        "timestamp": "june 2017",
+                        "description": "attempt at creating an animation loop of the day/night cycle",
+                        "tags": ["anim"]
+                    },
+                    "6": {
+                        "name": "flappybird",
+                        "timestamp": "may 2017",
+                        "description": "flappy bird game created for demo purposes at the infocomm booth during 2017's HCI open house",
+                        "tags": ["html5", "canvas"]
+                    },
+                    "7": {
+                        "name": ".io game behaviour",
+                        "timestamp": "june 2017",
+                        "description": "tried to mimic how .io games allow users to move a character with the mouse",
+                        "tags": ["html5", "canvas"]
+                    },
+                    "8": {
+                        "name": "polygon maker",
+                        "timestamp": "jul 2017",
+                        "description": "first ever <code>webgl</code> project. allows you to do xyz translation and define 4 vertices of a polygon.",
+                        "tags": ["webgl"] 
+                    },
+                    "9": {
+                        "name": "gradient generator",
+                        "timestamp": "jul 2017",
+                        "description": "second <code>webgl</code> project. allows you to define <code>rgba()</code> values for 4 vertices of a square and blends the colours naturally. useful for creating colour wallpapers.",
+                        "tags": ["webgl", "colour"] 
+                    },
+                    "10": {
+                        "name": "spinning cube",
+                        "timestamp": "jul 2017",
+                        "description": "third <code>webgl</code> project. renders a 3D rotating cube.",
+                        "tags": ["webgl"]
+                    },
+                    "11": {
+                        "name": "astro duel web",
+                        "timestamp": "dec 2017",
+                        "description": "had an idea to create a web version of the game astro duel/party. has potential for further development",
+                        "tags": ["html5", "canvas", "WIP"]
+                    },
+                    "12": {
                         "name": "snek",
-                        "timestamp": "2018",
+                        "timestamp": "june 2018",
                         "description": "snake game created with HTML5 canvas",
                         "tags": ["html5", "canvas"]
                     }
                 }
             },
-            "4": {
-                "name": "school commissions",
-                "subprojs": {}
+            "3": {
+                "name": "chrome extensions",
+                "subprojs": {
+                    "1": {
+                        "name": "clock newtab",
+                        "timestamp": "oct 2017",
+                        "description": "first time making a Chrome extension. overrides the default home page to a minimalist B&W clock.",
+                        "tags": ["chrome-extension"],
+                        "link": "https://github.com/meeps123/clock-newtab"
+                    },
+                    "2": {
+                        "name": "sleep controller",
+                        "timestamp": "feb 2018",
+                        "description": "second time making a chrome extension. when it is time to get off the computer, the extension alerts() and upon confirmation, closes Chrome",
+                        "tags": ["chrome-extension"],
+                        "link": "https://github.com/meeps123/sleep-controller"
+                    }
+                }
             }
         }
     },

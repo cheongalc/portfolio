@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Periodic Table of the Elements</title>
+	<style type="text/css">
+		body {
+			font-family: Arial;
+		}
+		td.groupNo {
+			color: blue;
+			border-left: 1px solid gray;
+			padding: 15px;
+			text-align: center;
+		}
+		td#last {
+			border-right: 1px solid gray;
+		}
+		td.periodNo {
+			color: blue;
+			border-right: 1px solid gray;
+			padding: 10px;
+		}
+		td.element {
+			padding:4px; 
+			width: 70px; 
+			cursor: pointer;
+			transition: all 0.5s ease;
+		}
+		td.element:hover {
+			box-shadow: 0px 20px 20px rgba(0,0,0,0.6);
+
+		}
+
+		td.H {background-color: #e6e6e6;}
+		td.He {background-color: #4da6ff;}
+		td.Li {background-color: orange;}
+		td.Be {background-color: yellow;}
+		td.B {background-color: #00ff00;}
+		td.C {background-color: #00ff00;}
+		td.N {background-color: #00ff00;}
+		td.O {background-color: #00ff00;}
+		td.F {background-color: #00ff00;}
+		td.Ne {background-color: #4da6ff;}
+		td.Na {background-color: orange;}
+		td.Mg {background-color: yellow;}
+		td.Al {background-color: #00e6e6;}
+		td.Si {background-color: #00ff00;}
+		td.P {background-color: #00ff00;}
+		td.S {background-color: #00ff00;}
+		td.Cl {background-color: #00ff00;}
+		td.Ar {background-color: #4da6ff;}
+		td.K {background-color: orange;}
+		td.Ca {background-color: yellow;}
+
+		div.proton_number {font-size: 69%;}
+		div.element_sym {font-size: 150%; font-weight: bold;}
+		div.element_name {font-size: 70%;}
+		div.nucleon_number {font-size: 70%;}
+		div.gas {color: maroon;}
+
+		div#blur {
+			position: fixed;
+			z-index: 2;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255,255,255,0.7);
+			display: none;
+		}
+	</style>
+	<script type="text/javascript">
+		function resetElements() {
+			var theElements = document.getElementsByClassName("element");
+			for (i=0; i<theElements.length; i++) {
+				theElements[i].style.position = "initial";
+				theElements[i].style.width = "70px";
+				theElements[i].style.height = "70px";
+				theElements[i].style.boxShadow = "0px 0px 0px white";
+				theElements[i].style.zIndex = "1";
+				theElements[i].style.top = "initial";
+				theElements[i].style.left = "initial";
+				theElements[i].style.padding = "4px";
+				var c = theElements[i].children;
+				for (j=0; j<c.length; j++){
+					if (c[j].className == "element_name" || c[j].className == "nucleon_number" || c[j].className == "proton_number") {
+						c[j].style.fontSize = "70%";
+					} else {
+						c[j].style.fontSize = "150%";
+					}
+				}
+			}
+			document.getElementById("blur").style.display = "none";
+
+
+		}
+		function isolateElement(x){
+			var theElement = document.getElementById(x);
+			theElement.style.boxShadow = "0px 30px 30px rgba(0,0,0,0.6)";
+			theElement.style.position = "fixed";
+			theElement.style.top = "40px";
+			theElement.style.left = "20px";
+			var expandedElementWidth = window.innerWidth - 80;
+			theElement.style.width = expandedElementWidth.toString() + "px";
+			theElement.style.height = "400px";
+			theElement.style.padding = "20px";
+
+
+			var elementChildren = theElement.children;
+			for (i=0; i<elementChildren.length; i++){
+				if (elementChildren[i].className == "proton_number" || elementChildren[i].className == "element_name" || elementChildren[i].className == "nucleon_number") {
+					elementChildren[i].style.fontSize = "20px";
+				} else {
+					elementChildren[i].style.fontSize = "60px";
+				}
+			}
+		}
+		function showBlur(x) {
+			document.getElementById("blur").style.display = "block";
+			document.getElementById("blur").style.width = window.innerWidth;
+			document.getElementById("blur").style.height = window.innerHeight;
+			document.getElementById(x).style.boxShadow = "0px 10px 10px rgba(0,0,0,0.45)";
+			document.getElementById(x).style.position = "fixed";
+			document.getElementById(x).style.zIndex = "3";
+			setTimeout(isolateElement(x), 3000);
+		}
+		function detectEsc(event) {
+			var x = event.which || event.keyCode;
+			if (x == 27) {resetElements();}
+		}
+	</script>
+</head>
+<body onkeydown="detectEsc(event)">
+	<div id="blur" onclick="resetElements()"></div>
+	<button onclick="showLegend()">Show Legend</button>
+	<center>
+		<table id="main">
+			<tbody>
+				<!-- Groups Row -->
+				<tr>
+					<td><!-- Filler for Period !--></td>
+					<td class="groupNo">1</td>
+					<td class="groupNo">2</td>
+					<td class="groupNo">3</td>
+					<td class="groupNo">4</td>
+					<td class="groupNo">5</td>
+					<td class="groupNo">6</td>
+					<td class="groupNo">7</td>
+					<td class="groupNo">8</td>
+					<td class="groupNo">9</td>
+					<td class="groupNo">10</td>
+					<td class="groupNo">11</td>
+					<td class="groupNo">12</td>
+					<td class="groupNo">13</td>
+					<td class="groupNo">14</td>
+					<td class="groupNo">15</td>
+					<td class="groupNo">16</td>
+					<td class="groupNo">17</td>
+					<td class="groupNo" id="last">18</td>
+				</tr>
+				<tr></tr>
+
+				<!-- Period One -->
+
+				<tr>
+					<td class="periodNo">1</td>
+					<td class="H element" id="H" onmouseover="showBlur(this.id)">
+						<div class="proton_number">1</div>	
+						<div class="element_sym gas">H</div>	
+						<div class="element_name">Hydrogen</div>
+						<div class="nucleon_number">1.00794</div>	
+					</td>
+					<td colspan="16"></td>
+					<td class="He element" id="He" onmouseover="showBlur(this.id)">
+						<div class="proton_number">2</div>	
+						<div class="element_sym gas">He</div>	
+						<div class="element_name">Helium</div>
+						<div class="nucleon_number">4.002602</div>
+					</td>
+				</tr>
+
+				<!--Period Two -->
+
+				<tr>
+					<td class="periodNo">2</td>
+					<td class="Li element" id="Li" onmouseover="showBlur(this.id)">
+						<div class="proton_number">3</div>
+						<div class="element_sym">Li</div>
+						<div class="element_name">Lithium</div>
+						<div class="nucleon_number">6.941</div>
+					</td>
+					<td class="Be element" id="Be" onmouseover="showBlur(this.id)">
+						<div class="proton_number">4</div>
+						<div class="element_sym">Be</div>
+						<div class="element_name">Beryllium</div>
+						<div class="nucleon_number">9.012182</div>
+					</td>
+					<td colspan="10"></td>
+					<td class="B element" id="B" onmouseover="showBlur(this.id)">
+						<div class="proton_number">5</div>
+						<div class="element_sym">B</div>
+						<div class="element_name">Boron</div>
+						<div class="nucleon_number">10.811</div>
+					</td>
+					<td class="C element" id="C" onmouseover="showBlur(this.id)">
+						<div class="proton_number">6</div>
+						<div class="element_sym">C</div>
+						<div class="element_name">Carbon</div>
+						<div class="nucleon_number">12.0107</div>
+					</td>
+					<td class="N element" id="N" onmouseover="showBlur(this.id)">
+						<div class="proton_number">7</div>
+						<div class="element_sym gas">N</div>
+						<div class="element_name">Nitrogen</div>
+						<div class="nucleon_number">14.0067</div>
+					</td>
+					<td class="O element" id="O" onmouseover="showBlur(this.id)">
+						<div class="proton_number">8</div>
+						<div class="element_sym gas">O</div>
+						<div class="element_name">Oxygen</div>
+						<div class="nucleon_number">15.9994</div>
+					</td>
+					<td class="F element" id="F" onmouseover="showBlur(this.id)">
+						<div class="proton_number">9</div>
+						<div class="element_sym gas">F</div>
+						<div class="element_name">Flourine</div>
+						<div class="nucleon_number">18.9984032</div>
+					</td>
+					<td class="Ne element" id="Ne" onmouseover="showBlur(this.id)">
+						<div class="proton_number">10</div>
+						<div class="element_sym gas">Ne</div>
+						<div class="element_name">Neon</div>
+						<div class="nucleon_number">20.1797</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="periodNo">3</td>
+					<td class="Na element" id="Na" onmouseover="showBlur(this.id)">
+						<div class="proton_number">11</div>
+						<div class="element_sym">Na</div>
+						<div class="element_name">Sodium</div>
+						<div class="nucleon_number">22.98976928</div>
+					</td>
+					<td class="Mg element" id="Mg" onmouseover="showBlur(this.id)">
+						<div class="proton_number">12</div>
+						<div class="element_sym">Mg</div>
+						<div class="element_name">Magnesium</div>
+						<div class="nucleon_number">24.3050</div>
+					</td>
+					<td colspan="10"></td>
+					<td class="Al element" id="Al" onmouseover="showBlur(this.id)">
+						<div class="proton_number">13</div>
+						<div class="element_sym">Al</div>
+						<div class="element_name">Aluminium</div>
+						<div class="nucleon_number">26.9815386</div>
+					</td>
+					<td class="Si element" id="Si" onmouseover="showBlur(this.id)">
+						<div class="proton_number">14</div>
+						<div class="element_sym">Si</div>
+						<div class="element_name">Sillicon</div>
+						<div class="nucleon_number">28.0855</div>
+					</td>
+					<td class="P element" id="P" onmouseover="showBlur(this.id)">
+						<div class="proton_number">15</div>
+						<div class="element_sym">P</div>
+						<div class="element_name">Phosphorous</div>
+						<div class="nucleon_number">30.973762</div>
+					</td>
+					<td class="S element" id="S" onmouseover="showBlur(this.id)">
+						<div class="proton_number">16</div>
+						<div class="element_sym">S</div>
+						<div class="element_name">Sulfur</div>
+						<div class="nucleon_number">32.065</div>
+					</td>
+					<td class="Cl element" id="Cl" onmouseover="showBlur(this.id)">
+						<div class="proton_number">17</div>
+						<div class="element_sym gas">Cl</div>
+						<div class="element_name">Chlorine</div>
+						<div class="nucleon_number">35.453</div>
+					</td>
+					<td class="Ar element" id="Ar" onmouseover="showBlur(this.id)">
+						<div class="proton_number">18</div>
+						<div class="element_sym gas">Ar</div>
+						<div class="element_name">Argon</div>
+						<div class="nucleon_number">39.948</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="periodNo">4</td>
+					<td class="K element" id="K" onmouseover="showBlur(this.id)">
+						<div class="proton_number">19</div>
+						<div class="element_sym">K</div>
+						<div class="element_name">Potassium</div>
+						<div class="nucleon_number">39.0983</div>
+					</td>
+					<td class="Ca element" id="Ca" onmouseover="showBlur(this.id)">
+						<div class="proton_number">20</div>
+						<div class="element_sym">Ca</div>
+						<div class="element_name">Calcium</div>
+						<div class="nucleon_number">40.078</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</center>
+</body>
+</html>

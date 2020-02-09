@@ -93,14 +93,15 @@ function generateProjectCards(projObjRef, i, j=null) {
             PROJDIV.appendChild(currRow);
         }
         let currProj = projObjRef[numProjsProcessed+1];
-        let currProjFilePath = `p/${i}/${j}/${numProjsProcessed+1}`;
+        let currProjLink = projObjRef[numProjsProcessed+1]['link'];
+        let currProjFilePath = (currProjLink) ? currProjLink : `p/${i}/${j}/${numProjsProcessed+1}`;
         let currProjName = currProj['name'];
         let currProjTimestamp = currProj['timestamp'];
         let currProjDesc = currProj['description'];
         let currProjTagArr = currProj['tags'];
         let currProjTagStr = '';
         for (t = 0; t < currProjTagArr.length; t++) {
-            currProjTagStr += `<span class="badge badge-primary ${(t < currProjTagArr.length - 1) ? 'mr-2' : ''}">${currProjTagArr[t]}</span>`;
+            currProjTagStr += `<span class="badge ${(currProjTagArr[t] == 'WIP' ? 'badge-danger' : 'badge-primary')} ${(t < currProjTagArr.length - 1) ? 'mr-2' : ''}">${currProjTagArr[t]}</span>`;
         }
 
         let cardWrapperDiv = document.createElement('div');

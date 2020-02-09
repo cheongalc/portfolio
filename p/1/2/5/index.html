@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Day Night Cycle</title>
+	<style type="text/css">
+		html {
+			height:100%;
+		}
+		img { 
+		    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+		    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+		    image-rendering: -o-crisp-edges;            /* Opera                          */
+		    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+		    image-rendering: pixelated; /* Chrome */
+		    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+		    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+
+		}
+
+		body {
+			padding: 0px;
+			margin:0px;
+			width: 100%;
+			height: 100%;
+			overflow-y: hidden;
+			overflow-x: hidden;
+		}
+		.background-sky {
+			/*background: linear-gradient(to left, #301860, #3B4371, #F3904F, #fffbd3, #f0f7ff, #fffbd3, #F3904F, #3B4371, #301860);*/
+			background: linear-gradient(to bottom, #301860, #3B4371, #F3904F, #93e0e6, #61d4e6);
+			width: 100%;
+			height: 2400%;
+			animation: infinite move 24s;
+			z-index: 1;
+		}
+		.background-star {
+			border-radius: 100%;
+			position: absolute;
+			left:10px;
+			top:10px;
+			background:radial-gradient(
+				rgba(255,255,255,1)0%,
+				rgba(255,255,255,0.7)55%,
+				rgba(255,255,255,0.25)60%,
+				rgba(255,255,255,0.05)100%);
+			width: 5px;
+			height: 5px;
+			animation: 24s fade-star infinite;
+			transform: translateZ(0);
+			z-index: 2;
+		}
+		.mountains {
+			animation: 24s fade-mountains infinite;
+			animation-timing-function: ease-in-out;
+			z-index: 3;
+			position: absolute;
+			bottom: -5px;
+			width: 100%;
+		}
+		.cloud {
+			position: absolute;
+			z-index: 4;
+			opacity: 0.7;
+		}
+		.sun {
+			animation: xSunMovement 24s infinite linear;
+			position: absolute;
+			bottom: -20vh;
+			left: 50vw;
+			height: 50vw;
+			transform: rotate(-150deg);
+			/*border: 1px solid red;*/
+		}
+		.sun::after {
+			animation: sunColorShift 24s infinite linear;
+			animation-timing-function: ease-in-out;
+			transition: ease;
+			content: "";
+			display: block;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background: radial-gradient(
+				rgba(255, 255, 255, 1)0%,
+				rgba(255, 255, 204, 1)55%,
+				rgba(255, 255, 153,1)60%,
+				rgba(255,255,0, 0.5)100%);
+			box-shadow: 0px 0px 200px rgb(255,255,0);
+		}
+		@keyframes xSunMovement {
+			0% {
+				height: 50vw;
+			}
+			40% {
+				transform: rotate(0deg);
+				height: 55vw;
+			}
+			80% {
+				transform: rotate(150deg);
+				height: 50vw;
+			}
+			100% {
+				transform: rotate(210deg);
+			}
+		}
+		@keyframes move {
+			from {transform: translateY(0);}
+			50% {transform: translateY(calc(-100% + 6%));}
+			to {transform: translateY(0);}
+		}
+	
+		@keyframes fade-star {
+			from {opacity: 1;}
+			10% {opacity: 1;}
+			20% {opacity: 0;}
+			60% {opacity: 0;}
+			70% {opacity: 1;}
+			to {opacity: 1;}
+		}
+
+		@keyframes sunColorShift {
+			from {
+				background: radial-gradient(
+					rgba(255, 255, 255, 1)0%,
+					rgba(255, 255, 204, 1)55%,
+					rgba(255, 255, 153,1)60%,
+					rgba(255,255,0, 0.5)100%);
+				box-shadow: 0px 0px 200px rgb(255,255,0);
+			}
+			25% {
+				background: radial-gradient(
+					rgba(255,255,255,1)0%,
+					rgba(255,255,220,1)55%,
+					rgba(255,255,180,1)60%,
+					rgba(255,255,110,0.5)100%);
+				box-shadow: 0px 0px 200px rgb(255,255,125);
+			}
+			50% {
+				background: radial-gradient(
+					rgba(255,255,255,1)0%,
+					rgba(255,255,240,1)55%,
+					rgba(255,255,230,1)60%,
+					rgba(255,255,220,0.5)100%);
+				box-shadow: 0px 0px 200px rgb(255,255,255);
+			}
+			75% {
+				background: radial-gradient(
+					rgba(255,255,255,1)0%,
+					rgba(255,255,220,1)55%,
+					rgba(255,255,180,1)60%,
+					rgba(255,255,0,0.5)100%);
+				box-shadow: 0px 0px 200px rgb(255,255,125);
+			}
+			to {
+				background: radial-gradient(
+					rgba(255, 255, 255, 1)0%,
+					rgba(255, 255, 204, 1)55%,
+					rgba(255, 255, 153,1)60%,
+					rgba(255,255,0, 0.5)100%);
+				box-shadow: 0px 0px 200px rgb(255,255,0);
+			}
+		}
+		@keyframes fade-mountains {
+
+		}
+	</style>
+	<script type="text/javascript">
+		var windowWidth = window.innerWidth - 50;
+		var windowHeight = window.innerHeight - 50;
+		var cloudYLimit = windowHeight/2;
+
+		function checkStars() {
+			var currentPercent = 0;
+			var starNumber = Math.floor((windowHeight * windowWidth) / 7500);
+			for (i=0;i<starNumber;i++) {
+				var star = document.createElement("div");
+				document.body.appendChild(star);
+				star.className = "background-star";
+				star.style.position = "absolute";
+				star.style.left = Math.floor(Math.random()*windowWidth) + 25 + "px";
+				star.style.top = Math.floor(Math.random()*windowHeight) + 25 + "px";
+			}
+
+			moveClouds();
+
+			var windDirection;
+			if (Math.round(Math.random()) == 0) {
+				windDirection = 0;
+			} else windDirection = 1;
+
+			setInterval(function () {
+				if (currentPercent < 100) {
+					currentPercent++;
+				} else {
+					currentPercent = 0;
+				}
+
+				if (currentPercent == 50) {
+					var stars = document.querySelectorAll(".background-star");
+					for (i=0;i<stars.length;i++){
+						stars[i].style.left = Math.floor(Math.random()*windowWidth) + 25 + "px";
+						stars[i].style.top = Math.floor(Math.random()*windowHeight) + 25 + "px";
+						console.log("Stars swapped");
+					}
+				}
+				
+				
+			},240);
+			var cloudAnim =function() {
+				var clouds = document.querySelectorAll(".cloud");
+				for (i=0;i<clouds.length;i++) {
+					var cloudXStr = clouds[i].style.left;
+					var cloudX = parseInt(cloudXStr.substring(cloudXStr.length-2, 0));
+					if (windDirection == 0) {
+						clouds[i].style.left = cloudX-1 + "px";
+						if (cloudX < -300) {
+							clouds[i].style.left = windowWidth + 100 + "px";
+							clouds[i].style.top = Math.floor(Math.random()*cloudYLimit) + 25 + "px";
+						}
+					} else {
+						clouds[i].style.left = cloudX+1 + "px";
+						if (cloudX > windowWidth + 300) {
+							clouds[i].style.left = "-100px";
+							clouds[i].style.top = Math.floor(Math.random()*cloudYLimit) + 25 + "px";
+						}
+					}
+					
+				}
+				requestAnimationFrame(cloudAnim);
+			}
+			requestAnimationFrame(cloudAnim);
+			// setInterval(function() {
+				
+			// },100);
+		}
+
+		function moveClouds() {
+			var clouds = document.querySelectorAll(".cloud");
+			for (i=0;i<clouds.length;i++){
+				clouds[i].style.left = Math.floor(Math.random()*windowWidth) + 25 + "px";
+				clouds[i].style.top = Math.floor(Math.random()*cloudYLimit) + 25 + "px";
+			}
+		}
+	</script>
+
+</head>
+<body onload="checkStars()">
+	<div class="background-sky"></div>
+	<div class="sun"></div>
+	<img src="The 25th Hour Mountains.svg" class="mountains">
+	<img src="cloud1.png" class="cloud">
+	<img src="cloud2.png" class="cloud">
+	<img src="cloud3.png" class="cloud">
+	<img src="cloud4.png" class="cloud">
+	
+</body>
+</html>

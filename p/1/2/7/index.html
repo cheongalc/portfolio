@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>canvas test</title>
+	<style type="text/css">
+		canvas {
+			border: 1px solid black;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100%;
+		}
+		.character {
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			background-color: red;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 999;
+		}
+
+	</style>
+	<script type="text/javascript">
+		
+		var character;
+		var board;
+		var angle;
+		var speedX, speedY;
+		var speedLim = 8;
+		var boardCanvas = {
+			canvas : document.createElement("canvas"),
+			start : function() {
+						this.canvas.width = window.innerWidth;
+						this.canvas.height = window.innerHeight;
+						this.context = this.canvas.getContext("2d");
+						document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+						this.frameNo = 0;
+						this.interval = updateBoard();
+						this.canvas.style.position = "fixed";
+						this.canvas.style.left = "0px";
+						this.canvas.style.top = "0px";
+						this.canvas.style.zIndex = "1";
+					},
+			clear : function() {
+						this.context.clearRect(0,0, this.canvas.width, this.canvas.height);
+					},
+			stop: function() {
+				clearInterval(this.interval);
+			}
+		}
+
+		function wait(ms) {
+			var start = new Date().getTime();
+			var end = start;
+			while (end < start + ms) {
+				end = new Date().getTime();
+			}
+		}
+
+		function startGame() {
+			board = new arena(1000, 500, -50, -50);
+			boardCanvas.start();
+		}
+
+		function arena(width, height, x, y) {
+			this.width = width;
+			this.height = height;
+			this.speedX = 0;
+			this.speedY = 0;
+			this.x = x;
+			this.y = y;
+			this.update = function() {
+				ctx = boardCanvas.context;
+				ctx.fillStyle = "green";
+				ctx.fillRect(this.x, this.y, this.width, this.height);
+			}
+			this.newPos = function() {
+				this.x += this.speedX;
+				this.y += this.speedY;
+			}
+		}
+
+		function jumpEqn(x) {
+			return -8 * (Math.pow(x, 2) - x);
+		}
+
+		function boost() {
+			var initSpeed = board.speedX;
+
+			for (i = 0; i < 1; i+= 0.001) {
+				console.log("board speedX: " +  board.speedX);
+				
+				if (board.speedX > 0.1) {
+					
+				}
+
+				board.speedX = initSpeed + jumpEqn(i);
+			}
+		}
+
+		function detectKey(event) {
+			var x = event.which || event.keyCode;
+			switch (x) {
+				case 32:
+					boost();
+					break;
+			}
+		}
+
+		function haltBoard() {
+			board.speedX = 0;
+			board.speedY = 0;
+		}
+
+		function updateBoard() {
+			var loop = function() {
+				boardCanvas.clear();
+				board.newPos();
+				board.update();
+				requestAnimationFrame(loop);
+			}
+			requestAnimationFrame(loop);
+		}
+
+		function findLeft(e) {
+			var r = e.getBoundingClientRect();
+			return r.left + window.scrollX;
+		}
+
+		function findTop(e) {
+			var r = e.getBoundingClientRect();
+			return r.top + window.scrollY;
+		}
+
+		function rotateCharacter(event) {
+			var mouseX = event.pageX;
+			var mouseY = event.pageY;
+			var c = document.getElementById("character");
+
+			var characterMiddle = [
+			c.offsetLeft+c.style.width/2, 
+			c.offsetTop+c.style.height/2
+			];
+
+			angle = Math.atan2(mouseX - characterMiddle[0], -(mouseY - characterMiddle[1]))*(180/Math.PI);
+
+			console.log(angle);
+
+			c.style.transform = "rotate(" + angle + "deg)";
+
+			var characterX = findLeft(c);
+			var characterY = findTop(c);
+
+			var diffX = -(mouseX - characterX);
+			var diffY = -(mouseY - characterY);
+
+			speedX  = diffX / 10;
+			speedY = diffY / 10;
+
+			if (speedX > speedLim) speedX = speedLim;
+			if (speedY > speedLim) speedY = speedLim;
+			if (speedX < -speedLim) speedX = -speedLim;
+			if (speedY < -speedLim) speedY = -speedLim;
+			board.speedX = speedX;
+			board.speedY = speedY;
+		
+		}
+
+		function updateCharacter() {
+			character.update();
+		}
+	</script>
+</head>
+<body onkeydown="detectKey(event)" onkeyup="haltBoard()" onload="startGame()" onmousemove="rotateCharacter(event)" onclick="boost()">
+	<div id="character" class="character"/>
+</body>
+</html>
