@@ -36,13 +36,15 @@
                         "name": "local storage example",
                         "timestamp": "jan 2017",
                         "description": "first time getting in touch with <code>localStorage</code>. the page remembers what color you have set the background to.",
-                        "tags": ["localStorage"]
+                        "tags": ["localStorage"],
+                        "hidden": true
                     },
                     "2": {
                         "name": "periodic table",
                         "timestamp": "jan 2017",
                         "description": "attempt at recreating the ptable found in <a href='https://ptable.org'>ptable.org</a>",
-                        "tags": ["recreate", "WIP"]
+                        "tags": ["recreate", "WIP"],
+                        "hidden": true
                     },
                     "3": {
                         "name": "win10 start screen",
@@ -54,7 +56,9 @@
                         "name": "damn counter",
                         "timestamp": "mar 2017",
                         "description": "another project that makes use of <code>localStorage</code>. a half useless damn counter that allows you to give X number of damns about a certain topic",
-                        "tags": ["localStorage"]
+                        "tags": ["localStorage"],
+                        "hidden": true
+                        
                     },
                     "5": {
                         "name": "the 25th hour",
@@ -72,13 +76,14 @@
                         "name": ".io game behaviour",
                         "timestamp": "june 2017",
                         "description": "tried to mimic how .io games allow users to move a character with the mouse",
-                        "tags": ["html5", "canvas"]
+                        "tags": ["html5", "canvas"],
+                        "hidden": true
                     },
                     "8": {
                         "name": "polygon maker",
                         "timestamp": "jul 2017",
                         "description": "first ever <code>webgl</code> project. allows you to do xyz translation and define 4 vertices of a polygon.",
-                        "tags": ["webgl"] 
+                        "tags": ["webgl"]
                     },
                     "9": {
                         "name": "gradient generator",
@@ -96,7 +101,8 @@
                         "name": "astro duel web",
                         "timestamp": "dec 2017",
                         "description": "had an idea to create a web version of the game astro duel/party. has potential for further development. full credit goes to the original developers though, don't want to be implicated for stealing their idea",
-                        "tags": ["html5", "canvas", "WIP"]
+                        "tags": ["html5", "canvas", "WIP"],
+                        "hidden": true
                     },
                     "12": {
                         "name": "snek",

@@ -92,6 +92,10 @@ function generateProjectCards(projObjRef, i, j=null) {
             PROJDIV.appendChild(currRow);
         }
         let currProj = projObjRef[numProjsProcessed+1];
+        if (currProj['hidden']) {
+            numProjsProcessed++;
+            continue;
+        }
         let currProjLink = projObjRef[numProjsProcessed+1]['link'];
         let currProjFilePath = (currProjLink) ? currProjLink : (j) ? `p/${i}/${j}/${numProjsProcessed+1}` : `p/${i}/${numProjsProcessed+1}`;
         let currProjName = currProj['name'];
