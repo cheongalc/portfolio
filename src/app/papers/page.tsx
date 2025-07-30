@@ -65,7 +65,7 @@ export default async function PapersPage() {
                       <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
                         <a 
                           href={paper.titleLink}
-                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -91,7 +91,7 @@ export default async function PapersPage() {
                             <a
                               key={linkIndex}
                               href={link.url}
-                              className="text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                              className="text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
                               target="_blank"
                               rel="noopener noreferrer"
                             >

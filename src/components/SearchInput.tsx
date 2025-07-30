@@ -8,7 +8,7 @@ interface SearchInputProps {
 }
 
 export default function SearchInput({ 
-  placeholder = "Search posts with natural language...", 
+  placeholder = "Search posts...", 
   className = "" 
 }: SearchInputProps) {
   const [isFocused, setIsFocused] = useState(false);
@@ -18,7 +18,7 @@ export default function SearchInput({
       <input
         type="text"
         placeholder={placeholder}
-        className={`w-full px-4 py-3 pl-12 text-[var(--color-text)] bg-[var(--color-background)] border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition-all duration-200 placeholder:text-[var(--color-muted)] ${className}`}
+        className={`w-full px-4 py-3 pl-12 text-[var(--color-text)] bg-[var(--color-background)] border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition-all duration-300 placeholder:text-[var(--color-muted)] ${className}`}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onChange={(e) => {
@@ -28,7 +28,7 @@ export default function SearchInput({
       />
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg 
-          className={`h-5 w-5 transition-colors duration-300 ease-in-out ${
+          className={`h-5 w-5 transition-colors duration-300 ${
             isFocused ? 'text-[var(--color-primary)]' : 'text-[var(--color-muted)]'
           }`} 
           fill="none" 

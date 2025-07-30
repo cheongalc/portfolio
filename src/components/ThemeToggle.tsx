@@ -25,13 +25,13 @@ const ThemeToggle = () => {
     setTimeout(() => {
       setTheme(isDarkMode ? 'light' : 'dark');
       setIsAnimating(false);
-    }, 500); // Duration of the animation
+    }, 300); // Duration of the animation
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="flex items-center space-x-2 text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors text-base group"
+      className="flex items-center space-x-2 text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300 text-base group"
       disabled={isAnimating}
     >
       <svg

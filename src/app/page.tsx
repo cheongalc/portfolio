@@ -78,7 +78,7 @@ export default async function HomePage() {
                       <h3 className="text-lg font-semibold text-[var(--color-text)] leading-tight mb-1">
                         <Link 
                           href={`/blog/${post.slug}`}
-                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
                         >
                           {post.title || 'Untitled Post'}
                         </Link>
@@ -95,7 +95,7 @@ export default async function HomePage() {
                           {post.tags.slice(0, 3).map(tag => (
                             <span 
                               key={tag}
-                              className="text-xs text-[var(--color-muted)] border-b border-[var(--color-border)] hover:text-[var(--color-primary)] transition-colors cursor-default"
+                              className="text-xs text-[var(--color-muted)] border-b border-[var(--color-border)] hover:text-[var(--color-primary)] transition-colors duration-300 cursor-default"
                             >
                               {tag}
                             </span>
@@ -117,7 +117,7 @@ export default async function HomePage() {
             <div className="mt-8">
               <Link 
                 href="/blog" 
-                className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors font-medium"
+                className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 font-medium"
               >
                 View all posts
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +146,7 @@ export default async function HomePage() {
                       <h3 className="text-lg font-semibold text-[var(--color-text)] leading-tight">
                         <a 
                           href={paper.titleLink}
-                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -166,7 +166,7 @@ export default async function HomePage() {
             <div className="mt-8">
               <Link 
                 href="/papers" 
-                className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors font-medium"
+                className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 font-medium"
               >
                 View all papers
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -189,7 +189,7 @@ export default async function HomePage() {
               </p>
               <Link 
                 href="/blog" 
-                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-hover)] transition-colors duration-300"
               >
                 Explore Writing
               </Link>

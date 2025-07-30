@@ -135,7 +135,7 @@
 
   /* Smooth transitions for hover effects */
   a, button {
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   }
 
   /* Sidebar mobile responsiveness */
@@ -233,7 +233,7 @@ html.theme-transition * {
     color: var(--color-primary);
     text-decoration: underline;
     text-decoration-color: var(--color-primary);
-    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
   }
 
   .prose-enhanced a:hover {
@@ -449,8 +449,8 @@ html.theme-transition * {
 
   @keyframes sun-out {
     0% { opacity: 1; }
-    40% { opacity: 1; }
-    60% { opacity: 0; }
+    40% { opacity: 0.8; }
+    60% { opacity: 0.2; }
     100% { opacity: 0; }
   }
 
@@ -460,8 +460,8 @@ html.theme-transition * {
 
   @keyframes moon-in {
     0% { opacity: 0; }
-    40% { opacity: 0; }
-    60% { opacity: 1; }
+    40% { opacity: 0.2; }
+    60% { opacity: 0.8; }
     100% { opacity: 1; }
   }
 

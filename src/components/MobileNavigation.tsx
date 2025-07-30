@@ -23,7 +23,7 @@ export default function MobileNavigation() {
       {/* Mobile Header */}
       <div className="lg:hidden flex items-center justify-between px-4 pt-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-background)] sticky top-0 z-30 transition-colors duration-300">
         <h1 className="text-xl font-bold text-[var(--color-text)]">
-          <a href="/" className="hover:text-[var(--color-primary)] transition-colors">Your Name</a>
+          <a href="/" className="hover:text-[var(--color-primary)] transition-colors duration-300">Your Name</a>
         </h1>
         <button
           className="text-[var(--color-muted)] hover:text-[var(--color-text)] p-2"
@@ -50,7 +50,7 @@ export default function MobileNavigation() {
           {/* Profile Section */}
           <div className="mb-12">
             <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
-              <a href="/" className="hover:text-[var(--color-primary)] transition-colors" onClick={closeMenu}>
+              <a href="/" className="hover:text-[var(--color-primary)] transition-colors duration-300" onClick={closeMenu}>
                 Your Name
               </a>
             </h1>
@@ -63,7 +63,7 @@ export default function MobileNavigation() {
             <nav className="flex space-x-4" role="navigation" aria-label="Social media links">
               <a 
                 href="https://twitter.com/yourusername" 
-                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="Twitter profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -74,7 +74,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://linkedin.com/in/yourusername" 
-                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="LinkedIn profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -85,7 +85,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://scholar.google.com/citations?user=yourusername" 
-                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="Google Scholar profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -96,7 +96,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://github.com/yourusername" 
-                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="GitHub profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -107,7 +107,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://instagram.com/yourusername" 
-                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="Instagram profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -123,7 +123,7 @@ export default function MobileNavigation() {
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
               href="/blog" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 underline text-base"
               aria-label="Blog posts"
               onClick={closeMenu}
             >
@@ -131,7 +131,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/papers" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 underline text-base"
               aria-label="Papers and publications"
               onClick={closeMenu}
             >
@@ -139,7 +139,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/projects" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 underline text-base"
               aria-label="Projects and work"
               onClick={closeMenu}
             >
@@ -147,7 +147,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/gallery" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 underline text-base"
               aria-label="Photo gallery"
               onClick={closeMenu}
             >
