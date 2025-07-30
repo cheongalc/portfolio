@@ -74,10 +74,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
         {/* Header Section */}
         <header className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-100 mb-6">
+          <h1 className="text-4xl font-bold text-[var(--color-text)] mb-6">
             Research
           </h1>
-          <p className="text-xl text-gray-300 leading-relaxed">
+          <p className="text-xl text-[var(--color-muted)] leading-relaxed">
             {type === 'publication' 
               ? 'Academic publications, research papers, and formal articles.'
               : tag
@@ -89,22 +89,22 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         {/* Filters Section */}
         {(availableTypes.length > 1 || availableTags.length > 0) && (
-          <section className="mb-12 p-6 bg-neutral-800 border border-neutral-700 rounded-lg">
-            <h2 className="text-lg font-semibold text-gray-100 mb-4">
+          <section className="mb-12 p-6 bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg">
+            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">
               Filter Posts
             </h2>
             
             {/* Type Filters */}
             {availableTypes.length > 1 && (
               <div className="mb-6">
-                <h3 className="text-base font-medium text-gray-300 mb-3">By Type:</h3>
+                <h3 className="text-base font-medium text-[var(--color-muted)] mb-3">By Type:</h3>
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/blog"
                     className={`px-4 py-2 rounded-md text-base transition-colors ${
                       !type 
                         ? 'bg-blue-600 text-white' 
-                        : 'bg-neutral-700 text-gray-300 hover:bg-neutral-600 border border-neutral-600'
+                        : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
                     }`}
                   >
                     All ({allPosts.length})
@@ -118,7 +118,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         className={`px-4 py-2 rounded-md text-base transition-colors capitalize ${
                           type === availableType 
                             ? 'bg-blue-600 text-white' 
-                            : 'bg-neutral-700 text-gray-300 hover:bg-neutral-600 border border-neutral-600'
+                            : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
                         }`}
                       >
                         {availableType} ({count})
@@ -132,7 +132,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             {/* Tag Filters */}
             {availableTags.length > 0 && (
               <div>
-                <h3 className="text-base font-medium text-gray-300 mb-3">By Tag:</h3>
+                <h3 className="text-base font-medium text-[var(--color-muted)] mb-3">By Tag:</h3>
                 <div className="flex flex-wrap gap-3">
                   {availableTags.slice(0, 10).map(availableTag => (
                     <Link
@@ -141,7 +141,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                       className={`px-4 py-2 rounded-md text-base transition-colors ${
                         tag === availableTag 
                           ? 'bg-green-600 text-white' 
-                          : 'bg-neutral-700 text-gray-300 hover:bg-neutral-600 border border-neutral-600'
+                          : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
                       }`}
                     >
                       {availableTag}
@@ -160,21 +160,21 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               {posts.map(post => (
                 <article 
                   key={post.slug} 
-                  className="bg-neutral-800 border border-neutral-700 rounded-lg p-8 hover:bg-neutral-750 transition-all duration-200"
+                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-8 hover:bg-neutral-750 transition-all duration-200"
                 >
                   {/* Post Header */}
                   <header className="mb-4">
-                    <h2 className="text-2xl font-semibold text-gray-100 mb-3">
+                    <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-3">
                       <Link 
                         href={`/blog/${post.slug}`}
-                        className="hover:text-blue-400 transition-colors"
+                        className="hover:text-[var(--color-primary)] transition-colors"
                       >
                         {post.title || 'Untitled Post'}
                       </Link>
                     </h2>
                     
                     {/* Post Metadata */}
-                    <div className="flex flex-wrap items-center gap-4 text-base text-gray-400">
+                    <div className="flex flex-wrap items-center gap-4 text-base text-[var(--color-muted)]">
                       {post.date && (
                         <time dateTime={post.date}>
                           {new Date(post.date).toLocaleDateString('en-US', {
@@ -194,19 +194,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
                   {/* Post Description */}
                   {post.description && (
-                    <p className="text-gray-300 mb-5 leading-relaxed text-lg">
+                    <p className="text-[var(--color-muted)] mb-5 leading-relaxed text-lg">
                       {post.description}
                     </p>
                   )}
 
                   {/* Post Tags */}
                   {post.tags && post.tags.length > 0 && (
-                    <footer className="flex flex-wrap gap-2 pt-2 border-t border-neutral-700">
+                    <footer className="flex flex-wrap gap-2 pt-2 border-t border-[var(--color-border)]">
                       {post.tags.map(postTag => (
                         <Link
                           key={postTag}
                           href={`/blog?tag=${postTag}`}
-                          className="inline-block px-3 py-1 text-sm bg-neutral-700 text-gray-400 rounded hover:bg-neutral-600 transition-colors"
+                          className="inline-block px-3 py-1 text-sm bg-neutral-700 text-[var(--color-muted)] rounded hover:bg-neutral-600 transition-colors"
                         >
                           #{postTag}
                         </Link>
@@ -221,10 +221,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           /* Empty State */
           <section className="text-center py-20">
             <div className="max-w-lg mx-auto">
-              <h2 className="text-2xl font-medium text-gray-100 mb-6">
+              <h2 className="text-2xl font-medium text-[var(--color-text)] mb-6">
                 {type || tag ? 'No Posts Found' : 'No Posts Yet'}
               </h2>
-              <p className="text-lg text-gray-300 mb-8">
+              <p className="text-lg text-[var(--color-muted)] mb-8">
                 {type || tag 
                   ? `No posts match the current filter criteria. Try adjusting your filters or browse all posts.`
                   : 'Research publications and papers will be listed here.'
@@ -249,10 +249,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
         <div className="text-center py-20">
-          <h1 className="text-3xl font-semibold text-gray-100 mb-6">
+          <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-6">
             Unable to Load Research Posts
           </h1>
-          <p className="text-lg text-gray-300 mb-8">
+          <p className="text-lg text-[var(--color-muted)] mb-8">
             There was an error loading the research posts. Please check that your blog directory exists and contains valid Markdown files.
           </p>
           <Link 

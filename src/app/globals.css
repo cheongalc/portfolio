@@ -55,6 +55,13 @@
   --font-garamond: "Adobe Garamond Pro", serif;
   --font-size-base: 1.125rem; /* 18px instead of 16px */
   --line-height-base: 1.75;
+
+  /* Color Palette */
+  --color-background: theme(colors.white);
+  --color-text: theme(colors.neutral.800);
+  --color-primary: theme(colors.blue.600);
+  --color-muted: theme(colors.neutral.500);
+  --color-border: theme(colors.neutral.200);
 }
 
 /* Base layer customizations */
@@ -69,9 +76,17 @@
   }
 
   /* Dark theme body styles */
+  :root.dark {
+    --color-background: theme(colors.black);
+    --color-text: theme(colors.neutral.300);
+    --color-primary: theme(colors.blue.400);
+    --color-muted: theme(colors.neutral.400);
+    --color-border: theme(colors.neutral.800);
+  }
+  
   body {
-    background-color: rgb(0 0 0);
-    color: rgb(212 212 216);
+    background-color: var(--color-background);
+    color: var(--color-text);
   }
 
   /* Focus styles for better keyboard navigation */

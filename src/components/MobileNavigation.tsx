@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 /**
  * Mobile Navigation Component
@@ -20,12 +21,12 @@ export default function MobileNavigation() {
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden flex items-center justify-between px-4 pt-6 pb-4 border-b border-neutral-800 bg-black sticky top-0 z-30">
-        <h1 className="text-xl font-bold text-gray-100">
-          <a href="/" className="hover:text-blue-400 transition-colors">Your Name</a>
+      <div className="lg:hidden flex items-center justify-between px-4 pt-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-background)] sticky top-0 z-30">
+        <h1 className="text-xl font-bold text-[var(--color-text)]">
+          <a href="/" className="hover:text-[var(--color-primary)] transition-colors">Your Name</a>
         </h1>
         <button
-          className="text-gray-400 hover:text-gray-200 p-2"
+          className="text-[var(--color-muted)] hover:text-[var(--color-text)] p-2"
           aria-label="Open menu"
           onClick={openMenu}
         >
@@ -48,12 +49,12 @@ export default function MobileNavigation() {
         <div className="flex-1 p-8">
           {/* Profile Section */}
           <div className="mb-12">
-            <h1 className="text-3xl font-bold text-gray-100 mb-6">
-              <a href="/" className="hover:text-blue-400 transition-colors" onClick={closeMenu}>
+            <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
+              <a href="/" className="hover:text-[var(--color-primary)] transition-colors" onClick={closeMenu}>
                 Your Name
               </a>
             </h1>
-            <p className="text-gray-400 text-base mb-6">
+            <p className="text-[var(--color-muted)] text-base mb-6">
               your.email[at]domain.com
             </p>
             
@@ -62,7 +63,7 @@ export default function MobileNavigation() {
             <nav className="flex space-x-4" role="navigation" aria-label="Social media links">
               <a 
                 href="https://twitter.com/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Twitter profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -73,7 +74,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://linkedin.com/in/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="LinkedIn profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,7 +85,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://scholar.google.com/citations?user=yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Google Scholar profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -95,7 +96,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://github.com/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="GitHub profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -106,7 +107,7 @@ export default function MobileNavigation() {
               </a>
               <a 
                 href="https://instagram.com/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Instagram profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -122,7 +123,7 @@ export default function MobileNavigation() {
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
               href="/" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="About page"
               onClick={closeMenu}
             >
@@ -130,7 +131,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/blog" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Blog posts"
               onClick={closeMenu}
             >
@@ -138,7 +139,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/publications" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Publications and papers"
               onClick={closeMenu}
             >
@@ -146,7 +147,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/projects" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Projects and work"
               onClick={closeMenu}
             >
@@ -154,7 +155,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/gallery" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Photo gallery"
               onClick={closeMenu}
             >
@@ -165,13 +166,8 @@ export default function MobileNavigation() {
         </div>
 
         {/* Theme Toggle */}
-        <div className="p-8 border-t border-neutral-800">
-          <button className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 transition-colors text-base group">
-            <svg className="w-5 h-5 group-hover:rotate-180 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
-            </svg>
-            <span>Light Mode</span>
-          </button>
+        <div className="p-8 border-t border-[var(--color-border)]">
+          <ThemeToggle />
         </div>
 
 
@@ -179,7 +175,7 @@ export default function MobileNavigation() {
         {/* Close button */}
         <button
           onClick={closeMenu}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-2xl"
+          className="absolute top-4 right-4 text-[var(--color-muted)] hover:text-[var(--color-text)] text-2xl"
           aria-label="Close menu"
         >
           ×

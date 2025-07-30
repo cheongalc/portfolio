@@ -131,11 +131,11 @@ export default async function PostPage({ params }: PostPageProps) {
       <div className="max-w-6xl mx-auto px-8 py-16">
         {/* Breadcrumb Navigation */}
         <nav className="mb-12" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-3 text-base text-gray-500">
+          <ol className="flex items-center space-x-3 text-base text-[var(--color-muted)]">
             <li>
               <Link 
                 href="/" 
-                className="hover:text-gray-700 transition-colors"
+                className="hover:text-[var(--color-primary)] transition-colors"
               >
                 Home
               </Link>
@@ -144,14 +144,14 @@ export default async function PostPage({ params }: PostPageProps) {
               <span className="mx-3">/</span>
               <Link 
                 href="/blog" 
-                className="hover:text-gray-700 transition-colors"
+                className="hover:text-[var(--color-primary)] transition-colors"
               >
                 Blog
               </Link>
             </li>
             <li className="flex items-center">
               <span className="mx-3">/</span>
-              <span className="text-gray-900 font-medium">
+              <span className="text-[var(--color-text)] font-medium">
                 {frontMatter.title || 'Untitled Post'}
               </span>
             </li>
@@ -160,12 +160,12 @@ export default async function PostPage({ params }: PostPageProps) {
 
         {/* Article Header */}
         <header className="mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-8 leading-tight">
+          <h1 className="text-5xl font-bold text-[var(--color-text)] mb-8 leading-tight">
             {frontMatter.title || 'Untitled Post'}
           </h1>
           
           {/* Article Metadata */}
-          <div className="flex flex-wrap items-center gap-8 text-base text-gray-600 mb-8">
+          <div className="flex flex-wrap items-center gap-8 text-base text-[var(--color-muted)] mb-8">
             {frontMatter.date && (
               <div className="flex items-center gap-3">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -195,7 +195,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
           {/* Article Description */}
           {frontMatter.description && (
-            <p className="text-2xl text-gray-600 leading-relaxed border-l-4 border-blue-500 pl-8">
+            <p className="text-2xl text-[var(--color-muted)] leading-relaxed border-l-4 border-[var(--color-primary)] pl-8">
               {frontMatter.description}
             </p>
           )}
@@ -207,11 +207,11 @@ export default async function PostPage({ params }: PostPageProps) {
         </article>
 
         {/* Article Footer */}
-        <footer className="mt-20 pt-12 border-t border-gray-200">
+        <footer className="mt-20 pt-12 border-t border-[var(--color-border)]">
           {/* Tags */}
           {frontMatter.tags && frontMatter.tags.length > 0 && (
             <div className="mb-12">
-              <h3 className="text-base font-medium text-gray-900 mb-4">
+              <h3 className="text-base font-medium text-[var(--color-text)] mb-4">
                 Tagged with:
               </h3>
               <div className="flex flex-wrap gap-3">
@@ -219,7 +219,7 @@ export default async function PostPage({ params }: PostPageProps) {
                   <Link
                     key={tag}
                     href={`/blog?tag=${tag}`}
-                    className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-base hover:bg-gray-200 transition-colors"
+                    className="inline-flex items-center px-4 py-2 bg-[var(--color-background)] text-[var(--color-muted)] rounded-full text-base hover:bg-gray-200 transition-colors"
                   >
                     #{tag}
                   </Link>
@@ -232,7 +232,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
             <Link 
               href="/blog" 
-              className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 rounded-md text-lg hover:bg-gray-200 transition-colors"
+              className="inline-flex items-center px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md text-lg hover:bg-gray-200 transition-colors"
             >
               <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -240,7 +240,7 @@ export default async function PostPage({ params }: PostPageProps) {
               Back to Blog
             </Link>
             
-            <div className="text-base text-gray-500">
+            <div className="text-base text-[var(--color-muted)]">
               Share this post on social media
             </div>
           </div>
@@ -254,10 +254,10 @@ export default async function PostPage({ params }: PostPageProps) {
     return (
       <div className="max-w-6xl mx-auto px-8 py-16">
         <div className="text-center py-20">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-6">
+          <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-6">
             Post Not Found
           </h1>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-[var(--color-muted)] mb-8">
             The blog post you're looking for doesn't exist or couldn't be loaded.
           </p>
           <Link 

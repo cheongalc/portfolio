@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import MobileNavigation from '@/components/MobileNavigation';
+import { Providers } from './providers';
+import ThemeToggle from '@/components/ThemeToggle';
 
 /**
  * Root metadata configuration for the entire application
@@ -52,16 +54,16 @@ export const metadata: Metadata = {
  */
 function Sidebar() {
   return (
-    <aside className="w-80 bg-black border-r border-neutral-800 flex flex-col sidebar-desktop ml-16">
+    <aside className="w-80 bg-[var(--color-background)] border-r border-[var(--color-border)] flex flex-col sidebar-desktop ml-16">
       <div className="flex-1 px-8 pt-32 pb-8">
         {/* Profile Section */}
         <div className="mb-12">
-          <h1 className="text-3xl font-bold text-gray-100 mb-6">
-            <a href="/" className="hover:text-blue-400 transition-colors">
+          <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
+            <a href="/" className="hover:text-[var(--color-primary)] transition-colors">
               Your Name
             </a>
           </h1>
-          <p className="text-gray-400 text-base mb-6">
+          <p className="text-[var(--color-muted)] text-base mb-6">
             your.email[at]domain.com
           </p>
           
@@ -70,7 +72,7 @@ function Sidebar() {
             <nav className="flex space-x-4" role="navigation" aria-label="Social media links">
               <a 
                 href="https://twitter.com/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Twitter profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -81,7 +83,7 @@ function Sidebar() {
               </a>
               <a 
                 href="https://linkedin.com/in/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="LinkedIn profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -92,7 +94,7 @@ function Sidebar() {
               </a>
               <a 
                 href="https://scholar.google.com/citations?user=yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Google Scholar profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -103,7 +105,7 @@ function Sidebar() {
               </a>
               <a 
                 href="https://github.com/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="GitHub profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -114,7 +116,7 @@ function Sidebar() {
               </a>
               <a 
                 href="https://instagram.com/yourusername" 
-                className="text-gray-400 hover:text-blue-400 transition-colors"
+                className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Instagram profile"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -130,35 +132,35 @@ function Sidebar() {
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
               href="/" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="About page"
             >
               about
             </a>
             <a 
               href="/blog" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Blog posts"
             >
               blog
             </a>
             <a 
               href="/publications" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Publications and papers"
             >
               publications
             </a>
             <a 
               href="/projects" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Projects and work"
             >
               projects
             </a>
             <a 
               href="/gallery" 
-              className="block text-blue-400 hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Photo gallery"
             >
               gallery
@@ -168,12 +170,7 @@ function Sidebar() {
 
         {/* Theme Toggle */}
         <div className="mt-auto">
-          <button className="flex items-center space-x-2 text-gray-400 hover:text-blue-400 transition-colors text-base group">
-            <svg className="w-5 h-5 group-hover:rotate-180 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
-            </svg>
-            <span>Light Mode</span>
-          </button>
+          <ThemeToggle />
         </div>
       </div>
 
@@ -203,30 +200,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen bg-black text-gray-100 antialiased">
-        {/* Skip link for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Skip to main content
-        </a>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className="min-h-screen antialiased">
+        <Providers attribute="class" defaultTheme="dark">
+          {/* Skip link for accessibility */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Skip to main content
+          </a>
 
-        <div className="flex min-h-screen justify-center">
-          <div className="flex max-w-7xl w-full">
-            {/* Desktop Sidebar */}
-            <Sidebar />
+          <div className="flex min-h-screen justify-center">
+            <div className="flex max-w-7xl w-full">
+              {/* Desktop Sidebar */}
+              <Sidebar />
 
-            {/* Main Content Area */}
-            <main id="main-content" className="flex-1 bg-black lg:ml-0 main-content-mobile">
-              {/* Mobile Navigation Component */}
-              <MobileNavigation />
-              
-              {children}
-            </main>
+              {/* Main Content Area */}
+              <main id="main-content" className="flex-1 lg:ml-0 main-content-mobile">
+                {/* Mobile Navigation Component */}
+                <MobileNavigation />
+                
+                {children}
+              </main>
+            </div>
           </div>
-        </div>
+        </Providers>
       </body>
     </html>
   );
