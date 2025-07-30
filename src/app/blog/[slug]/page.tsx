@@ -127,37 +127,21 @@ export default async function PostPage({ params }: PostPageProps) {
 
     const { frontMatter, content, options } = post;
 
+    // Get all posts to find next/previous navigation
+    const allPosts = await getAllPosts();
+    const sortedPosts = allPosts
+      .filter(p => p.type !== 'publication') // Exclude publications from navigation
+      .sort((a, b) => {
+        if (!a.date || !b.date) return 0;
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+    
+    const currentIndex = sortedPosts.findIndex(p => p.slug === slug);
+    const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+    const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+
     return (
       <div className="max-w-6xl mx-auto px-8 pt-32 pb-16">
-        {/* Breadcrumb Navigation */}
-        <nav className="mb-12" aria-label="Breadcrumb">
-          <ol className="flex items-center text-base text-[var(--color-muted)]">
-            <li>
-              <Link 
-                href="/" 
-                className="hover:text-[var(--color-primary)] transition-colors"
-              >
-                Home
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <span className="mx-2">/</span>
-              <Link 
-                href="/blog" 
-                className="hover:text-[var(--color-primary)] transition-colors"
-              >
-                Blog
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <span className="mx-2">/</span>
-              <span className="text-[var(--color-text)] font-medium">
-                {frontMatter.title || 'Untitled Post'}
-              </span>
-            </li>
-          </ol>
-        </nav>
-
         {/* Article Header */}
         <header className="mb-16">
           <h1 className="text-5xl font-bold text-[var(--color-text)] mb-8 leading-tight">
@@ -228,21 +212,81 @@ export default async function PostPage({ params }: PostPageProps) {
             </div>
           )}
 
-          {/* Navigation */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-            <Link 
-              href="/blog" 
-              className="inline-flex items-center px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md text-lg hover:bg-gray-200 transition-colors duration-300"
-            >
-              <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              Back to Blog
-            </Link>
-            
-            <div className="text-base text-[var(--color-muted)]">
-              Share this post on social media
-            </div>
+          {/* Post Navigation */}
+          <div className="flex justify-between items-center gap-6">
+            {/* Next Post (Newer) */}
+            {nextPost ? (
+              <Link 
+                href={`/blog/${nextPost.slug}`}
+                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-gray-200 transition-colors duration-300 group max-w-xs"
+              >
+                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <div className="min-w-0 flex-1">
+                  <div className="text-xs text-[var(--color-muted)]">Next</div>
+                  <div className="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors truncate">
+                    {nextPost.title || 'Untitled Post'}
+                  </div>
+                  {nextPost.date && (
+                    <div className="text-xs text-[var(--color-muted)]">
+                      {new Date(nextPost.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ) : (
+              <div className="flex items-center gap-3 px-6 py-3 text-[var(--color-muted)] opacity-50 max-w-xs">
+                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <div className="min-w-0 flex-1">
+                  <div className="text-xs">Next</div>
+                  <div className="text-sm">No next post</div>
+                </div>
+              </div>
+            )}
+
+            {/* Previous Post (Older) */}
+            {prevPost ? (
+              <Link 
+                href={`/blog/${prevPost.slug}`}
+                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-gray-200 transition-colors duration-300 group max-w-xs"
+              >
+                <div className="min-w-0 flex-1 text-right">
+                  <div className="text-xs text-[var(--color-muted)]">Previous</div>
+                  <div className="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors truncate">
+                    {prevPost.title || 'Untitled Post'}
+                  </div>
+                  {prevPost.date && (
+                    <div className="text-xs text-[var(--color-muted)]">
+                      {new Date(prevPost.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </div>
+                  )}
+                </div>
+                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
+              </Link>
+            ) : (
+              <div className="flex items-center gap-3 px-6 py-3 text-[var(--color-muted)] opacity-50 max-w-xs">
+                <div className="min-w-0 flex-1 text-right">
+                  <div className="text-xs">Previous</div>
+                  <div className="text-sm">No previous post</div>
+                </div>
+                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+            )}
           </div>
         </footer>
       </div>
