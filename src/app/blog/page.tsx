@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPosts, type PostMetadata } from '@/lib/posts';
+import SearchInput from '@/components/SearchInput';
 
 /**
  * Props interface for the BlogPage component
@@ -74,7 +75,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
         {/* Header Section */}
-        <header className="mb-12">
+        <header className="mb-6">
           <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
             Blog
           </h1>
@@ -83,46 +84,48 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               ? 'Academic publications, research papers, and formal articles.'
               : tag
               ? `Posts tagged with "${tag}"`
-              : 'Publications, research papers, and technical writing on AI, computer vision, and machine learning.'
+              : 'Writing on AI, computer science, technology, photography, music, and life.'
             }
           </p>
         </header>
 
-        {/* Filters Section */}
-        {(availableTypes.length > 1 || availableTags.length > 0) && (
-          <section className="mb-12 p-6 bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg transition-colors duration-300">
-            <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">
-              Filter Posts
-            </h2>
-            
+        {/* Search and Filters Section */}
+        <section className="mb-12 space-y-4">
+          {/* Natural Language Search Bar */}
+          <SearchInput />
+
+          {/* Filter Controls */}
+          <div className="flex flex-wrap items-start gap-6">
             {/* Type Filters */}
             {availableTypes.length > 1 && (
-              <div className="mb-6">
-                <h3 className="text-base font-medium text-[var(--color-muted)] mb-3">By Type:</h3>
-                <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-[var(--color-text)]">Type:</span>
+                <div className="flex flex-wrap gap-2">
                   <Link
                     href="/blog"
-                    className={`px-4 py-2 rounded-md text-base transition-colors ${
+                    className={`px-3 py-1 text-sm transition-colors relative ${
                       !type 
-                        ? 'bg-[var(--color-primary)] text-white' 
-                        : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
+                        ? 'text-[var(--color-primary)]' 
+                        : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
                     }`}
                   >
                     All ({allPosts.length})
+                    {!type && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)]"></span>}
                   </Link>
                   {availableTypes.map(availableType => {
                     const count = allPosts.filter(p => p.type === availableType).length;
                     return (
                       <Link
-                        key={availableType}
+                        key={String(availableType)}
                         href={`/blog?type=${availableType}`}
-                        className={`px-4 py-2 rounded-md text-base transition-colors capitalize ${
+                        className={`px-3 py-1 text-sm transition-colors capitalize relative ${
                           type === availableType 
-                            ? 'bg-[var(--color-primary)] text-white' 
-                            : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
+                            ? 'text-[var(--color-primary)]' 
+                            : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
                         }`}
                       >
-                        {availableType} ({count})
+                        {String(availableType)} ({count})
+                        {type === availableType && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)]"></span>}
                       </Link>
                     );
                   })}
@@ -132,88 +135,87 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
             {/* Tag Filters */}
             {availableTags.length > 0 && (
-              <div>
-                <h3 className="text-base font-medium text-[var(--color-muted)] mb-3">By Tag:</h3>
-                <div className="flex flex-wrap gap-3">
-                  {availableTags.slice(0, 10).map(availableTag => (
+              <div className="flex items-center gap-3 flex-1">
+                <span className="text-sm font-medium text-[var(--color-text)]">Tags:</span>
+                <div className="flex flex-wrap gap-x-3 gap-y-2 max-w-3xl">
+                  {availableTags.slice(0, 12).map(availableTag => (
                     <Link
                       key={availableTag}
                       href={`/blog?tag=${availableTag}`}
-                      className={`px-4 py-2 rounded-md text-base transition-colors ${
+                      className={`text-sm transition-colors relative inline-block ${
                         tag === availableTag 
-                          ? 'bg-green-600 text-white' 
-                          : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
+                          ? 'text-[var(--color-primary)]' 
+                          : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
                       }`}
                     >
                       {availableTag}
+                      {tag === availableTag && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-primary)]"></span>}
                     </Link>
                   ))}
+                  {availableTags.length > 12 && (
+                    <span className="text-sm text-[var(--color-muted)]">
+                      +{availableTags.length - 12} more
+                    </span>
+                  )}
                 </div>
               </div>
             )}
-          </section>
-        )}
+          </div>
+        </section>
 
-        {/* Posts List - Vertical Layout */}
+        {/* Posts List - Clean List Layout */}
         {posts.length > 0 ? (
           <section>
             <div className="space-y-8">
               {posts.map(post => (
-                <article 
-                  key={post.slug} 
-                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-8 hover:bg-neutral-750 transition-all duration-300"
-                >
-                  {/* Post Header */}
-                  <header className="mb-4">
-                    <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-3">
-                      <Link 
-                        href={`/blog/${post.slug}`}
-                        className="hover:text-[var(--color-primary)] transition-colors"
-                      >
-                        {post.title || 'Untitled Post'}
-                      </Link>
-                    </h2>
-                    
-                    {/* Post Metadata */}
-                    <div className="flex flex-wrap items-center gap-4 text-base text-[var(--color-muted)]">
-                      {post.date && (
-                        <time dateTime={post.date}>
-                          {new Date(post.date).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </time>
+                <article key={post.slug} className="space-y-3 border-b border-[var(--color-border)] pb-8 last:border-b-0">
+                  <div className="flex items-start gap-4">
+                    <time className="text-sm text-[var(--color-muted)] font-medium min-w-[6rem]">
+                      {post.date && new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </time>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h2 className="text-xl font-semibold text-[var(--color-text)]">
+                          <Link 
+                            href={`/blog/${post.slug}`}
+                            className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                          >
+                            {post.title || 'Untitled Post'}
+                          </Link>
+                        </h2>
+                        {post.type && post.type !== 'article' ? (
+                          <span className="px-2 py-1 bg-[var(--color-primary)] text-white rounded text-xs uppercase font-medium">
+                            {String(post.type)}
+                          </span>
+                        ) : null}
+                      </div>
+                      
+                      {post.description && (
+                        <p className="text-[var(--color-muted)] leading-relaxed text-base mb-3">
+                          {post.description}
+                        </p>
                       )}
-                      {post.type && post.type !== 'article' && (
-                        <span className="px-3 py-1 bg-[var(--color-primary)] text-white rounded-full text-sm uppercase font-medium">
-                          {post.type}
-                        </span>
+                      
+                      {post.tags && post.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-3">
+                          {post.tags.map(postTag => (
+                            <Link
+                              key={postTag}
+                              href={`/blog?tag=${postTag}`}
+                              className="text-xs text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors relative inline-block group"
+                            >
+                              {postTag}
+                              <span className="absolute bottom-0 left-0 right-0 h-px bg-[var(--color-border)] group-hover:bg-[var(--color-primary)] transition-colors"></span>
+                            </Link>
+                          ))}
+                        </div>
                       )}
                     </div>
-                  </header>
-
-                  {/* Post Description */}
-                  {post.description && (
-                    <p className="text-[var(--color-muted)] mb-5 leading-relaxed text-lg">
-                      {post.description}
-                    </p>
-                  )}
-
-                  {/* Post Tags */}
-                  {post.tags && post.tags.length > 0 && (
-                    <footer className="flex flex-wrap gap-2 pt-2 border-t border-[var(--color-border)]">
-                      {post.tags.map(postTag => (
-                        <Link
-                          key={postTag}
-                          href={`/blog?tag=${postTag}`}
-                          className="inline-block px-3 py-1 text-sm bg-neutral-700 text-[var(--color-muted)] rounded hover:bg-neutral-600 transition-colors"
-                        >
-                          #{postTag}
-                        </Link>
-                      ))}
-                    </footer>
-                  )}
+                  </div>
                 </article>
               ))}
             </div>

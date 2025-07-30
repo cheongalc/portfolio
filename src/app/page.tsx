@@ -58,70 +58,69 @@ export default async function HomePage() {
 
         {/* Latest Posts Section */}
         {latestPosts.length > 0 && (
-          <section>
+          <section className="mb-16">
             <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
               Latest Posts
             </h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            
+            <div className="space-y-6">
               {latestPosts.map(post => (
-                <article 
-                  key={post.slug} 
-                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-6 hover:border-[var(--color-primary)] transition-all duration-300 group"
-                >
-                  <h3 className="text-xl font-medium text-[var(--color-text)] mb-3 group-hover:text-[var(--color-primary)] transition-colors">
-                    <Link 
-                      href={`/blog/${post.slug}`}
-                      className="block"
-                    >
-                      {post.title || 'Untitled Post'}
-                    </Link>
-                  </h3>
-                  
-                  {post.date && (
-                    <time className="text-sm text-[var(--color-muted)] mb-3 block">
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
+                <article key={post.slug} className="space-y-2">
+                  <div className="flex items-start gap-4">
+                    <time className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                      {post.date && new Date(post.date).toLocaleDateString('en-US', {
                         month: 'short',
-                        day: 'numeric'
+                        day: 'numeric',
+                        year: 'numeric'
                       })}
                     </time>
-                  )}
-                  
-                  {post.description && (
-                    <p className="text-[var(--color-text)] text-sm leading-relaxed mb-4 line-clamp-3">
-                      {post.description}
-                    </p>
-                  )}
-                  
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.slice(0, 2).map(tag => (
-                        <span 
-                          key={tag}
-                          className="inline-block px-2 py-1 text-xs bg-neutral-800 text-[var(--color-muted)] rounded"
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-[var(--color-text)] leading-tight mb-1">
+                        <Link 
+                          href={`/blog/${post.slug}`}
+                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
                         >
-                          {tag}
-                        </span>
-                      ))}
-                      {post.tags.length > 2 && (
-                        <span className="inline-block px-2 py-1 text-xs bg-neutral-800 text-[var(--color-muted)] rounded">
-                          +{post.tags.length - 2}
-                        </span>
+                          {post.title || 'Untitled Post'}
+                        </Link>
+                      </h3>
+                      
+                      {post.description && (
+                        <p className="text-[var(--color-muted)] text-sm leading-relaxed line-clamp-2">
+                          {post.description}
+                        </p>
+                      )}
+                      
+                      {post.tags && post.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-3 mt-2">
+                          {post.tags.slice(0, 3).map(tag => (
+                            <span 
+                              key={tag}
+                              className="text-xs text-[var(--color-muted)] border-b border-[var(--color-border)] hover:text-[var(--color-primary)] transition-colors cursor-default"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                          {post.tags.length > 3 && (
+                            <span className="text-xs text-[var(--color-muted)]">
+                              +{post.tags.length - 3} more
+                            </span>
+                          )}
+                        </div>
                       )}
                     </div>
-                  )}
+                  </div>
                 </article>
               ))}
             </div>
             
             {/* View All Posts Link */}
-            <div className="mt-12 text-center">
+            <div className="mt-8">
               <Link 
                 href="/blog" 
-                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
+                className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors font-medium"
               >
-                View All Posts
-                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                View all posts
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
@@ -138,60 +137,39 @@ export default async function HomePage() {
             
             <div className="space-y-6">
               {recentPapers.map((paper, index) => (
-                <article 
-                  key={index}
-                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-6 hover:bg-neutral-750 transition-all duration-300"
-                >
-                  <h3 className="text-lg font-semibold text-[var(--color-text)] mb-3">
-                    <a 
-                      href={paper.titleLink}
-                      className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {paper.title}
-                    </a>
-                  </h3>
-                  
-                  <p 
-                    className="text-[var(--color-text)] text-sm leading-relaxed mb-2"
-                    dangerouslySetInnerHTML={{ __html: paper.authorsHtml }}
-                  />
-                  
-                  <p className="text-[var(--color-muted)] text-sm italic mb-4">
-                    {paper.venue}
-                  </p>
-                  
-                  {paper.links && paper.links.length > 0 && (
-                    <div className="flex items-center gap-4 flex-wrap">
-                      {paper.links.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href={link.url}
-                          className="inline-flex items-center text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                <article key={index} className="space-y-2">
+                  <div className="flex items-start gap-4">
+                    <span className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                      {paper.year}
+                    </span>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-[var(--color-text)] leading-tight">
+                        <a 
+                          href={paper.titleLink}
+                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {link.text}
-                          <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
+                          {paper.title}
                         </a>
-                      ))}
+                      </h3>
+                      <p className="text-[var(--color-muted)] text-sm mt-1">
+                        {paper.venue}
+                      </p>
                     </div>
-                  )}
+                  </div>
                 </article>
               ))}
             </div>
             
             {/* View All Papers Link */}
-            <div className="mt-8 text-center">
+            <div className="mt-8">
               <Link 
                 href="/papers" 
-                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
+                className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors font-medium"
               >
-                View All Papers
-                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                View all papers
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>

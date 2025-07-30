@@ -37,66 +37,76 @@ export default async function PapersPage() {
         </h1>
       </section>
 
-      {/* Papers Section - Rendered from JSON */}
-      <section className="space-y-12">
-        {papersByYear.map(({ year, papers }) => (
-          <div key={year} className="space-y-6">
-            {/* Year Header */}
-            <h2 className="text-xl font-bold text-[var(--color-text)] border-b-2 border-[var(--color-border)] pb-2">
-              {year}
-            </h2>
+      {/* Papers Section - Resume-style Table Layout */}
+      <section className="space-y-6">
+        {papersByYear.flatMap(({ year, papers }) => 
+          papers.map((paper, paperIndex) => {
+            // Check if this is the first paper of a new year
+            const isFirstOfYear = paperIndex === 0;
             
-            {/* Papers for this year */}
-            <div className="space-y-8">
-              {papers.map((paper, index) => (
-                <article key={index} className="space-y-3">
-                  {/* Paper Title */}
-                  <h3 className="text-lg font-semibold text-[var(--color-text)]">
-                    <a 
-                      href={paper.titleLink}
-                      className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {paper.title}
-                    </a>
-                  </h3>
-                  
-                  {/* Authors */}
-                  <p 
-                    className="text-[var(--color-text)] text-sm leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: paper.authorsHtml }}
-                  />
-                  
-                  {/* Venue */}
-                  <p className="text-[var(--color-muted)] text-sm italic">
-                    {paper.venue}
-                  </p>
-                  
-                  {/* Links */}
-                  {paper.links && paper.links.length > 0 && (
-                    <div className="flex items-center gap-4 flex-wrap">
-                      {paper.links.map((link, linkIndex) => (
-                        <a
-                          key={linkIndex}
-                          href={link.url}
-                          className="inline-flex items-center text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+            // Check if this paper should have a horizontal rule above it
+            // (i.e., it's the first paper of a year that's not the very first year)
+            const shouldHaveRule = isFirstOfYear && papersByYear.findIndex(y => y.year === year) > 0;
+            
+            return (
+              <div key={`${year}-${paperIndex}`}>
+                {/* Horizontal rule between years */}
+                {shouldHaveRule && (
+                  <hr className="border-[var(--color-border)] my-8" />
+                )}
+                
+                <article className="space-y-3 pb-6">
+                  <div className="flex items-start gap-4">
+                    <span className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                      {isFirstOfYear ? year : ''}
+                    </span>
+                    <div className="flex-1">
+                      {/* Paper Title */}
+                      <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
+                        <a 
+                          href={paper.titleLink}
+                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {link.text}
-                          <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
+                          {paper.title}
                         </a>
-                      ))}
+                      </h3>
+                      
+                      {/* Authors */}
+                      <p 
+                        className="text-[var(--color-text)] text-sm leading-relaxed mb-2"
+                        dangerouslySetInnerHTML={{ __html: paper.authorsHtml }}
+                      />
+                      
+                      {/* Venue */}
+                      <p className="text-[var(--color-muted)] text-sm italic mb-3">
+                        {paper.venue}
+                      </p>
+                      
+                      {/* Links */}
+                      {paper.links && paper.links.length > 0 && (
+                        <div className="flex items-center gap-4 flex-wrap">
+                          {paper.links.map((link, linkIndex) => (
+                            <a
+                              key={linkIndex}
+                              href={link.url}
+                              className="text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {link.text}
+                            </a>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
                 </article>
-              ))}
-            </div>
-          </div>
-        ))}
+              </div>
+            );
+          })
+        )}
       </section>
     </div>
   );
