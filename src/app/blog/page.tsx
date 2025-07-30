@@ -75,7 +75,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         {/* Header Section */}
         <header className="mb-12">
           <h1 className="text-4xl font-bold text-[var(--color-text)] mb-6">
-            Research
+            Blog
           </h1>
           <p className="text-xl text-[var(--color-muted)] leading-relaxed">
             {type === 'publication' 

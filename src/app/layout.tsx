@@ -131,13 +131,6 @@ function Sidebar() {
           {/* Navigation */}
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
-              href="/" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
-              aria-label="About page"
-            >
-              about
-            </a>
-            <a 
               href="/blog" 
               className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Blog posts"

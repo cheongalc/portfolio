@@ -131,7 +131,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <div className="max-w-6xl mx-auto px-8 pt-32 pb-16">
         {/* Breadcrumb Navigation */}
         <nav className="mb-12" aria-label="Breadcrumb">
-          <ol className="flex items-center space-x-3 text-base text-[var(--color-muted)]">
+          <ol className="flex items-center text-base text-[var(--color-muted)]">
             <li>
               <Link 
                 href="/" 
@@ -141,7 +141,7 @@ export default async function PostPage({ params }: PostPageProps) {
               </Link>
             </li>
             <li className="flex items-center">
-              <span className="mx-3">/</span>
+              <span className="mx-2">/</span>
               <Link 
                 href="/blog" 
                 className="hover:text-[var(--color-primary)] transition-colors"
@@ -150,7 +150,7 @@ export default async function PostPage({ params }: PostPageProps) {
               </Link>
             </li>
             <li className="flex items-center">
-              <span className="mx-3">/</span>
+              <span className="mx-2">/</span>
               <span className="text-[var(--color-text)] font-medium">
                 {frontMatter.title || 'Untitled Post'}
               </span>

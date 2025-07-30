@@ -122,14 +122,6 @@ export default function MobileNavigation() {
           {/* Navigation */}
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
-              href="/" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
-              aria-label="About page"
-              onClick={closeMenu}
-            >
-              about
-            </a>
-            <a 
               href="/blog" 
               className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
               aria-label="Blog posts"

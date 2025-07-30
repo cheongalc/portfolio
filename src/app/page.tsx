@@ -7,119 +7,142 @@ import { getAllPosts, type PostMetadata } from '@/lib/posts';
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'Learn about my background, research interests, and professional experience in machine learning and artificial intelligence.',
+  title: 'Home - Your Name',
+  description: 'Welcome to my personal portfolio. Learn about my background and explore my latest blog posts on technology, development, and more.',
   openGraph: {
-    title: 'About - Your Name',
-    description: 'Learn about my background, research interests, and professional experience in machine learning and artificial intelligence.',
+    title: 'Home - Your Name',
+    description: 'Welcome to my personal portfolio. Learn about my background and explore my latest blog posts.',
     type: 'website',
   },
 };
 
 /**
- * Home page component that displays personal information and recent work
+ * Home page component that displays personal information and recent blog posts
  * 
  * This component serves as the main landing page, featuring:
- * - Personal introduction and background
- * - Latest publications in vertical layout
- * - Academic and professional experience
+ * - About Me section with personal introduction
+ * - Latest Posts section with mini cards for recent blog posts
  * 
- * @returns The rendered home page with about content and publication listings
+ * @returns The rendered home page with about content and latest blog posts
  */
 export default async function HomePage() {
   try {
-    // Fetch all posts and separate by type
+    // Fetch all posts and get the latest 3
     const posts: PostMetadata[] = await getAllPosts();
     
-    // Filter publications (academic papers, articles, etc.)
-    const publications = posts
-      .filter(post => post.type === 'publication')
-      .slice(0, 5); // Show more publications on the main page
+    // Get the latest 3 posts (excluding publications)
+    const latestPosts = posts
+      .filter(post => post.type !== 'publication')
+      .slice(0, 3);
 
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
-        {/* Main Content */}
-        <div className="space-y-8 text-[var(--color-text)] leading-relaxed">
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-        </div>
+        {/* About Me Section */}
+        <section className="mb-16">
+          <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
+            About Me
+          </h1>
+          <div className="space-y-4 text-[var(--color-text)] leading-relaxed text-lg">
+            <p>
+              Welcome to my digital space! Dummy text
+            </p>
+            <p>
+              More dummy text
+            </p>
+          </div>
+        </section>
 
-        {/* Publications Section */}
-        {publications.length > 0 && (
-          <div className="mt-16">
+        {/* Latest Posts Section */}
+        {latestPosts.length > 0 && (
+          <section>
             <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
-              Recent Publications
+              Latest Posts
             </h2>
-            <div className="space-y-6">
-              {publications.map(publication => (
-                <article key={publication.slug} className="border-l-2 border-[var(--color-primary)] pl-6 py-2">
-                  <h3 className="text-xl font-medium text-[var(--color-text)] mb-2">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {latestPosts.map(post => (
+                <article 
+                  key={post.slug} 
+                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-6 hover:border-[var(--color-primary)] transition-all duration-300 group"
+                >
+                  <h3 className="text-xl font-medium text-[var(--color-text)] mb-3 group-hover:text-[var(--color-primary)] transition-colors">
                     <Link 
-                      href={`/blog/${publication.slug}`}
-                      className="hover:text-[var(--color-primary)] transition-colors"
+                      href={`/blog/${post.slug}`}
+                      className="block"
                     >
-                      {publication.title || 'Untitled Publication'}
+                      {post.title || 'Untitled Post'}
                     </Link>
                   </h3>
-                  {publication.date && (
-                    <time className="text-base text-[var(--color-muted)] mb-2 block">
-                      {new Date(publication.date).toLocaleDateString('en-US', {
+                  
+                  {post.date && (
+                    <time className="text-sm text-[var(--color-muted)] mb-3 block">
+                      {new Date(post.date).toLocaleDateString('en-US', {
                         year: 'numeric',
-                        month: 'long',
+                        month: 'short',
                         day: 'numeric'
                       })}
                     </time>
                   )}
-                  {publication.description && (
-                    <p className="text-[var(--color-text)] text-base leading-relaxed">
-                      {publication.description}
+                  
+                  {post.description && (
+                    <p className="text-[var(--color-text)] text-sm leading-relaxed mb-4 line-clamp-3">
+                      {post.description}
                     </p>
                   )}
-                  {publication.tags && publication.tags.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {publication.tags.slice(0, 3).map(tag => (
+                  
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.slice(0, 2).map(tag => (
                         <span 
                           key={tag}
-                          className="inline-block px-2 py-1 text-sm bg-neutral-800 text-[var(--color-muted)] rounded"
+                          className="inline-block px-2 py-1 text-xs bg-neutral-800 text-[var(--color-muted)] rounded"
                         >
                           {tag}
                         </span>
                       ))}
+                      {post.tags.length > 2 && (
+                        <span className="inline-block px-2 py-1 text-xs bg-neutral-800 text-[var(--color-muted)] rounded">
+                          +{post.tags.length - 2}
+                        </span>
+                      )}
                     </div>
                   )}
                 </article>
               ))}
             </div>
             
-            <div className="mt-8">
+            {/* View All Posts Link */}
+            <div className="mt-12 text-center">
               <Link 
                 href="/blog" 
-                className="text-[var(--color-primary)] hover:text-blue-300 transition-colors text-lg underline"
-                aria-label="View all research and publications"
+                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
               >
-                View all research →
+                View All Posts
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </Link>
             </div>
-          </div>
+          </section>
         )}
-
-        {/* Empty State */}
-        {publications.length === 0 && (
-          <div className="mt-16 text-center">
-            <div className="max-w-lg mx-auto">
-              <h2 className="text-2xl font-medium text-[var(--color-text)] mb-6">
-                No Publications Yet
-              </h2>
-              <p className="text-lg text-[var(--color-text)] mb-8">
-                Research publications and papers will be listed here.
+        
+        {/* No Posts Fallback */}
+        {latestPosts.length === 0 && (
+          <section>
+            <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
+              Latest Posts
+            </h2>
+            <div className="text-center py-12 border border-[var(--color-border)] rounded-lg">
+              <p className="text-[var(--color-muted)] text-lg mb-4">
+                No blog posts found yet.
               </p>
               <Link 
                 href="/blog" 
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white rounded-md hover:bg-blue-700 transition-colors"
               >
-                Go to Research
+                Explore Writing
               </Link>
             </div>
-          </div>
+          </section>
         )}
       </div>
     );
@@ -139,7 +162,7 @@ export default async function HomePage() {
             href="/blog" 
             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
           >
-            Try Research Page
+            Try Blog Page
           </Link>
         </div>
       </div>
