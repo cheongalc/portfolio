@@ -21,7 +21,7 @@ export default function MobileNavigation() {
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden flex items-center justify-between px-4 pt-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-background)] sticky top-0 z-30">
+      <div className="lg:hidden flex items-center justify-between px-4 pt-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-background)] sticky top-0 z-30 transition-colors duration-300">
         <h1 className="text-xl font-bold text-[var(--color-text)]">
           <a href="/" className="hover:text-[var(--color-primary)] transition-colors">Your Name</a>
         </h1>
@@ -45,7 +45,7 @@ export default function MobileNavigation() {
       )}
 
       {/* Mobile Sidebar */}
-      <div className={`mobile-sidebar lg:hidden ${isMenuOpen ? 'open' : ''}`}>
+      <div className={`mobile-sidebar lg:hidden ${isMenuOpen ? 'open' : ''} transition-colors duration-300`}>
         <div className="flex-1 p-8">
           {/* Profile Section */}
           <div className="mb-12">

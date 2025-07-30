@@ -207,7 +207,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </article>
 
         {/* Article Footer */}
-        <footer className="mt-20 pt-12 border-t border-[var(--color-border)]">
+        <footer className="mt-20 pt-12 border-t border-[var(--color-border)] transition-colors duration-300">
           {/* Tags */}
           {frontMatter.tags && frontMatter.tags.length > 0 && (
             <div className="mb-12">
@@ -219,7 +219,7 @@ export default async function PostPage({ params }: PostPageProps) {
                   <Link
                     key={tag}
                     href={`/blog?tag=${tag}`}
-                    className="inline-flex items-center px-4 py-2 bg-[var(--color-background)] text-[var(--color-muted)] rounded-full text-base hover:bg-gray-200 transition-colors"
+                    className="inline-flex items-center px-4 py-2 bg-[var(--color-background)] text-[var(--color-muted)] rounded-full text-base hover:bg-gray-200 transition-colors duration-300"
                   >
                     #{tag}
                   </Link>
@@ -232,7 +232,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
             <Link 
               href="/blog" 
-              className="inline-flex items-center px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md text-lg hover:bg-gray-200 transition-colors"
+              className="inline-flex items-center px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md text-lg hover:bg-gray-200 transition-colors duration-300"
             >
               <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />

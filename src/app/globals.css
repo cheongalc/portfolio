@@ -89,6 +89,18 @@
     color: var(--color-text);
   }
 
+  /* Enable transitions only after .theme-transition is present on <html> */
+  html.theme-transition body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Prevent all transitions before hydration to avoid flash */
+  html:not(.theme-transition) *,
+  html:not(.theme-transition) *::before,
+  html:not(.theme-transition) *::after {
+    transition: none !important;
+  }
+
   /* Focus styles for better keyboard navigation */
   *:focus-visible {
     outline: 2px solid rgb(59 130 246);
@@ -123,6 +135,42 @@
   a, button {
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
   }
+
+  /* Sidebar mobile responsiveness */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(0 0 0 / 0.5);
+    z-index: 40;
+    transition: background-color 0.3s ease;
+  }
+
+  .mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 20rem;
+    background-color: var(--color-background);
+    border-right: 1px solid var(--color-border);
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .mobile-sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* Global color transition once hydrated */
+html.theme-transition * {
+  transition-property: background-color, color, border-color, fill, stroke;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
 /* Component layer customizations */
@@ -306,8 +354,8 @@
     left: 0;
     bottom: 0;
     width: 20rem;
-    background-color: rgb(0 0 0);
-    border-right: 1px solid rgb(64 64 64);
+    background-color: var(--color-background);
+    border-right: 1px solid var(--color-border);
     z-index: 50;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
@@ -378,6 +426,41 @@
   /* Custom utility for neutral-750 background */
   .bg-neutral-750 {
     background-color: rgb(48 48 48);
+  }
+
+  @keyframes rotate-360-ease-in-out {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-rotate-360 {
+    animation: rotate-360-ease-in-out 0.5s ease-in-out;
+  }
+
+  @keyframes sun-out {
+    0% { opacity: 1; }
+    40% { opacity: 1; }
+    60% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  .animate-sun-out {
+    animation: sun-out 0.5s ease-in-out;
+  }
+
+  @keyframes moon-in {
+    0% { opacity: 0; }
+    40% { opacity: 0; }
+    60% { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  .animate-moon-in {
+    animation: moon-in 0.5s ease-in-out;
   }
 }
 

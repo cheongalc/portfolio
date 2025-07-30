@@ -89,7 +89,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
         {/* Filters Section */}
         {(availableTypes.length > 1 || availableTags.length > 0) && (
-          <section className="mb-12 p-6 bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg">
+          <section className="mb-12 p-6 bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg transition-colors duration-300">
             <h2 className="text-lg font-semibold text-[var(--color-text)] mb-4">
               Filter Posts
             </h2>
@@ -160,7 +160,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               {posts.map(post => (
                 <article 
                   key={post.slug} 
-                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-8 hover:bg-neutral-750 transition-all duration-200"
+                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-8 hover:bg-neutral-750 transition-all duration-300"
                 >
                   {/* Post Header */}
                   <header className="mb-4">

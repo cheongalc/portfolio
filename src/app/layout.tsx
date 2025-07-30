@@ -54,7 +54,7 @@ export const metadata: Metadata = {
  */
 function Sidebar() {
   return (
-    <aside className="w-80 bg-[var(--color-background)] border-r border-[var(--color-border)] flex flex-col sidebar-desktop ml-16">
+    <aside className="w-80 bg-[var(--color-background)] border-r border-[var(--color-border)] flex flex-col sidebar-desktop ml-16 transition-colors duration-300">
       <div className="flex-1 px-8 pt-32 pb-8">
         {/* Profile Section */}
         <div className="mb-12">
