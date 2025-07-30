@@ -1,0 +1,38 @@
+{
+  "2025": [
+    {
+      "title": "Detecting Offensive Memes with Social Biases in Singapore Context Using Multimodal Large Language Models",
+      "titleLink": "https://arxiv.org/abs/2502.18101",
+      "authors": "Cao Yuxuan, Wu Jiayang, **Alistair Cheong Liang Chuen**, Bryan Shan Guanrong, Theodore Lee Chong Jen, Sherman Chann Zhi Shen",
+      "venue": "3rd Workshop, C3NLP, NAACL 2025",
+      "links": [
+        {
+          "text": "C3NLP site",
+          "url": "https://c3nlp.github.io/#accept_papers"
+        },
+        {
+          "text": "GitHub",
+          "url": "https://github.com/aliencaocao/vlm-for-memes-aisg"
+        }
+      ]
+    }
+  ],
+  "2022": [
+    {
+      "title": "Explaining adversarial vulnerability with a data sparsity hypothesis",
+      "titleLink": "https://doi.org/10.1016/j.neucom.2022.01.062",
+      "authors": "Mahsa Paknezhad, Cuong Phuc Ngo, Amadeus Aristo Winarto, **Alistair Cheong**, Chuen Yang Beh, Jiayang Wu, Hwee Kuan Lee",
+      "venue": "Neurocomputing, Volume 495, Pages 178-193",
+      "links": [
+        {
+          "text": "arXiv preprint",
+          "url": "https://arxiv.org/abs/2103.00778"
+        },
+        {
+          "text": "GitHub",
+          "url": "https://github.com/MahsaPaknezhad/AdversariallyRobustTraining"
+        }
+      ]
+    }
+  ]
+}

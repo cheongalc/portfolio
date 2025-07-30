@@ -1,15 +1,14 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import matter from 'gray-matter';
-// Remove serialize import - not needed for RSC version
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypePrettyCode from 'rehype-pretty-code';
+import type { Pluggable } from 'unified';
 
 /**
  * Directory path where blog posts are stored
- * Uses process.cwd() to get the current working directory and joins it with 'public/blog'
  */
 const BLOG_DIR = path.join(process.cwd(), 'public/blog');
 
@@ -30,7 +29,7 @@ export interface PostMetadata {
   /** Post tags/categories */
   tags?: string[];
   /** Any additional frontmatter fields */
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /**
@@ -44,8 +43,8 @@ export interface ProcessedPost {
   /** MDX options for RSC MDXRemote */
   options: {
     mdxOptions: {
-      remarkPlugins: any[];
-      rehypePlugins: any[];
+      remarkPlugins: Pluggable[];
+      rehypePlugins: Pluggable[];
     };
   };
 }
@@ -55,16 +54,13 @@ export interface ProcessedPost {
  * 
  * @returns Promise that resolves to an array of post metadata, sorted by date (newest first)
  * @throws Will throw an error if the blog directory cannot be read
- * 
- * @example
- * ```typescript
- * const posts = await getAllPosts();
- * console.log(`Found ${posts.length} published posts`);
- * ```
  */
 export async function getAllPosts(): Promise<PostMetadata[]> {
   try {
-    // Read all files from the blog directory and filter for .md files only
+    // Check if directory exists
+    await fs.access(BLOG_DIR);
+    
+    // Read all files from the directory and filter for .md files only
     const files = (await fs.readdir(BLOG_DIR)).filter(file => file.endsWith('.md'));
     
     // Process each markdown file to extract its frontmatter metadata
@@ -90,8 +86,8 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
       .sort((a, b) => +new Date(b.date || 0) - +new Date(a.date || 0));
       
   } catch (error) {
-    console.error('Error reading blog posts:', error);
-    throw new Error('Failed to load blog posts');
+    console.error(`Error reading blog posts:`, error);
+    return [];
   }
 }
 
@@ -100,13 +96,6 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
  * 
  * @param slug - The post identifier (filename without .md extension)
  * @returns Promise that resolves to the processed post with frontmatter and raw content
- * @throws Will throw an error if the post file cannot be found or processed
- * 
- * @example
- * ```typescript
- * const post = await getPost('my-first-post');
- * console.log(post.frontMatter.title);
- * ```
  */
 export async function getPost(slug: string): Promise<ProcessedPost> {
   try {

@@ -137,14 +137,14 @@ export default async function PostPage({ params }: PostPageProps) {
       });
     
     const currentIndex = sortedPosts.findIndex(p => p.slug === slug);
-    const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
-    const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+    const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+    const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
 
     return (
-      <div className="max-w-6xl mx-auto px-8 pt-32 pb-16">
+      <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
         {/* Article Header */}
         <header className="mb-16">
-          <h1 className="text-5xl font-bold text-[var(--color-text)] mb-8 leading-tight">
+          <h1 className="text-3xl font-bold text-[var(--color-text)] mb-8 leading-tight">
             {frontMatter.title || 'Untitled Post'}
           </h1>
           
@@ -170,7 +170,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                 </svg>
-                <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm uppercase font-medium">
+                <span className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-full text-sm uppercase font-medium">
                   {frontMatter.type}
                 </span>
               </div>
@@ -296,7 +296,7 @@ export default async function PostPage({ params }: PostPageProps) {
     console.error(`Error loading post "${slug}":`, error);
     
     return (
-      <div className="max-w-6xl mx-auto px-8 pt-32 pb-16">
+      <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
         <div className="text-center py-20">
           <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-6">
             Post Not Found
@@ -306,7 +306,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </p>
           <Link 
             href="/blog" 
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
           >
             <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />

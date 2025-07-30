@@ -132,28 +132,28 @@ function Sidebar() {
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
               href="/blog" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
               aria-label="Blog posts"
             >
               blog
             </a>
             <a 
-              href="/publications" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
-              aria-label="Publications and papers"
+              href="/papers" 
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              aria-label="Papers and publications"
             >
-              publications
+              papers
             </a>
             <a 
               href="/projects" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
               aria-label="Projects and work"
             >
               projects
             </a>
             <a 
               href="/gallery" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
               aria-label="Photo gallery"
             >
               gallery
@@ -199,7 +199,7 @@ export default function RootLayout({
           {/* Skip link for accessibility */}
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--color-primary)] focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
           >
             Skip to main content
           </a>

@@ -60,6 +60,7 @@
   --color-background: theme(colors.white);
   --color-text: theme(colors.neutral.800);
   --color-primary: theme(colors.blue.600);
+  --color-primary-hover: theme(colors.blue.700);
   --color-muted: theme(colors.neutral.500);
   --color-border: theme(colors.neutral.200);
 }
@@ -80,6 +81,7 @@
     --color-background: theme(colors.black);
     --color-text: theme(colors.neutral.300);
     --color-primary: theme(colors.blue.400);
+    --color-primary-hover: theme(colors.blue.300);
     --color-muted: theme(colors.neutral.400);
     --color-border: theme(colors.neutral.800);
   }
@@ -184,38 +186,38 @@ html.theme-transition * {
   }
 
   .prose-enhanced h1 {
-    font-size: 2.75rem; /* Increased from 2.25rem */
+    font-size: 2rem; /* Reduced from 2.75rem */
     font-weight: 700;
     color: var(--color-text);
     margin-top: 0;
-    margin-bottom: 2rem; /* Increased spacing */
+    margin-bottom: 1.5rem; /* Slightly reduced spacing */
     line-height: 1.2;
   }
 
   .prose-enhanced h2 {
-    font-size: 2.25rem; /* Increased from 1.875rem */
+    font-size: 1.75rem; /* Reduced from 2.25rem */
     font-weight: 600;
     color: var(--color-text);
-    margin-top: 2.5rem; /* Increased spacing */
-    margin-bottom: 1.25rem;
+    margin-top: 2rem; /* Slightly reduced spacing */
+    margin-bottom: 1rem;
     line-height: 1.3;
   }
 
   .prose-enhanced h3 {
-    font-size: 1.875rem; /* Increased from 1.5rem */
+    font-size: 1.5rem; /* Reduced from 1.875rem */
     font-weight: 600;
     color: var(--color-text);
-    margin-top: 2rem; /* Increased spacing */
-    margin-bottom: 1rem;
+    margin-top: 1.75rem; /* Slightly reduced spacing */
+    margin-bottom: 0.75rem;
     line-height: 1.4;
   }
 
   .prose-enhanced h4 {
-    font-size: 1.5rem; /* Increased from 1.25rem */
+    font-size: 1.25rem; /* Reduced from 1.5rem */
     font-weight: 600;
     color: var(--color-text);
-    margin-top: 1.5rem; /* Increased spacing */
-    margin-bottom: 0.75rem;
+    margin-top: 1.25rem; /* Slightly reduced spacing */
+    margin-bottom: 0.5rem;
     line-height: 1.4;
   }
 
@@ -228,14 +230,15 @@ html.theme-transition * {
   }
 
   .prose-enhanced a {
-    color: rgb(96 165 250);
+    color: var(--color-primary);
     text-decoration: underline;
-    text-decoration-color: rgb(59 130 246);
+    text-decoration-color: var(--color-primary);
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
   }
 
   .prose-enhanced a:hover {
-    color: rgb(147 197 253);
-    text-decoration-color: rgb(96 165 250);
+    color: var(--color-primary-hover);
+    text-decoration-color: var(--color-primary-hover);
   }
 
   .prose-enhanced strong {

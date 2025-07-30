@@ -7,12 +7,12 @@ import { getAllPosts, type PostMetadata } from '@/lib/posts';
  */
 interface BlogPageProps {
   /** URL search parameters for filtering */
-  searchParams?: {
+  searchParams?: Promise<{
     /** Filter posts by type (e.g., 'publication', 'article') */
     type?: string;
     /** Filter posts by tag */
     tag?: string;
-  };
+  }>;
 }
 
 /**
@@ -50,7 +50,8 @@ export const dynamic = 'force-static';
  */
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   try {
-    const { type, tag } = searchParams ?? {};
+    const resolvedSearchParams = await searchParams;
+    const { type, tag } = resolvedSearchParams ?? {};
     
     // Fetch all posts and apply filters
     let posts: PostMetadata[] = await getAllPosts();
@@ -74,7 +75,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
         {/* Header Section */}
         <header className="mb-12">
-          <h1 className="text-4xl font-bold text-[var(--color-text)] mb-6">
+          <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
             Blog
           </h1>
           <p className="text-xl text-[var(--color-muted)] leading-relaxed">
@@ -103,7 +104,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                     href="/blog"
                     className={`px-4 py-2 rounded-md text-base transition-colors ${
                       !type 
-                        ? 'bg-blue-600 text-white' 
+                        ? 'bg-[var(--color-primary)] text-white' 
                         : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
                     }`}
                   >
@@ -117,7 +118,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         href={`/blog?type=${availableType}`}
                         className={`px-4 py-2 rounded-md text-base transition-colors capitalize ${
                           type === availableType 
-                            ? 'bg-blue-600 text-white' 
+                            ? 'bg-[var(--color-primary)] text-white' 
                             : 'bg-neutral-700 text-[var(--color-muted)] hover:bg-neutral-600 border border-neutral-600'
                         }`}
                       >
@@ -185,7 +186,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         </time>
                       )}
                       {post.type && post.type !== 'article' && (
-                        <span className="px-3 py-1 bg-blue-600 text-blue-100 rounded-full text-sm uppercase font-medium">
+                        <span className="px-3 py-1 bg-[var(--color-primary)] text-white rounded-full text-sm uppercase font-medium">
                           {post.type}
                         </span>
                       )}
@@ -233,7 +234,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
               {(type || tag) && (
                 <Link 
                   href="/blog" 
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
                 >
                   View All Posts
                 </Link>
@@ -257,7 +258,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           </p>
           <Link 
             href="/" 
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
           >
             Go Home
           </Link>

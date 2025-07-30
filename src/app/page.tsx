@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPosts, type PostMetadata } from '@/lib/posts';
+import { getRecentPapers } from '@/lib/papers';
 
 /**
  * Metadata configuration for the home page
@@ -34,6 +35,9 @@ export default async function HomePage() {
     const latestPosts = posts
       .filter(post => post.type !== 'publication')
       .slice(0, 3);
+
+    // Get recent papers
+    const recentPapers = await getRecentPapers(2);
 
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
@@ -114,9 +118,79 @@ export default async function HomePage() {
             <div className="mt-12 text-center">
               <Link 
                 href="/blog" 
-                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
               >
                 View All Posts
+                <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </section>
+        )}
+        
+        {/* Recent Papers Section */}
+        {recentPapers.length > 0 && (
+          <section className="mb-16">
+            <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
+              Recent Papers
+            </h2>
+            
+            <div className="space-y-6">
+              {recentPapers.map((paper, index) => (
+                <article 
+                  key={index}
+                  className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg p-6 hover:bg-neutral-750 transition-all duration-300"
+                >
+                  <h3 className="text-lg font-semibold text-[var(--color-text)] mb-3">
+                    <a 
+                      href={paper.titleLink}
+                      className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {paper.title}
+                    </a>
+                  </h3>
+                  
+                  <p 
+                    className="text-[var(--color-text)] text-sm leading-relaxed mb-2"
+                    dangerouslySetInnerHTML={{ __html: paper.authorsHtml }}
+                  />
+                  
+                  <p className="text-[var(--color-muted)] text-sm italic mb-4">
+                    {paper.venue}
+                  </p>
+                  
+                  {paper.links && paper.links.length > 0 && (
+                    <div className="flex items-center gap-4 flex-wrap">
+                      {paper.links.map((link, linkIndex) => (
+                        <a
+                          key={linkIndex}
+                          href={link.url}
+                          className="inline-flex items-center text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {link.text}
+                          <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+            
+            {/* View All Papers Link */}
+            <div className="mt-8 text-center">
+              <Link 
+                href="/papers" 
+                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
+              >
+                View All Papers
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -137,7 +211,7 @@ export default async function HomePage() {
               </p>
               <Link 
                 href="/blog" 
-                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
               >
                 Explore Writing
               </Link>
@@ -160,7 +234,7 @@ export default async function HomePage() {
           </p>
           <Link 
             href="/blog" 
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
           >
             Try Blog Page
           </Link>

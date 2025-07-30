@@ -123,23 +123,23 @@ export default function MobileNavigation() {
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
               href="/blog" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
               aria-label="Blog posts"
               onClick={closeMenu}
             >
               blog
             </a>
             <a 
-              href="/publications" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
-              aria-label="Publications and papers"
+              href="/papers" 
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              aria-label="Papers and publications"
               onClick={closeMenu}
             >
-              publications
+              papers
             </a>
             <a 
               href="/projects" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
               aria-label="Projects and work"
               onClick={closeMenu}
             >
@@ -147,7 +147,7 @@ export default function MobileNavigation() {
             </a>
             <a 
               href="/gallery" 
-              className="block text-[var(--color-primary)] hover:text-blue-300 transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
               aria-label="Photo gallery"
               onClick={closeMenu}
             >
