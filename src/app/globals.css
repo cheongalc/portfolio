@@ -178,7 +178,7 @@ html.theme-transition * {
   /* Enhanced prose styles for dark theme blog content */
   .prose-enhanced {
     max-width: none;
-    color: rgb(212 212 216);
+    color: var(--color-text);
     line-height: 1.8;
     font-size: 1.125rem; /* Larger base text */
   }
@@ -186,7 +186,7 @@ html.theme-transition * {
   .prose-enhanced h1 {
     font-size: 2.75rem; /* Increased from 2.25rem */
     font-weight: 700;
-    color: rgb(245 245 245);
+    color: var(--color-text);
     margin-top: 0;
     margin-bottom: 2rem; /* Increased spacing */
     line-height: 1.2;
@@ -195,7 +195,7 @@ html.theme-transition * {
   .prose-enhanced h2 {
     font-size: 2.25rem; /* Increased from 1.875rem */
     font-weight: 600;
-    color: rgb(245 245 245);
+    color: var(--color-text);
     margin-top: 2.5rem; /* Increased spacing */
     margin-bottom: 1.25rem;
     line-height: 1.3;
@@ -204,7 +204,7 @@ html.theme-transition * {
   .prose-enhanced h3 {
     font-size: 1.875rem; /* Increased from 1.5rem */
     font-weight: 600;
-    color: rgb(245 245 245);
+    color: var(--color-text);
     margin-top: 2rem; /* Increased spacing */
     margin-bottom: 1rem;
     line-height: 1.4;
@@ -213,7 +213,7 @@ html.theme-transition * {
   .prose-enhanced h4 {
     font-size: 1.5rem; /* Increased from 1.25rem */
     font-weight: 600;
-    color: rgb(245 245 245);
+    color: var(--color-text);
     margin-top: 1.5rem; /* Increased spacing */
     margin-bottom: 0.75rem;
     line-height: 1.4;
@@ -224,7 +224,7 @@ html.theme-transition * {
     margin-bottom: 1.25rem;
     line-height: 1.8;
     font-size: 1.125rem; /* Larger paragraph text */
-    color: rgb(212 212 216);
+    color: var(--color-text);
   }
 
   .prose-enhanced a {
@@ -240,7 +240,7 @@ html.theme-transition * {
 
   .prose-enhanced strong {
     font-weight: 600;
-    color: rgb(245 245 245);
+    color: var(--color-text);
   }
 
   .prose-enhanced code {
@@ -298,7 +298,7 @@ html.theme-transition * {
   .prose-enhanced li {
     margin: 0.75rem 0; /* Increased margin */
     font-size: 1.125rem; /* Larger list text */
-    color: rgb(212 212 216);
+    color: var(--color-text);
   }
 
   .prose-enhanced table {
@@ -329,7 +329,7 @@ html.theme-transition * {
   /* Math equation styling */
   .katex {
     font-size: 1.25em !important; /* Increased from 1.1em */
-    color: rgb(212 212 216) !important;
+    color: var(--color-text) !important;
   }
 
   .katex-display {
@@ -472,13 +472,13 @@ html.theme-transition * {
   
   .main-content-mobile {
     width: 100%;
-    padding: 1rem;
+    padding: 0 1rem 1rem 1rem; /* Remove top padding to fix sticky navbar */
   }
 }
 
 @media (max-width: 768px) {
   .main-content-mobile {
-    padding: 0.75rem;
+    padding: 0 0.75rem 0.75rem 0.75rem; /* Remove top padding to fix sticky navbar */
   }
   
   .prose-enhanced h1 {

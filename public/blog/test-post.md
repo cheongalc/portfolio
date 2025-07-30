@@ -12,4 +12,4 @@ $$
 \int_0^1 x^2\,dx = \frac{1}{3}
 $$
 
-![Bridge at sunset](media/blog/test-post/test.jpg)
+![Bridge at sunset](../media/blog/test-post/test.jpg)
