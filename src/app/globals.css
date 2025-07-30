@@ -449,8 +449,9 @@ html.theme-transition * {
 
   @keyframes sun-out {
     0% { opacity: 1; }
-    40% { opacity: 0.8; }
-    60% { opacity: 0.2; }
+    30% { opacity: 0.9; }
+    50% { opacity: 0.5; }
+    70% { opacity: 0.1; }
     100% { opacity: 0; }
   }
 
@@ -460,8 +461,9 @@ html.theme-transition * {
 
   @keyframes moon-in {
     0% { opacity: 0; }
-    40% { opacity: 0.2; }
-    60% { opacity: 0.8; }
+    30% { opacity: 0.1; }
+    50% { opacity: 0.5; }
+    70% { opacity: 0.9; }
     100% { opacity: 1; }
   }
 
