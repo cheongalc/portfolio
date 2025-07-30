@@ -54,7 +54,7 @@ export const metadata: Metadata = {
  */
 function Sidebar() {
   return (
-    <aside className="w-80 bg-[var(--color-background)] border-r border-[var(--color-border)] flex flex-col sidebar-desktop ml-16 transition-colors duration-300">
+    <aside className="w-80 bg-[var(--color-background)] border-r border-[var(--color-border)] flex flex-col sidebar-desktop ml-16 transition-colors duration-300 sticky top-0 h-screen overflow-y-auto">
       <div className="flex-1 px-8 pt-32 pb-8">
         {/* Profile Section */}
         <div className="mb-12">
@@ -212,12 +212,12 @@ export default function RootLayout({
           </a>
 
           <div className="flex min-h-screen justify-center">
-            <div className="flex max-w-7xl w-full">
+            <div className="flex max-w-7xl w-full h-screen overflow-hidden">
               {/* Desktop Sidebar */}
               <Sidebar />
 
               {/* Main Content Area */}
-              <main id="main-content" className="flex-1 lg:ml-0 main-content-mobile">
+              <main id="main-content" className="flex-1 lg:ml-0 main-content-mobile overflow-y-auto">
                 {/* Mobile Navigation Component */}
                 <MobileNavigation />
                 

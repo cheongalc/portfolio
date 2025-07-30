@@ -128,7 +128,7 @@ export default async function PostPage({ params }: PostPageProps) {
     const { frontMatter, content, options } = post;
 
     return (
-      <div className="max-w-6xl mx-auto px-8 py-16">
+      <div className="max-w-6xl mx-auto px-8 pt-32 pb-16">
         {/* Breadcrumb Navigation */}
         <nav className="mb-12" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-3 text-base text-[var(--color-muted)]">
@@ -252,7 +252,7 @@ export default async function PostPage({ params }: PostPageProps) {
     console.error(`Error loading post "${slug}":`, error);
     
     return (
-      <div className="max-w-6xl mx-auto px-8 py-16">
+      <div className="max-w-6xl mx-auto px-8 pt-32 pb-16">
         <div className="text-center py-20">
           <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-6">
             Post Not Found
