@@ -6,10 +6,10 @@ import { getPapersByYear } from '@/lib/papers';
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'Papers - Your Name',
-  description: 'Academic publications, research papers, and formal articles. Explore my research contributions in AI, computer vision, and machine learning.',
+  title: 'Papers | Alistair Cheong',
+  description: 'Academic publications, research papers, and formal articles.',
   openGraph: {
-    title: 'Papers - Your Name',
+    title: 'Papers | Alistair Cheong',
     description: 'Academic publications, research papers, and formal articles.',
     type: 'website',
   },
@@ -63,14 +63,7 @@ export default async function PapersPage() {
                     <div className="flex-1">
                       {/* Paper Title */}
                       <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
-                        <a 
-                          href={paper.titleLink}
-                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {paper.title}
-                        </a>
+                        {paper.title}
                       </h3>
                       
                       {/* Authors */}
@@ -87,17 +80,31 @@ export default async function PapersPage() {
                       {/* Links */}
                       {paper.links && paper.links.length > 0 && (
                         <div className="flex items-center gap-4 flex-wrap">
-                          {paper.links.map((link, linkIndex) => (
-                            <a
-                              key={linkIndex}
-                              href={link.url}
-                              className="text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {link.text}
-                            </a>
-                          ))}
+                          {paper.links.map((link, linkIndex) => {
+                            if (!link.url) {
+                              // Dead link - styled but not clickable
+                              return (
+                                <span
+                                  key={linkIndex}
+                                  className="text-sm text-[var(--color-primary)] cursor-default"
+                                >
+                                  {link.text}
+                                </span>
+                              );
+                            }
+                            // Active link
+                            return (
+                              <a
+                                key={linkIndex}
+                                href={link.url}
+                                className="text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {link.text}
+                              </a>
+                            );
+                          })}
                         </div>
                       )}
                     </div>

@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Periodic Table of the Elements</title>
+	<style type="text/css">
+		body {
+			font-family: Arial;
+			margin: 0;
+			padding: 20px;
+		}
+		
+		table#main {
+			border-collapse: collapse;
+			table-layout: fixed;
+		}
+		td.groupNo {
+			color: blue;
+			border-left: 1px solid gray;
+			padding: 15px;
+			text-align: center;
+		}
+		td#last {
+			border-right: 1px solid gray;
+		}
+		td.periodNo {
+			color: blue;
+			border-right: 1px solid gray;
+			padding: 10px;
+		}
+		td.element {
+			padding:4px; 
+			width: 70px; 
+			cursor: pointer;
+			transition: all 0.5s ease;
+		}
+		td.element:hover {
+			box-shadow: 0px 20px 20px rgba(0,0,0,0.6);
+
+		}
+
+		/* Element Categories */
+		td.nonmetal {background-color: #ccffcc;} /* Light green */
+		td.noble-gas {background-color: #ccccff;} /* Light blue */
+		td.alkali-metal {background-color: #ffcccc;} /* Light red */
+		td.alkaline-earth {background-color: #ffffcc;} /* Light yellow */
+		td.metalloid {background-color: #ffcc99;} /* Light orange */
+		td.post-transition {background-color: #ccffff;} /* Light cyan */
+		td.transition-metal {background-color: #ffccff;} /* Light magenta */
+		td.lanthanide {background-color: #ffeecc;} /* Light peach */
+		td.actinide {background-color: #eeccff;} /* Light purple */
+		td.unknown {background-color: #f0f0f0;} /* Light gray */
+
+		/* Specific element overrides for hydrogen */
+		td.H {background-color: #e6e6e6;}
+
+		div.proton_number {font-size: 69%;}
+		div.element_sym {font-size: 150%; font-weight: bold;}
+		div.element_name {font-size: 70%;}
+		div.nucleon_number {font-size: 70%;}
+		div.gas {color: maroon;}
+
+		div#blur {
+			position: fixed;
+			z-index: 2;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255,255,255,0.7);
+			display: none;
+		}
+		
+		div#legend {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background: white;
+			border: 2px solid #333;
+			padding: 15px;
+			z-index: 10;
+			display: none;
+			font-size: 12px;
+			max-width: 250px;
+			box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+			border-radius: 5px;
+		}
+		
+		.legend-item {
+			display: flex;
+			align-items: center;
+			margin: 5px 0;
+		}
+		
+		.legend-color {
+			width: 20px;
+			height: 15px;
+			margin-right: 10px;
+			border: 1px solid #333;
+		}
+		
+		.legend-color.nonmetal {background-color: #ccffcc;}
+		.legend-color.noble-gas {background-color: #ccccff;}
+		.legend-color.alkali-metal {background-color: #ffcccc;}
+		.legend-color.alkaline-earth {background-color: #ffffcc;}
+		.legend-color.metalloid {background-color: #ffcc99;}
+		.legend-color.post-transition {background-color: #ccffff;}
+		.legend-color.transition-metal {background-color: #ffccff;}
+		.legend-color.lanthanide {background-color: #ffeecc;}
+		.legend-color.actinide {background-color: #eeccff;}
+		.legend-color.unknown {background-color: #f0f0f0;}
+		
+		button {
+			background-color: #007bff;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			margin: 10px 0 20px 0;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 14px;
+		}
+		
+		button:hover {
+			background-color: #0056b3;
+		}
+	</style>
+	<script type="text/javascript">
+		function resetElements() {
+			var theElements = document.getElementsByClassName("element");
+			for (i=0; i<theElements.length; i++) {
+				theElements[i].style.position = "static";
+				theElements[i].style.width = "70px";
+				theElements[i].style.height = "70px";
+				theElements[i].style.boxShadow = "0px 0px 0px white";
+				theElements[i].style.zIndex = "1";
+				theElements[i].style.top = "auto";
+				theElements[i].style.left = "auto";
+				theElements[i].style.padding = "4px";
+				theElements[i].style.transform = "none";
+				theElements[i].style.margin = "0";
+				var c = theElements[i].children;
+				for (j=0; j<c.length; j++){
+					if (c[j].className == "element_name" || c[j].className == "nucleon_number" || c[j].className == "proton_number") {
+						c[j].style.fontSize = "70%";
+					} else {
+						c[j].style.fontSize = "150%";
+					}
+				}
+			}
+			document.getElementById("blur").style.display = "none";
+			
+			// Force table layout recalculation
+			var table = document.getElementById("main");
+			table.style.display = "none";
+			table.offsetHeight; // Trigger reflow
+			table.style.display = "table";
+		}
+		function isolateElement(x){
+			var theElement = document.getElementById(x);
+			theElement.style.transition = "all 0.3s ease";
+			theElement.style.boxShadow = "0px 30px 30px rgba(0,0,0,0.6)";
+			theElement.style.position = "fixed";
+			theElement.style.top = "40px";
+			theElement.style.left = "20px";
+			var expandedElementWidth = window.innerWidth - 80;
+			theElement.style.width = expandedElementWidth.toString() + "px";
+			theElement.style.height = "400px";
+			theElement.style.padding = "20px";
+			theElement.style.margin = "0";
+
+			var elementChildren = theElement.children;
+			for (i=0; i<elementChildren.length; i++){
+				if (elementChildren[i].className == "proton_number" || elementChildren[i].className == "element_name" || elementChildren[i].className == "nucleon_number") {
+					elementChildren[i].style.fontSize = "20px";
+				} else {
+					elementChildren[i].style.fontSize = "60px";
+				}
+			}
+		}
+		function showBlur(x) {
+			document.getElementById("blur").style.display = "block";
+			document.getElementById("blur").style.width = window.innerWidth + "px";
+			document.getElementById("blur").style.height = window.innerHeight + "px";
+			document.getElementById(x).style.boxShadow = "0px 10px 10px rgba(0,0,0,0.45)";
+			document.getElementById(x).style.position = "fixed";
+			document.getElementById(x).style.zIndex = "3";
+			isolateElement(x);
+		}
+		
+		function showLegend() {
+			var legend = document.getElementById("legend");
+			if (legend.style.display === "none" || legend.style.display === "") {
+				legend.style.display = "block";
+			} else {
+				legend.style.display = "none";
+			}
+		}
+		function detectEsc(event) {
+			var x = event.which || event.keyCode;
+			if (x == 27) {resetElements();}
+		}
+	</script>
+</head>
+<body onkeydown="detectEsc(event)">
+	<div id="blur" onclick="resetElements()"></div>
+	<div id="legend">
+		<h3 style="margin-top: 0;">Element Categories</h3>
+		<div class="legend-item">
+			<div class="legend-color nonmetal"></div>
+			<span>Nonmetals</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color noble-gas"></div>
+			<span>Noble Gases</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color alkali-metal"></div>
+			<span>Alkali Metals</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color alkaline-earth"></div>
+			<span>Alkaline Earth Metals</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color transition-metal"></div>
+			<span>Transition Metals</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color post-transition"></div>
+			<span>Post-transition Metals</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color metalloid"></div>
+			<span>Metalloids</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color lanthanide"></div>
+			<span>Lanthanides</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color actinide"></div>
+			<span>Actinides</span>
+		</div>
+		<div class="legend-item">
+			<div class="legend-color unknown"></div>
+			<span>Unknown Properties</span>
+		</div>
+	</div>
+	<button onclick="showLegend()">Show Legend</button>
+	<center>
+		<table id="main">
+			<tbody>
+				<!-- Groups Row -->
+				<tr>
+					<td><!-- Filler for Period !--></td>
+					<td class="groupNo">1</td>
+					<td class="groupNo">2</td>
+					<td class="groupNo">3</td>
+					<td class="groupNo">4</td>
+					<td class="groupNo">5</td>
+					<td class="groupNo">6</td>
+					<td class="groupNo">7</td>
+					<td class="groupNo">8</td>
+					<td class="groupNo">9</td>
+					<td class="groupNo">10</td>
+					<td class="groupNo">11</td>
+					<td class="groupNo">12</td>
+					<td class="groupNo">13</td>
+					<td class="groupNo">14</td>
+					<td class="groupNo">15</td>
+					<td class="groupNo">16</td>
+					<td class="groupNo">17</td>
+					<td class="groupNo" id="last">18</td>
+				</tr>
+				<tr></tr>
+
+				<!-- Period One -->
+
+				<tr>
+					<td class="periodNo">1</td>
+					<td class="H element nonmetal" id="H" onclick="showBlur(this.id)">
+						<div class="proton_number">1</div>	
+						<div class="element_sym gas">H</div>	
+						<div class="element_name">Hydrogen</div>
+						<div class="nucleon_number">1.008</div>	
+					</td>
+					<td colspan="16"></td>
+					<td class="He element noble-gas" id="He" onclick="showBlur(this.id)">
+						<div class="proton_number">2</div>	
+						<div class="element_sym gas">He</div>	
+						<div class="element_name">Helium</div>
+						<div class="nucleon_number">4.003</div>
+					</td>
+				</tr>
+
+				<!--Period Two -->
+
+				<tr>
+					<td class="periodNo">2</td>
+					<td class="Li element alkali-metal" id="Li" onclick="showBlur(this.id)">
+						<div class="proton_number">3</div>
+						<div class="element_sym">Li</div>
+						<div class="element_name">Lithium</div>
+						<div class="nucleon_number">6.941</div>
+					</td>
+					<td class="Be element alkaline-earth" id="Be" onclick="showBlur(this.id)">
+						<div class="proton_number">4</div>
+						<div class="element_sym">Be</div>
+						<div class="element_name">Beryllium</div>
+						<div class="nucleon_number">9.012</div>
+					</td>
+					<td colspan="10"></td>
+					<td class="B element metalloid" id="B" onclick="showBlur(this.id)">
+						<div class="proton_number">5</div>
+						<div class="element_sym">B</div>
+						<div class="element_name">Boron</div>
+						<div class="nucleon_number">10.81</div>
+					</td>
+					<td class="C element nonmetal" id="C" onclick="showBlur(this.id)">
+						<div class="proton_number">6</div>
+						<div class="element_sym">C</div>
+						<div class="element_name">Carbon</div>
+						<div class="nucleon_number">12.01</div>
+					</td>
+					<td class="N element nonmetal" id="N" onclick="showBlur(this.id)">
+						<div class="proton_number">7</div>
+						<div class="element_sym gas">N</div>
+						<div class="element_name">Nitrogen</div>
+						<div class="nucleon_number">14.01</div>
+					</td>
+					<td class="O element nonmetal" id="O" onclick="showBlur(this.id)">
+						<div class="proton_number">8</div>
+						<div class="element_sym gas">O</div>
+						<div class="element_name">Oxygen</div>
+						<div class="nucleon_number">16.00</div>
+					</td>
+					<td class="F element nonmetal" id="F" onclick="showBlur(this.id)">
+						<div class="proton_number">9</div>
+						<div class="element_sym gas">F</div>
+						<div class="element_name">Fluorine</div>
+						<div class="nucleon_number">19.00</div>
+					</td>
+					<td class="Ne element noble-gas" id="Ne" onclick="showBlur(this.id)">
+						<div class="proton_number">10</div>
+						<div class="element_sym gas">Ne</div>
+						<div class="element_name">Neon</div>
+						<div class="nucleon_number">20.18</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="periodNo">3</td>
+					<td class="Na element alkali-metal" id="Na" onclick="showBlur(this.id)">
+						<div class="proton_number">11</div>
+						<div class="element_sym">Na</div>
+						<div class="element_name">Sodium</div>
+						<div class="nucleon_number">22.99</div>
+					</td>
+					<td class="Mg element alkaline-earth" id="Mg" onclick="showBlur(this.id)">
+						<div class="proton_number">12</div>
+						<div class="element_sym">Mg</div>
+						<div class="element_name">Magnesium</div>
+						<div class="nucleon_number">24.31</div>
+					</td>
+					<td colspan="10"></td>
+					<td class="Al element post-transition" id="Al" onclick="showBlur(this.id)">
+						<div class="proton_number">13</div>
+						<div class="element_sym">Al</div>
+						<div class="element_name">Aluminum</div>
+						<div class="nucleon_number">26.98</div>
+					</td>
+					<td class="Si element metalloid" id="Si" onclick="showBlur(this.id)">
+						<div class="proton_number">14</div>
+						<div class="element_sym">Si</div>
+						<div class="element_name">Silicon</div>
+						<div class="nucleon_number">28.09</div>
+					</td>
+					<td class="P element nonmetal" id="P" onclick="showBlur(this.id)">
+						<div class="proton_number">15</div>
+						<div class="element_sym">P</div>
+						<div class="element_name">Phosphorus</div>
+						<div class="nucleon_number">30.97</div>
+					</td>
+					<td class="S element nonmetal" id="S" onclick="showBlur(this.id)">
+						<div class="proton_number">16</div>
+						<div class="element_sym">S</div>
+						<div class="element_name">Sulfur</div>
+						<div class="nucleon_number">32.07</div>
+					</td>
+					<td class="Cl element nonmetal" id="Cl" onclick="showBlur(this.id)">
+						<div class="proton_number">17</div>
+						<div class="element_sym gas">Cl</div>
+						<div class="element_name">Chlorine</div>
+						<div class="nucleon_number">35.45</div>
+					</td>
+					<td class="Ar element noble-gas" id="Ar" onclick="showBlur(this.id)">
+						<div class="proton_number">18</div>
+						<div class="element_sym gas">Ar</div>
+						<div class="element_name">Argon</div>
+						<div class="nucleon_number">39.95</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="periodNo">4</td>
+					<td class="K element alkali-metal" id="K" onclick="showBlur(this.id)">
+						<div class="proton_number">19</div>
+						<div class="element_sym">K</div>
+						<div class="element_name">Potassium</div>
+						<div class="nucleon_number">39.10</div>
+					</td>
+					<td class="Ca element alkaline-earth" id="Ca" onclick="showBlur(this.id)">
+						<div class="proton_number">20</div>
+						<div class="element_sym">Ca</div>
+						<div class="element_name">Calcium</div>
+						<div class="nucleon_number">40.08</div>
+					</td>
+					<td class="Sc element transition-metal" id="Sc" onclick="showBlur(this.id)">
+						<div class="proton_number">21</div>
+						<div class="element_sym">Sc</div>
+						<div class="element_name">Scandium</div>
+						<div class="nucleon_number">44.96</div>
+					</td>
+					<td class="Ti element transition-metal" id="Ti" onclick="showBlur(this.id)">
+						<div class="proton_number">22</div>
+						<div class="element_sym">Ti</div>
+						<div class="element_name">Titanium</div>
+						<div class="nucleon_number">47.87</div>
+					</td>
+					<td class="V element transition-metal" id="V" onclick="showBlur(this.id)">
+						<div class="proton_number">23</div>
+						<div class="element_sym">V</div>
+						<div class="element_name">Vanadium</div>
+						<div class="nucleon_number">50.94</div>
+					</td>
+					<td class="Cr element transition-metal" id="Cr" onclick="showBlur(this.id)">
+						<div class="proton_number">24</div>
+						<div class="element_sym">Cr</div>
+						<div class="element_name">Chromium</div>
+						<div class="nucleon_number">51.00</div>
+					</td>
+					<td class="Mn element transition-metal" id="Mn" onclick="showBlur(this.id)">
+						<div class="proton_number">25</div>
+						<div class="element_sym">Mn</div>
+						<div class="element_name">Manganese</div>
+						<div class="nucleon_number">54.94</div>
+					</td>
+					<td class="Fe element transition-metal" id="Fe" onclick="showBlur(this.id)">
+						<div class="proton_number">26</div>
+						<div class="element_sym">Fe</div>
+						<div class="element_name">Iron</div>
+						<div class="nucleon_number">55.85</div>
+					</td>
+					<td class="Co element transition-metal" id="Co" onclick="showBlur(this.id)">
+						<div class="proton_number">27</div>
+						<div class="element_sym">Co</div>
+						<div class="element_name">Cobalt</div>
+						<div class="nucleon_number">58.93</div>
+					</td>
+					<td class="Ni element transition-metal" id="Ni" onclick="showBlur(this.id)">
+						<div class="proton_number">28</div>
+						<div class="element_sym">Ni</div>
+						<div class="element_name">Nickel</div>
+						<div class="nucleon_number">58.69</div>
+					</td>
+					<td class="Cu element transition-metal" id="Cu" onclick="showBlur(this.id)">
+						<div class="proton_number">29</div>
+						<div class="element_sym">Cu</div>
+						<div class="element_name">Copper</div>
+						<div class="nucleon_number">63.55</div>
+					</td>
+					<td class="Zn element transition-metal" id="Zn" onclick="showBlur(this.id)">
+						<div class="proton_number">30</div>
+						<div class="element_sym">Zn</div>
+						<div class="element_name">Zinc</div>
+						<div class="nucleon_number">65.38</div>
+					</td>
+					<td class="Ga element post-transition" id="Ga" onclick="showBlur(this.id)">
+						<div class="proton_number">31</div>
+						<div class="element_sym">Ga</div>
+						<div class="element_name">Gallium</div>
+						<div class="nucleon_number">69.72</div>
+					</td>
+					<td class="Ge element metalloid" id="Ge" onclick="showBlur(this.id)">
+						<div class="proton_number">32</div>
+						<div class="element_sym">Ge</div>
+						<div class="element_name">Germanium</div>
+						<div class="nucleon_number">72.64</div>
+					</td>
+					<td class="As element metalloid" id="As" onclick="showBlur(this.id)">
+						<div class="proton_number">33</div>
+						<div class="element_sym">As</div>
+						<div class="element_name">Arsenic</div>
+						<div class="nucleon_number">74.92</div>
+					</td>
+					<td class="Se element nonmetal" id="Se" onclick="showBlur(this.id)">
+						<div class="proton_number">34</div>
+						<div class="element_sym">Se</div>
+						<div class="element_name">Selenium</div>
+						<div class="nucleon_number">78.96</div>
+					</td>
+					<td class="Br element nonmetal" id="Br" onclick="showBlur(this.id)">
+						<div class="proton_number">35</div>
+						<div class="element_sym">Br</div>
+						<div class="element_name">Bromine</div>
+						<div class="nucleon_number">79.90</div>
+					</td>
+					<td class="Kr element noble-gas" id="Kr" onclick="showBlur(this.id)">
+						<div class="proton_number">36</div>
+						<div class="element_sym gas">Kr</div>
+						<div class="element_name">Krypton</div>
+						<div class="nucleon_number">83.80</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="periodNo">5</td>
+					<td class="Rb element alkali-metal" id="Rb" onclick="showBlur(this.id)">
+						<div class="proton_number">37</div>
+						<div class="element_sym">Rb</div>
+						<div class="element_name">Rubidium</div>
+						<div class="nucleon_number">85.47</div>
+					</td>
+					<td class="Sr element alkaline-earth" id="Sr" onclick="showBlur(this.id)">
+						<div class="proton_number">38</div>
+						<div class="element_sym">Sr</div>
+						<div class="element_name">Strontium</div>
+						<div class="nucleon_number">87.62</div>
+					</td>
+					<td class="Y element transition-metal" id="Y" onclick="showBlur(this.id)">
+						<div class="proton_number">39</div>
+						<div class="element_sym">Y</div>
+						<div class="element_name">Yttrium</div>
+						<div class="nucleon_number">88.91</div>
+					</td>
+					<td class="Zr element transition-metal" id="Zr" onclick="showBlur(this.id)">
+						<div class="proton_number">40</div>
+						<div class="element_sym">Zr</div>
+						<div class="element_name">Zirconium</div>
+						<div class="nucleon_number">91.22</div>
+					</td>
+					<td class="Nb element transition-metal" id="Nb" onclick="showBlur(this.id)">
+						<div class="proton_number">41</div>
+						<div class="element_sym">Nb</div>
+						<div class="element_name">Niobium</div>
+						<div class="nucleon_number">92.91</div>
+					</td>
+					<td class="Mo element transition-metal" id="Mo" onclick="showBlur(this.id)">
+						<div class="proton_number">42</div>
+						<div class="element_sym">Mo</div>
+						<div class="element_name">Molybdenum</div>
+						<div class="nucleon_number">95.96</div>
+					</td>
+					<td class="Tc element transition-metal" id="Tc" onclick="showBlur(this.id)">
+						<div class="proton_number">43</div>
+						<div class="element_sym">Tc</div>
+						<div class="element_name">Technetium</div>
+						<div class="nucleon_number">[98]</div>
+					</td>
+					<td class="Ru element transition-metal" id="Ru" onclick="showBlur(this.id)">
+						<div class="proton_number">44</div>
+						<div class="element_sym">Ru</div>
+						<div class="element_name">Ruthenium</div>
+						<div class="nucleon_number">101.1</div>
+					</td>
+					<td class="Rh element transition-metal" id="Rh" onclick="showBlur(this.id)">
+						<div class="proton_number">45</div>
+						<div class="element_sym">Rh</div>
+						<div class="element_name">Rhodium</div>
+						<div class="nucleon_number">102.9</div>
+					</td>
+					<td class="Pd element transition-metal" id="Pd" onclick="showBlur(this.id)">
+						<div class="proton_number">46</div>
+						<div class="element_sym">Pd</div>
+						<div class="element_name">Palladium</div>
+						<div class="nucleon_number">106.4</div>
+					</td>
+					<td class="Ag element transition-metal" id="Ag" onclick="showBlur(this.id)">
+						<div class="proton_number">47</div>
+						<div class="element_sym">Ag</div>
+						<div class="element_name">Silver</div>
+						<div class="nucleon_number">107.9</div>
+					</td>
+					<td class="Cd element transition-metal" id="Cd" onclick="showBlur(this.id)">
+						<div class="proton_number">48</div>
+						<div class="element_sym">Cd</div>
+						<div class="element_name">Cadmium</div>
+						<div class="nucleon_number">112.4</div>
+					</td>
+					<td class="In element post-transition" id="In" onclick="showBlur(this.id)">
+						<div class="proton_number">49</div>
+						<div class="element_sym">In</div>
+						<div class="element_name">Indium</div>
+						<div class="nucleon_number">114.8</div>
+					</td>
+					<td class="Sn element post-transition" id="Sn" onclick="showBlur(this.id)">
+						<div class="proton_number">50</div>
+						<div class="element_sym">Sn</div>
+						<div class="element_name">Tin</div>
+						<div class="nucleon_number">118.7</div>
+					</td>
+					<td class="Sb element metalloid" id="Sb" onclick="showBlur(this.id)">
+						<div class="proton_number">51</div>
+						<div class="element_sym">Sb</div>
+						<div class="element_name">Antimony</div>
+						<div class="nucleon_number">121.8</div>
+					</td>
+					<td class="Te element metalloid" id="Te" onclick="showBlur(this.id)">
+						<div class="proton_number">52</div>
+						<div class="element_sym">Te</div>
+						<div class="element_name">Tellurium</div>
+						<div class="nucleon_number">127.6</div>
+					</td>
+					<td class="I element nonmetal" id="I" onclick="showBlur(this.id)">
+						<div class="proton_number">53</div>
+						<div class="element_sym">I</div>
+						<div class="element_name">Iodine</div>
+						<div class="nucleon_number">126.9</div>
+					</td>
+					<td class="Xe element noble-gas" id="Xe" onclick="showBlur(this.id)">
+						<div class="proton_number">54</div>
+						<div class="element_sym gas">Xe</div>
+						<div class="element_name">Xenon</div>
+						<div class="nucleon_number">131.3</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="periodNo">6</td>
+					<td class="Cs element alkali-metal" id="Cs" onclick="showBlur(this.id)">
+						<div class="proton_number">55</div>
+						<div class="element_sym">Cs</div>
+						<div class="element_name">Cesium</div>
+						<div class="nucleon_number">132.9</div>
+					</td>
+					<td class="Ba element alkaline-earth" id="Ba" onclick="showBlur(this.id)">
+						<div class="proton_number">56</div>
+						<div class="element_sym">Ba</div>
+						<div class="element_name">Barium</div>
+						<div class="nucleon_number">137.3</div>
+					</td>
+					<td class="La element lanthanide" id="La" onclick="showBlur(this.id)">
+						<div class="proton_number">57</div>
+						<div class="element_sym">La</div>
+						<div class="element_name">Lanthanum</div>
+						<div class="nucleon_number">138.9</div>
+					</td>
+					<td class="Hf element transition-metal" id="Hf" onclick="showBlur(this.id)">
+						<div class="proton_number">72</div>
+						<div class="element_sym">Hf</div>
+						<div class="element_name">Hafnium</div>
+						<div class="nucleon_number">178.5</div>
+					</td>
+					<td class="Ta element transition-metal" id="Ta" onclick="showBlur(this.id)">
+						<div class="proton_number">73</div>
+						<div class="element_sym">Ta</div>
+						<div class="element_name">Tantalum</div>
+						<div class="nucleon_number">180.9</div>
+					</td>
+					<td class="W element transition-metal" id="W" onclick="showBlur(this.id)">
+						<div class="proton_number">74</div>
+						<div class="element_sym">W</div>
+						<div class="element_name">Tungsten</div>
+						<div class="nucleon_number">183.8</div>
+					</td>
+					<td class="Re element transition-metal" id="Re" onclick="showBlur(this.id)">
+						<div class="proton_number">75</div>
+						<div class="element_sym">Re</div>
+						<div class="element_name">Rhenium</div>
+						<div class="nucleon_number">186.2</div>
+					</td>
+					<td class="Os element transition-metal" id="Os" onclick="showBlur(this.id)">
+						<div class="proton_number">76</div>
+						<div class="element_sym">Os</div>
+						<div class="element_name">Osmium</div>
+						<div class="nucleon_number">190.2</div>
+					</td>
+					<td class="Ir element transition-metal" id="Ir" onclick="showBlur(this.id)">
+						<div class="proton_number">77</div>
+						<div class="element_sym">Ir</div>
+						<div class="element_name">Iridium</div>
+						<div class="nucleon_number">192.2</div>
+					</td>
+					<td class="Pt element transition-metal" id="Pt" onclick="showBlur(this.id)">
+						<div class="proton_number">78</div>
+						<div class="element_sym">Pt</div>
+						<div class="element_name">Platinum</div>
+						<div class="nucleon_number">195.1</div>
+					</td>
+					<td class="Au element transition-metal" id="Au" onclick="showBlur(this.id)">
+						<div class="proton_number">79</div>
+						<div class="element_sym">Au</div>
+						<div class="element_name">Gold</div>
+						<div class="nucleon_number">197.0</div>
+					</td>
+					<td class="Hg element transition-metal" id="Hg" onclick="showBlur(this.id)">
+						<div class="proton_number">80</div>
+						<div class="element_sym">Hg</div>
+						<div class="element_name">Mercury</div>
+						<div class="nucleon_number">200.6</div>
+					</td>
+					<td class="Tl element post-transition" id="Tl" onclick="showBlur(this.id)">
+						<div class="proton_number">81</div>
+						<div class="element_sym">Tl</div>
+						<div class="element_name">Thallium</div>
+						<div class="nucleon_number">204.4</div>
+					</td>
+					<td class="Pb element post-transition" id="Pb" onclick="showBlur(this.id)">
+						<div class="proton_number">82</div>
+						<div class="element_sym">Pb</div>
+						<div class="element_name">Lead</div>
+						<div class="nucleon_number">207.2</div>
+					</td>
+					<td class="Bi element post-transition" id="Bi" onclick="showBlur(this.id)">
+						<div class="proton_number">83</div>
+						<div class="element_sym">Bi</div>
+						<div class="element_name">Bismuth</div>
+						<div class="nucleon_number">209.0</div>
+					</td>
+					<td class="Po element post-transition" id="Po" onclick="showBlur(this.id)">
+						<div class="proton_number">84</div>
+						<div class="element_sym">Po</div>
+						<div class="element_name">Polonium</div>
+						<div class="nucleon_number">[209]</div>
+					</td>
+					<td class="At element metalloid" id="At" onclick="showBlur(this.id)">
+						<div class="proton_number">85</div>
+						<div class="element_sym">At</div>
+						<div class="element_name">Astatine</div>
+						<div class="nucleon_number">[210]</div>
+					</td>
+					<td class="Rn element noble-gas" id="Rn" onclick="showBlur(this.id)">
+						<div class="proton_number">86</div>
+						<div class="element_sym gas">Rn</div>
+						<div class="element_name">Radon</div>
+						<div class="nucleon_number">[222]</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="periodNo">7</td>
+					<td class="Fr element alkali-metal" id="Fr" onclick="showBlur(this.id)">
+						<div class="proton_number">87</div>
+						<div class="element_sym">Fr</div>
+						<div class="element_name">Francium</div>
+						<div class="nucleon_number">[223]</div>
+					</td>
+					<td class="Ra element alkaline-earth" id="Ra" onclick="showBlur(this.id)">
+						<div class="proton_number">88</div>
+						<div class="element_sym">Ra</div>
+						<div class="element_name">Radium</div>
+						<div class="nucleon_number">[226]</div>
+					</td>
+					<td class="Ac element actinide" id="Ac" onclick="showBlur(this.id)">
+						<div class="proton_number">89</div>
+						<div class="element_sym">Ac</div>
+						<div class="element_name">Actinium</div>
+						<div class="nucleon_number">[227]</div>
+					</td>
+					<td class="Rf element transition-metal" id="Rf" onclick="showBlur(this.id)">
+						<div class="proton_number">104</div>
+						<div class="element_sym">Rf</div>
+						<div class="element_name">Rutherfordium</div>
+						<div class="nucleon_number">[267]</div>
+					</td>
+					<td class="Db element transition-metal" id="Db" onclick="showBlur(this.id)">
+						<div class="proton_number">105</div>
+						<div class="element_sym">Db</div>
+						<div class="element_name">Dubnium</div>
+						<div class="nucleon_number">[268]</div>
+					</td>
+					<td class="Sg element transition-metal" id="Sg" onclick="showBlur(this.id)">
+						<div class="proton_number">106</div>
+						<div class="element_sym">Sg</div>
+						<div class="element_name">Seaborgium</div>
+						<div class="nucleon_number">[271]</div>
+					</td>
+					<td class="Bh element transition-metal" id="Bh" onclick="showBlur(this.id)">
+						<div class="proton_number">107</div>
+						<div class="element_sym">Bh</div>
+						<div class="element_name">Bohrium</div>
+						<div class="nucleon_number">[272]</div>
+					</td>
+					<td class="Hs element transition-metal" id="Hs" onclick="showBlur(this.id)">
+						<div class="proton_number">108</div>
+						<div class="element_sym">Hs</div>
+						<div class="element_name">Hassium</div>
+						<div class="nucleon_number">[270]</div>
+					</td>
+					<td class="Mt element unknown" id="Mt" onclick="showBlur(this.id)">
+						<div class="proton_number">109</div>
+						<div class="element_sym">Mt</div>
+						<div class="element_name">Meitnerium</div>
+						<div class="nucleon_number">[276]</div>
+					</td>
+					<td class="Ds element unknown" id="Ds" onclick="showBlur(this.id)">
+						<div class="proton_number">110</div>
+						<div class="element_sym">Ds</div>
+						<div class="element_name">Darmstadtium</div>
+						<div class="nucleon_number">[281]</div>
+					</td>
+					<td class="Rg element unknown" id="Rg" onclick="showBlur(this.id)">
+						<div class="proton_number">111</div>
+						<div class="element_sym">Rg</div>
+						<div class="element_name">Roentgenium</div>
+						<div class="nucleon_number">[280]</div>
+					</td>
+					<td class="Cn element transition-metal" id="Cn" onclick="showBlur(this.id)">
+						<div class="proton_number">112</div>
+						<div class="element_sym">Cn</div>
+						<div class="element_name">Copernicium</div>
+						<div class="nucleon_number">[285]</div>
+					</td>
+					<td class="Nh element unknown" id="Nh" onclick="showBlur(this.id)">
+						<div class="proton_number">113</div>
+						<div class="element_sym">Nh</div>
+						<div class="element_name">Nihonium</div>
+						<div class="nucleon_number">[284]</div>
+					</td>
+					<td class="Fl element post-transition" id="Fl" onclick="showBlur(this.id)">
+						<div class="proton_number">114</div>
+						<div class="element_sym">Fl</div>
+						<div class="element_name">Flerovium</div>
+						<div class="nucleon_number">[289]</div>
+					</td>
+					<td class="Mc element unknown" id="Mc" onclick="showBlur(this.id)">
+						<div class="proton_number">115</div>
+						<div class="element_sym">Mc</div>
+						<div class="element_name">Moscovium</div>
+						<div class="nucleon_number">[288]</div>
+					</td>
+					<td class="Lv element post-transition" id="Lv" onclick="showBlur(this.id)">
+						<div class="proton_number">116</div>
+						<div class="element_sym">Lv</div>
+						<div class="element_name">Livermorium</div>
+						<div class="nucleon_number">[293]</div>
+					</td>
+					<td class="Ts element unknown" id="Ts" onclick="showBlur(this.id)">
+						<div class="proton_number">117</div>
+						<div class="element_sym">Ts</div>
+						<div class="element_name">Tennessine</div>
+						<div class="nucleon_number">[294]</div>
+					</td>
+					<td class="Og element noble-gas" id="Og" onclick="showBlur(this.id)">
+						<div class="proton_number">118</div>
+						<div class="element_sym">Og</div>
+						<div class="element_name">Oganesson</div>
+						<div class="nucleon_number">[294]</div>
+					</td>
+				</tr>
+				<tr><td colspan="19">&nbsp;</td></tr>
+				<!-- Lanthanides -->
+				<tr>
+					<td></td>
+					<td colspan="2" style="text-align: center; font-weight: bold;">Lanthanides:</td>
+					<td class="Ce element lanthanide" id="Ce" onclick="showBlur(this.id)">
+						<div class="proton_number">58</div>
+						<div class="element_sym">Ce</div>
+						<div class="element_name">Cerium</div>
+						<div class="nucleon_number">140.1</div>
+					</td>
+					<td class="Pr element lanthanide" id="Pr" onclick="showBlur(this.id)">
+						<div class="proton_number">59</div>
+						<div class="element_sym">Pr</div>
+						<div class="element_name">Praseodymium</div>
+						<div class="nucleon_number">140.9</div>
+					</td>
+					<td class="Nd element lanthanide" id="Nd" onclick="showBlur(this.id)">
+						<div class="proton_number">60</div>
+						<div class="element_sym">Nd</div>
+						<div class="element_name">Neodymium</div>
+						<div class="nucleon_number">144.2</div>
+					</td>
+					<td class="Pm element lanthanide" id="Pm" onclick="showBlur(this.id)">
+						<div class="proton_number">61</div>
+						<div class="element_sym">Pm</div>
+						<div class="element_name">Promethium</div>
+						<div class="nucleon_number">[145]</div>
+					</td>
+					<td class="Sm element lanthanide" id="Sm" onclick="showBlur(this.id)">
+						<div class="proton_number">62</div>
+						<div class="element_sym">Sm</div>
+						<div class="element_name">Samarium</div>
+						<div class="nucleon_number">150.4</div>
+					</td>
+					<td class="Eu element lanthanide" id="Eu" onclick="showBlur(this.id)">
+						<div class="proton_number">63</div>
+						<div class="element_sym">Eu</div>
+						<div class="element_name">Europium</div>
+						<div class="nucleon_number">152.0</div>
+					</td>
+					<td class="Gd element lanthanide" id="Gd" onclick="showBlur(this.id)">
+						<div class="proton_number">64</div>
+						<div class="element_sym">Gd</div>
+						<div class="element_name">Gadolinium</div>
+						<div class="nucleon_number">157.3</div>
+					</td>
+					<td class="Tb element lanthanide" id="Tb" onclick="showBlur(this.id)">
+						<div class="proton_number">65</div>
+						<div class="element_sym">Tb</div>
+						<div class="element_name">Terbium</div>
+						<div class="nucleon_number">158.9</div>
+					</td>
+					<td class="Dy element lanthanide" id="Dy" onclick="showBlur(this.id)">
+						<div class="proton_number">66</div>
+						<div class="element_sym">Dy</div>
+						<div class="element_name">Dysprosium</div>
+						<div class="nucleon_number">162.5</div>
+					</td>
+					<td class="Ho element lanthanide" id="Ho" onclick="showBlur(this.id)">
+						<div class="proton_number">67</div>
+						<div class="element_sym">Ho</div>
+						<div class="element_name">Holmium</div>
+						<div class="nucleon_number">164.9</div>
+					</td>
+					<td class="Er element lanthanide" id="Er" onclick="showBlur(this.id)">
+						<div class="proton_number">68</div>
+						<div class="element_sym">Er</div>
+						<div class="element_name">Erbium</div>
+						<div class="nucleon_number">167.3</div>
+					</td>
+					<td class="Tm element lanthanide" id="Tm" onclick="showBlur(this.id)">
+						<div class="proton_number">69</div>
+						<div class="element_sym">Tm</div>
+						<div class="element_name">Thulium</div>
+						<div class="nucleon_number">168.9</div>
+					</td>
+					<td class="Yb element lanthanide" id="Yb" onclick="showBlur(this.id)">
+						<div class="proton_number">70</div>
+						<div class="element_sym">Yb</div>
+						<div class="element_name">Ytterbium</div>
+						<div class="nucleon_number">173.1</div>
+					</td>
+					<td class="Lu element lanthanide" id="Lu" onclick="showBlur(this.id)">
+						<div class="proton_number">71</div>
+						<div class="element_sym">Lu</div>
+						<div class="element_name">Lutetium</div>
+						<div class="nucleon_number">175.0</div>
+					</td>
+				</tr>
+				<!-- Actinides -->
+				<tr>
+					<td></td>
+					<td colspan="2" style="text-align: center; font-weight: bold;">Actinides:</td>
+					<td class="Th element actinide" id="Th" onclick="showBlur(this.id)">
+						<div class="proton_number">90</div>
+						<div class="element_sym">Th</div>
+						<div class="element_name">Thorium</div>
+						<div class="nucleon_number">232.0</div>
+					</td>
+					<td class="Pa element actinide" id="Pa" onclick="showBlur(this.id)">
+						<div class="proton_number">91</div>
+						<div class="element_sym">Pa</div>
+						<div class="element_name">Protactinium</div>
+						<div class="nucleon_number">231.0</div>
+					</td>
+					<td class="U element actinide" id="U" onclick="showBlur(this.id)">
+						<div class="proton_number">92</div>
+						<div class="element_sym">U</div>
+						<div class="element_name">Uranium</div>
+						<div class="nucleon_number">238.0</div>
+					</td>
+					<td class="Np element actinide" id="Np" onclick="showBlur(this.id)">
+						<div class="proton_number">93</div>
+						<div class="element_sym">Np</div>
+						<div class="element_name">Neptunium</div>
+						<div class="nucleon_number">[237]</div>
+					</td>
+					<td class="Pu element actinide" id="Pu" onclick="showBlur(this.id)">
+						<div class="proton_number">94</div>
+						<div class="element_sym">Pu</div>
+						<div class="element_name">Plutonium</div>
+						<div class="nucleon_number">[244]</div>
+					</td>
+					<td class="Am element actinide" id="Am" onclick="showBlur(this.id)">
+						<div class="proton_number">95</div>
+						<div class="element_sym">Am</div>
+						<div class="element_name">Americium</div>
+						<div class="nucleon_number">[243]</div>
+					</td>
+					<td class="Cm element actinide" id="Cm" onclick="showBlur(this.id)">
+						<div class="proton_number">96</div>
+						<div class="element_sym">Cm</div>
+						<div class="element_name">Curium</div>
+						<div class="nucleon_number">[247]</div>
+					</td>
+					<td class="Bk element actinide" id="Bk" onclick="showBlur(this.id)">
+						<div class="proton_number">97</div>
+						<div class="element_sym">Bk</div>
+						<div class="element_name">Berkelium</div>
+						<div class="nucleon_number">[247]</div>
+					</td>
+					<td class="Cf element actinide" id="Cf" onclick="showBlur(this.id)">
+						<div class="proton_number">98</div>
+						<div class="element_sym">Cf</div>
+						<div class="element_name">Californium</div>
+						<div class="nucleon_number">[251]</div>
+					</td>
+					<td class="Es element actinide" id="Es" onclick="showBlur(this.id)">
+						<div class="proton_number">99</div>
+						<div class="element_sym">Es</div>
+						<div class="element_name">Einsteinium</div>
+						<div class="nucleon_number">[252]</div>
+					</td>
+					<td class="Fm element actinide" id="Fm" onclick="showBlur(this.id)">
+						<div class="proton_number">100</div>
+						<div class="element_sym">Fm</div>
+						<div class="element_name">Fermium</div>
+						<div class="nucleon_number">[257]</div>
+					</td>
+					<td class="Md element actinide" id="Md" onclick="showBlur(this.id)">
+						<div class="proton_number">101</div>
+						<div class="element_sym">Md</div>
+						<div class="element_name">Mendelevium</div>
+						<div class="nucleon_number">[258]</div>
+					</td>
+					<td class="No element actinide" id="No" onclick="showBlur(this.id)">
+						<div class="proton_number">102</div>
+						<div class="element_sym">No</div>
+						<div class="element_name">Nobelium</div>
+						<div class="nucleon_number">[259]</div>
+					</td>
+					<td class="Lr element actinide" id="Lr" onclick="showBlur(this.id)">
+						<div class="proton_number">103</div>
+						<div class="element_sym">Lr</div>
+						<div class="element_name">Lawrencium</div>
+						<div class="nucleon_number">[262]</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</center>
+</body>
+</html>

@@ -60,18 +60,18 @@ function Sidebar() {
         <div className="mb-12">
           <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
             <a href="/" className="hover:text-[var(--color-primary)] transition-colors">
-              Your Name
+              Alistair Cheong
             </a>
           </h1>
           <p className="text-[var(--color-muted)] text-base mb-6">
-            your.email[at]domain.com
+            acheong[at]andrew.cmu.edu
           </p>
           
           {/* Social Links */}
           <div className="mb-8">
             <nav className="flex space-x-4" role="navigation" aria-label="Social media links">
               <a 
-                href="https://twitter.com/yourusername" 
+                href="https://twitter.com/cheongalc" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Twitter profile"
                 target="_blank"
@@ -82,7 +82,7 @@ function Sidebar() {
                 </svg>
               </a>
               <a 
-                href="https://linkedin.com/in/yourusername" 
+                href="https://linkedin.com/in/alistair-cheong" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="LinkedIn profile"
                 target="_blank"
@@ -93,7 +93,7 @@ function Sidebar() {
                 </svg>
               </a>
               <a 
-                href="https://scholar.google.com/citations?user=yourusername" 
+                href="https://scholar.google.com/citations?user=IWvm3i0AAAAJ&hl=en" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Google Scholar profile"
                 target="_blank"
@@ -104,7 +104,7 @@ function Sidebar() {
                 </svg>
               </a>
               <a 
-                href="https://github.com/yourusername" 
+                href="https://github.com/cheongalc" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="GitHub profile"
                 target="_blank"
@@ -115,7 +115,7 @@ function Sidebar() {
                 </svg>
               </a>
               <a 
-                href="https://instagram.com/yourusername" 
+                href="https://instagram.com/cheongalc" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors"
                 aria-label="Instagram profile"
                 target="_blank"

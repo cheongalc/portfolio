@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Windows 10 Start Screen</title>
+	<style type="text/css">
+		body { margin: 0px; padding: 0px; font-family: system, 'Segoe UI';}
+		.transparent-background {z-index: -999; background-color: rgba(0,0,0,0.8); filter: brightness(55%); position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: url("polygon.png"); background-size: cover; background-position: center;}
+		/*SIDEBAR*/
+		.sidebar {position: fixed; left: 0; top: 0; width: 50px; height: 100%;}
+		.glyphicon-hamburger {width: 35px; margin-left: 7px; margin-top: 20px;}
+		.glyphicon-selectedMenu {width: 50px; margin-top: 10px;}
+		.glyphicon-list {width: 50px; margin-top: 10px;}
+		.glyphicon-account {width: 50px; margin-bottom: 0px;}
+		.glyphicon-settings {width: 50px; margin-bottom: 0px;}
+		.glyphicon-power {width: 50px; margin-bottom: 10px;}
+		.glyphicons-bottom {position:fixed; left: 0; bottom: 0; width: 50px;}
+
+		/*CENTRE WIDGETS*/
+		.widgets-left {display: inline-block; margin-top: 40px; margin-bottom: 90px;}
+		.spacer {width:150px; height: 100%; display: inline-block;}
+		.widgets-right {display: inline-block; margin-top: 40px;}
+		.widgets-left td {table-layout: fixed; width: 100px; height: 100px; padding: 4px;}
+		.widgets-left td.mini {width:50px; height: 50px; padding: 0px;}
+		.widgets-right td {table-layout: fixed; width: 100px; height: 100px; padding: 4px;}
+		td {font-size: 13px; color: white; font-weight: lighter; border: 2px solid transparent; box-sizing: border-box; overflow: hidden;}
+		td.list-header {height: 50px; color: white; font-size: 15px; font-weight: normal;}
+		.widget-footer {position: relative; top:40px; left: 2px;}
+
+		td:hover {border-color: white; cursor: pointer;}
+
+		td img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+
+		/*SPECIFIC WIDGETS*/
+		.calendarWidget {
+			text-align: center;
+			line-height: 22px;
+			background-color: #0099BC;
+		}
+		.emailWidget {
+			position: relative;
+			background-color: #0099BC;
+		}
+		.fbWidget {position: relative; background-color: #3B5998;}
+		.weatherWidget {position: relative; background-color: #354052;}
+		.photosWidget {position: relative; width: 100px; background-color: #0099BC;}
+		.skypeWidget {position: relative; background-image: url("skype-icon.png")}
+		.newsWidget {position: relative; background-color: #D13438;}
+		.wordWidget {position: relative;}
+		.powerpointWidget {position: relative;}
+		.excelWidget {position: relative;}
+		.onenoteWidget {position: relative;}
+
+	</style>
+
+</head>
+<body>
+	<div class="transparent-background"></div>
+	<div class="sidebar">
+		<img class="glyphicon-hamburger" src="glyphicon-hamburger.png">
+		<img class="glyphicon-selectedMenu" src="glyphicon-selectedMenu.png">
+		<img class="glyphicon-list" src="glyphicon-list.png">
+		<div class="glyphicons-bottom">
+			<img class="glyphicon-account" src="glyphicon-account.png">
+			<img class="glyphicon-settings" src="glyphicon-settings.png">
+			<img class="glyphicon-power" src="glyphicon-power.png">
+		</div>
+	</div>
+
+	<center class="main">
+		<table class="widgets-left">
+			<tr><td colspan = "6" class="list-header">Life at a glance</td></tr>
+			<tr>
+				<td colspan = "2" class="calendarWidget">Friday<br><span style="font-size: 40px;">3</span></td>
+				<td colspan = "4" class="emailWidget">
+					<span style="position: absolute; top:4px; left: 4px;">Toodledo</span>
+					<span style="position: absolute; top: 20px; left: 4px; color: #99D6E4;">Welcome to Toodledo</span>
+					<div class="widget-footer">Mail</div>
+					<span style="position: absolute; right: 4px; bottom: 4px; font-weight: normal;">2</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan = "2" class="fbWidget">
+					<span style="position: absolute; top: 4px; left: 4px;">Zhi Jian posted in HCI NOI '17 Training.</span>
+					<div class="widget-footer">Facebook</div>
+					<span><img src="fbicon.png" style="width: 10px; position: absolute; right: 20px; bottom: 8px;"></span>
+					<span style="position: absolute; right: 4px; bottom: 5px; font-weight: normal;">2</span>
+				</td>
+				<td colspan = "2" class="weatherWidget" style="padding: 0px; height: 100px; width: 100px;"><img src="weather-content.png"></td>
+				<td colspan = "2" class="photosWidget" style="padding: 0px;" valign="top" height="100">
+					<span style="position: absolute; left: 6px; bottom: 5px;">Photos</span>
+					<img src="photos-icon.png" style="width: 10px; position: absolute; right: 4px; bottom: 8px;">
+
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="skypeWidget">
+					<div class="widget-footer">Skype Preview</div>
+				</td>
+				<td colspan="4" rowspan="3" class="newsWidget">
+					<span style="position: absolute; left: 76px; top: 4px; font-size: 11px; font-weight: normal; ">100 under-the-radar places everyone should visit in the world</span>
+					<span style="position: absolute; left: 76px; top: 60px; font-size: 11px; font-weight: normal; ">Migrant crisis: EU Summit seeks action-plan with Libya</span>
+					<span style="position: absolute; left: 76px; top: 124px; font-size: 11px; font-weight: normal; ">Credit card thieves move online as chips cut in-store fraud</span>
+					<span style="position: absolute; left: 6px; bottom: 5px;">News</span>
+					<img src="news-icon.png" style="position: absolute; right: 4px; bottom: 4px; width: 20px;">
+					<img src="news-images.png" style="position: absolute; left: 8px; top: 8px; width: 60px; height: 160px;">
+				</td>
+			</tr>
+			<tr>
+				<td class="wordWidget mini"><img src="word-icon.png"></td>
+				<td class="powerpointWidget mini"><img src="powerpoint-icon.png"></td>
+			</tr>
+			<tr>
+				<td class="excelWidget mini"><img src="excel-icon.png"></td>
+				<td class="onenoteWidget mini"><img src="onenote-icon.png"></td>
+			</tr>
+			<tr><td colspan="6" class="list-header">Dell - SYSTEM</td></tr>
+			<tr>
+				<td class="helpWidget mini" style="position: relative;"><img src="dellhelp-icon.png"></td>
+				<td class="pcWidget mini" style="position: relative;"><img src="pc-icon.png"></td>
+			</tr>
+			<tr>
+				<td class="mcafeeWidget mini" style="position: relative;"><img src="mcafee-icon.png"></td>
+				<td class="dropboxWidget mini" style="position: relative;"><img src="dropbox-icon.png"></td>
+			</tr>
+		</table>
+		<div class="spacer"></div>
+		<table class="widgets-right">
+			<tr><td colspan="3" class="list-header">Coding</td></tr>
+			<tr>
+				<td class="sublimeWidget" style="position: relative; padding: 0px; background-color: #0099BC; ">
+					<img src="sublimetext-icon.png">
+					<div class="widget-footer" style="left:6px;">Sublime Text 3</div>
+				</td>
+				<td class="devWidget" style="position: relative; padding: 0px;background-color: #0099BC; ">
+					<img src="devcpp-icon.png">
+					<div class="widget-footer" style="left: 6px;">Dev-C++</div>
+				</td>
+				<td class="asWidget" style="position: relative; padding: 0px; background-color: #0099BC;">
+					<img src="androidstudio-icon.png">
+					<div class="widget-footer" style="left: 6px;">Android Studio</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="xamppWidget" style="position: relative; padding: 0px; background-color: #0099BC; height: 102px;">
+					<img src="xampp-icon.png">
+					<div class="widget-footer" style="line-height: 13px; left: 6px; bottom: 14px;">XAMPP Control Panel</div>
+				</td>
+				<td class="xamppWidget2" style="position: relative; padding: 0px; background-color: #0099BC; height: 102px;">
+				<img src="htdocs-icon.png">
+					<div class="widget-footer" style="line-height: 13px; left: 6px; bottom: 14px;">XAMPP htdocs folder</div>
+				</td>
+			</tr>
+
+			<tr><td colspan="3" class="list-header">Play and explore</td></tr>
+			<tr>
+				<td class="pdfWidget" style="position: relative; padding: 0px; background-color: #608B8B; height: 102px;">
+					<img src="drawboardpdf-icon.png">
+					<div class="widget-footer" style="left: 6px;">Drawboard PDF</div>
+				</td>
+				<td class="musicWidget" style="position: relative; padding: 0px; background-color: #0099BC; height: 102px;">
+					<img src="groovemusic-icon.png">
+					<div class="widget-footer" style="left: 6px;">Groove Music</div>
+				</td>
+				<td class="vidsWidget" style="position: relative; padding: 0px; background-color: #0099BC; height: 102px;">
+					<img src="moviestv-icon.png">
+					<div class="widget-footer">Movies & TV</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="xboxWidget" style="position: relative; padding: 0px; background-color: #107C10; height: 102px;">
+					<img src="xbox-icon.png">
+					<div class="widget-footer" style="left: 6px;">XBox</div>
+				</td>
+				<td class="xboxliveWidget" style="position: relative; padding: 0px; background-color: #107C10; height: 102px;" valign="top">
+					<img src="xboxlive-icon.png">
+				</td>
+				<td class="candyCrushWidget" style="position: relative; padding: 0px; background-color: #107C10; height: 102px;" valign="top">
+					<img src="candycrush-icon.png">
+				</td>
+			</tr>
+			<tr>
+				<td class="rrIIWidget" style="position: relative; padding: 0px; background-color: #107C10; height: 102px;" valign="top">
+					<img src="royalresultii-icon.png">
+				</td>
+				<td class="gameloftWidget" style="position: relative; padding: 0px; background-color: #107C10; height: 102px;" valign="top">
+					<img src="gameloft-icon.png">
+				</td>
+				<td class="xboxliveWidget2" style="position: relative; padding: 0px; background-color: #107C10; height: 102px;" valign="top">
+					<img src="xboxlive-icon2.png">
+				</td>
+			</tr>
+			<tr>
+				<td class="getOfficeWidget" style="position: relative; padding: 0px; background-color: #107C10; height: 102px;" valign="top">
+					<img src="getoffice-icon.png">
+					<span style="position: absolute; left: 6px; bottom: 4px;">Get Office</span>
+				</td>
+			</tr>
+		</table>
+	</center>
+</body>
+</html>

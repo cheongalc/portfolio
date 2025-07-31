@@ -1,11 +1,26 @@
 {
   "2025": [
     {
+      "title": "A Comparison of Chain-of-Thought Bypass Errors in Large Reasoning Models trained with Outcome Supervision and Process Supervision",
+      "titleLink": "",
+      "authors": "**Alistair Cheong**",
+      "venue": "Mini Research Project done as part of CMU's Undergraduate First Year Writing Course",
+      "links": [
+        {
+            "text": "Blog Post Coming Soon",
+            "url": ""
+        }
+      ]
+    },
+    {
       "title": "Detecting Offensive Memes with Social Biases in Singapore Context Using Multimodal Large Language Models",
-      "titleLink": "https://arxiv.org/abs/2502.18101",
       "authors": "Cao Yuxuan, Wu Jiayang, **Alistair Cheong Liang Chuen**, Bryan Shan Guanrong, Theodore Lee Chong Jen, Sherman Chann Zhi Shen",
       "venue": "3rd Workshop, C3NLP, NAACL 2025",
       "links": [
+        {
+            "text": "arXiv preprint",
+            "url": "https://arxiv.org/abs/2502.18101"
+        },
         {
           "text": "C3NLP site",
           "url": "https://c3nlp.github.io/#accept_papers"
@@ -20,10 +35,13 @@
   "2022": [
     {
       "title": "Explaining adversarial vulnerability with a data sparsity hypothesis",
-      "titleLink": "https://doi.org/10.1016/j.neucom.2022.01.062",
       "authors": "Mahsa Paknezhad, Cuong Phuc Ngo, Amadeus Aristo Winarto, **Alistair Cheong**, Chuen Yang Beh, Jiayang Wu, Hwee Kuan Lee",
       "venue": "Neurocomputing, Volume 495, Pages 178-193",
       "links": [
+        {
+            "text": "Official Publication",
+            "url": "https://doi.org/10.1016/j.neucom.2022.01.062"
+        },
         {
           "text": "arXiv preprint",
           "url": "https://arxiv.org/abs/2103.00778"

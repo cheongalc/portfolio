@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { processInlineMarkdown } from './markdown';
 
 /**
  * Path to the papers metadata JSON file
@@ -22,8 +23,6 @@ export interface PaperLink {
 export interface Paper {
   /** Title of the paper */
   title: string;
-  /** URL to the paper (main link) */
-  titleLink: string;
   /** Authors string (may contain markdown formatting) */
   authors: string;
   /** Venue where the paper was published */
@@ -50,17 +49,6 @@ export interface ProcessedPaper extends Paper {
 }
 
 /**
- * Utility function to process author strings and convert markdown bold to HTML
- * 
- * @param authorsString - The authors string with markdown formatting
- * @returns HTML string with proper bold formatting
- */
-function processAuthors(authorsString: string): string {
-  // Convert **text** to <strong>text</strong>
-  return authorsString.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-}
-
-/**
  * Retrieves and processes all papers from the JSON file
  * 
  * @returns Promise that resolves to an array of processed papers, sorted by year (newest first)
@@ -83,7 +71,7 @@ export async function getAllPapers(): Promise<ProcessedPaper[]> {
         allPapers.push({
           ...paper,
           year,
-          authorsHtml: processAuthors(paper.authors)
+          authorsHtml: processInlineMarkdown(paper.authors)
         });
       }
     }
@@ -115,7 +103,7 @@ export async function getPapersByYear(): Promise<{ year: string; papers: Process
       papers: papersData[year].map(paper => ({
         ...paper,
         year,
-        authorsHtml: processAuthors(paper.authors)
+        authorsHtml: processInlineMarkdown(paper.authors)
       }))
     }));
     

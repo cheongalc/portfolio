@@ -8,10 +8,10 @@ import { getRecentPapers } from '@/lib/papers';
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'Home - Your Name',
+  title: 'Home | Alistair Cheong',
   description: 'Welcome to my personal portfolio. Learn about my background and explore my latest blog posts on technology, development, and more.',
   openGraph: {
-    title: 'Home - Your Name',
+    title: 'Home | Alistair Cheong',
     description: 'Welcome to my personal portfolio. Learn about my background and explore my latest blog posts.',
     type: 'website',
   },

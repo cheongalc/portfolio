@@ -23,7 +23,7 @@ export default function MobileNavigation() {
       {/* Mobile Header */}
       <div className="lg:hidden flex items-center justify-between px-4 pt-6 pb-4 border-b border-[var(--color-border)] bg-[var(--color-background)] sticky top-0 z-30 transition-colors duration-300">
         <h1 className="text-xl font-bold text-[var(--color-text)]">
-          <a href="/" className="hover:text-[var(--color-primary)] transition-colors duration-300">Your Name</a>
+          <a href="/" className="hover:text-[var(--color-primary)] transition-colors duration-300">Alistair Cheong</a>
         </h1>
         <button
           className="text-[var(--color-muted)] hover:text-[var(--color-text)] p-2"
@@ -51,7 +51,7 @@ export default function MobileNavigation() {
           <div className="mb-12">
             <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
               <a href="/" className="hover:text-[var(--color-primary)] transition-colors duration-300" onClick={closeMenu}>
-                Your Name
+                Alistair Cheong
               </a>
             </h1>
             <p className="text-[var(--color-muted)] text-base mb-6">

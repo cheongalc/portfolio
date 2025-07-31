@@ -1,0 +1,446 @@
+{
+  "projects": [
+    {
+        "id": "1088def0-1ce9-473f-a9ce-ab70e49c53c5",
+        "name": "ZettelLinker",
+        "dateStart": "2025-06-05",
+        "dateEnd": "ongoing",
+        "description": "I'm trying to build an Obsidian plugin that suggests wikilinks in a style similar to GitHub Copilot/Cursor Tab to support my Zettelkasten workflow.",
+        "tags": ["obsidian", "typescript", "ollama", "WIP", "machine learning"],
+        "links": [
+            {
+                "text": "Blog Post Coming Soon",
+                "url": ""
+            }
+        ]
+    },
+    {
+        "id": "970f3fa2-650e-45ca-9d57-bb144390029d",
+        "name": "Tree Of Life",
+        "dateStart": "2025-06-21",
+        "dateEnd": "2025-06-22",
+        "description": "Entry for the UC Berkeley AI Hackathon 2025. Tree Of Life is a journalling app that is controlled solely by voice. You can talk to it about your day or about historical events and it will plot what you say as a tree on a horizontal timeline. This makes it very easy to see all the commitments going on in your life and promotes closure (so that we don't start things and forget about them later/procrastinate on them). The voice agent functionality was built using Vapi with Claude 4 as the LLM brain. The timeline UI was done using HTML5 Canvas.",
+        "tags": ["vapi", "html5", "canvas", "web development"],
+        "links": [
+            {
+                "text": "Devpost Submission",
+                "url": "https://devpost.com/software/tree-of-life-x928ai"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/Alexlihing/berkeley-ai"
+            }
+        ]
+    },
+    {
+        "id": "0e22a43e-1d82-4d81-a50e-489d47e880f7",
+        "name": "Atlas",
+        "dateStart": "2024-11-09",
+        "dateEnd": "2024-11-09",
+        "description": "Team submission for CMU's Nova GenAI Hackathon on 9 November 2024. Atlas is a proof-of-concept geoanalysis tool that lets a user query a map using natural language. The motivation behind Atlas stems from the challenges faced during humanitarian crises. When disasters strike, aid teams must rapidly assess affected areas and integrate fragmented data (such as damaged roads, hospital locations, etc.) to formulate response plans. Atlas aims to streamline this process by offering an intuitive, natural language interface to a map, enabling users to quickly extract relevant information.",
+        "tags": ["geoanalysis", "natural language processing", "openlayers", "hotosm", "web development"],
+        "links": [
+          {
+            "text": "GitHub",
+            "url": "https://github.com/cheongalc/atlas"
+          }
+        ]
+    },
+    {
+        "id": "871ff044-ccb1-4dff-b989-53dc592dd9bb",
+        "name": "Physics Animations",
+        "dateStart": "2020-04-20",
+        "dateEnd": "2020-05-31",
+        "description": "A collection of physics animations I made as part of homework during Junior College, covering kinematics and electrostatics. No physics engine was used, all animations done by hand.",
+        "tags": ["physics", "animation", "recreation", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "https://cheongalc.github.io/physicsanims/"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/physicsanims"
+            }
+        ]
+    },
+    {
+        "id": "d5fc8ba1-bd67-479a-ac9c-a32a2d34074e",
+        "name": "Predicting HDB Prices",
+        "dateStart": "2020-01-09",
+        "dateEnd": "2020-01-09",
+        "description": "This was my first try at anything machine learning related. It was done as part of a walkthrough conducted by AI Singapore's AI For Everyone (AI4E) initiative. I used Microsoft's Azure ML studio to perform a linear regression on open HDB data from 1999. Based on 4 features (flat type, storey range, flat model, town), the workshop guided us to plot the data as points in 4D space and then find the best fit line.",
+        "tags": ["azure ml", "machine learning"],
+        "links": [
+            {
+                "text": "Azure ML Studio Screenshot",
+                "url": "azuremlss.png"
+            }
+        ]
+    },
+    {
+        "id": "70bed75e-b833-4795-9faa-9658921b2174",
+        "name": "chemcom2019",
+        "dateStart": "2019-06-01",
+        "dateEnd": "2019-06-30",
+        "description": "Companion website made for my team's entry to the National University of Singapore Chemistry Communication Challenge 2019. We selected \"Metal-Organic Frameworks\" as our theme. The website was made using Bootstrap 4. Left scrollspy sidebar inspiration was taken from `matter.js` libdocs. Matter.js was also used to create a model for the commercial application of Metal-Organic Frameworks for $CO_2$ adsorption. Citations dynamically generated based on txt file using JS.",
+        "tags": ["bootstrap", "matter.js", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "https://cheongalc.github.io/chemcom2019/page1.html"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/chemcom2019"
+            }
+        ]
+    },
+    {
+        "id": "dabe4479-39b4-4cae-a537-0111e38f7436",
+        "name": "情牵华岗 (HC100 Heritage Tour)",
+        "dateStart": "2019-03-09",
+        "dateEnd": "2019-03-09",
+        "description": "情牵华岗 is a website created for the Hwa Chong 100th Anniversary Heritage Tour, held on 9 March 2019. Using location services, it detects, highlights, and gives a brief introduction on Hwa Chong landmarks that are in close proximity to the visitor. It also acts as a guestbook that allows visitors to pen down messages as a record of the visit.",
+        "tags": ["commission", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "https://cheongalc.github.io/hc100heritagetour/"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/hc100heritagetour"
+            }
+        ]
+    },
+    {
+        "id": "2256021f-546e-4cd5-87ca-6f330d0d8b59",
+        "name": "Connite",
+        "dateStart": "2019-03-01",
+        "dateEnd": "2019-05-19",
+        "description": "This is my team's entry for the \"Build On Singapore 2019\" hackathon organized by Amazon Web Services. Connite is an app targeted at the elderly. It aims to ensure that they maintain an active lifestyle. It suggests activities such as exercise, recreation etc. based on nearby Place Of Interest (POI) data from the Google Maps API.",
+        "tags": ["android", "app development"],
+        "links": [
+            {
+                "text": "Presentation Slides",
+                "url": "ChikaWow BOS 2019.pdf"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/bos-connite"
+            }
+        ]
+    },
+    {
+        "id": "c53e28d6-60f2-4a0d-b8fd-1c8b5150048b",
+        "name": "cytohelper",
+        "dateStart": "2019-03-01",
+        "dateEnd": "2019-03-31",
+        "description": "This is a helper website that I made when doing a Biology research project in Secondary 4. It helps you  compute viable cell density and viable cell percentage based on number of replicates and dilution factor when performing the trypan blue cell death assay. Onload, the website will prompt for number of replicates & dilution factor. The information needs to be filled in as JS dynamically generates the hemocytometer A/B well layout. For testing purposes we can just input 3 and 100 (most common dilution factor used for yeast).",
+        "tags": ["flexbox", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "https://cheongalc.github.io/cytohelper/"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/cytohelper"
+            }
+        ]
+    },
+    {
+        "id": "09ca48e6-84a2-4ad6-80f3-c49d1563af50",
+        "name": "VibrationTester",
+        "dateStart": "2019-02-01",
+        "dateEnd": "2019-02-28",
+        "description": "First try at doing an android app in Kotlin. VibrationTester is an Android app that vibrates the phone at regular intervals to test the tactic engine. Coded this app because my phone's call vibration was weird after dropping it.",
+        "tags": ["android", "app development"],
+        "links": [
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/vibrationtester"
+            }
+        ]
+    },
+    {
+        "id": "761cbb8c-140f-404e-8ab3-3cdfe2a980dc",
+        "name": "Ikan Oh Ikan (mBoggle 2.0)",
+        "dateStart": "2017-12-01",
+        "dateEnd": "2019-05-31",
+        "description": "We developed a new Malay word game to replace the existing one in Hwa Chong's annual Malay Boggle (mBoggle) competition. Players control a fish (\"ikan\" in Malay) that pops alphabet bubbles to spell out Malay words. This is a fun and interactive way to engage Malay Special Programme (MSP) students, improve their Malay vocabulary, and promote greater interest in the Malay language. The mBoggle competition attracts about 200 MSP students from different schools in Singapore. From 2019 onwards, Ikan oh Ikan was deployed as the game used in the competition.",
+        "tags": ["commission", "matter.js", "web development"],
+        "links": [
+            {
+                "text": "Standalone Site (for testing purposes)",
+                "url": "https://cheongalc.github.io/ioi-static-demo"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/ioi-static-demo"
+            }
+        ]
+    },
+    {
+        "id": "81f6c5d0-1ade-4e3c-b952-24f2cb3c1c38",
+        "name": "图战 (TuZhan)",
+        "dateStart": "2017-11-01",
+        "dateEnd": "2018-09-30",
+        "description": "This is my team's entry for the Singapore Centre for Chinese Learning competition, 2018年全国学生华文应用程序制作比赛. We chose to build an app according to one of the challenge themes: 职业 (occupations). The app is based off Fight List and Pictionary. Users compete against one another to guess the definitions of occupations in Chinese based on an image prompt. They can revise the vocab learnt through a flashcards system. The app was chosen as a finalist and eventually won a Top 20 excellence award. All finalists also presented at the 2018 5th International Conference on Teaching and Learning of Chinese as a Second Language @ Suntec City Singapore.\n\n图战 used to be on the Play Store until SCCL pulled all competition entries in 2020. However, you can still find the writeup done by the organizers on their [competition webpage](https://archive.is/WQRq3). Scroll down till you find our app, alternatively see the screenshots of the app or competition website below.",
+        "tags": ["android", "app development"],
+        "links": [
+            {
+                "text": "App Homepage Screenshot",
+                "url": "home.png"
+            },
+            {
+                "text": "Enemy Match Found Screenshot",
+                "url": "matchfound.png"
+            },
+            {
+                "text": "Actual Gameplay Screenshot",
+                "url": "gameplay.png"
+            },
+            {
+                "text": "Results Screenshot",
+                "url": "results.png"
+            },
+            {
+                "text": "Flashcards Screenshot",
+                "url": "flashcards.png"
+            },
+            {
+                "text": "Flashcards Answer Screenshot",
+                "url": "flashcardsanswer.png"
+            },
+            {
+                "text": "Competition Website Screenshot",
+                "url": "website.png"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/tuzhan"
+            }
+        ]
+    },
+    {
+        "id": "06c0cf92-bb56-4b8d-9a24-2fc307e3e88d",
+        "name": "snek",
+        "dateStart": "2018-06-01",
+        "dateEnd": "2018-06-30",
+        "description": "Snake game created with HTML5 canvas.",
+        "tags": ["html5", "canvas", "recreation", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "cadc67cd-0889-40a1-80eb-a1788070e989",
+        "name": "sleep controller",
+        "dateStart": "2018-02-01",
+        "dateEnd": "2018-02-28",
+        "description": "Second time making a Chrome extension. When it is time to get off the computer, the extension alerts() and upon confirmation, closes Chrome.",
+        "tags": ["chrome extension"],
+        "links": [
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/sleep-controller"
+            }
+        ]
+    },
+    {
+        "id": "e8d0440e-216e-4c1b-bb1c-cd9663ff4989",
+        "name": "findingOpponentAnim",
+        "dateStart": "2017-12-01",
+        "dateEnd": "2017-12-31",
+        "description": "This project is a Web export of an Android `AnimatedVectorDrawable` that was one of the animation ideas for finding an opponent in the 图战 game. The animation uses SVG path morphing to transform a search magnifying glass into a clock & back again. Made with [shapeshifter.design](https://shapeshifter.design/).",
+        "tags": ["android", "AnimatedVectorDrawable", "animation", "app development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "beaf242b-06a4-4f4a-a514-352e857132ee",
+        "name": "clock newtab",
+        "dateStart": "2017-10-01",
+        "dateEnd": "2017-10-31",
+        "description": "First time making a Chrome extension. Overrides the default home page to a minimalist B&W clock.",
+        "tags": ["chrome extension"],
+        "links": [
+            {
+            "text": "GitHub",
+            "url": "https://github.com/cheongalc/clock-newtab"
+            }
+        ]
+    },
+    {
+        "id": "7641921b-32ca-4140-a271-71b4565cc10d",
+        "name": "Spinning Cube",
+        "dateStart": "2017-07-01",
+        "dateEnd": "2017-07-31",
+        "description": "Third WebGL project. Renders a 3D rotating cube.",
+        "tags": ["webgl", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "c6c8efa7-5a88-42bc-a815-89b5cf5863c9",
+        "name": "Gradient Generator",
+        "dateStart": "2017-07-01",
+        "dateEnd": "2017-07-31",
+        "description": "Second WebGL project. Allows you to define `rgba()` values for 4 vertices of a square and blends the colours naturally. Useful for creating colour wallpapers.",
+        "tags": ["webgl", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "80197d7b-d846-4a1f-8766-c76da341153b",
+        "name": "Polygon Maker",
+        "dateStart": "2017-07-01",
+        "dateEnd": "2017-07-31",
+        "description": "First ever WebGL project. Allows you to do xyz translation and define 4 vertices of a polygon.",
+        "tags": ["webgl", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "c66d6fa6-68d8-4e97-b377-2821c80ed5b0",
+        "name": "The 25th Hour",
+        "dateStart": "2017-06-01",
+        "dateEnd": "2017-06-30",
+        "description": "Crude attempt at creating an animation loop of the day/night cycle.",
+        "tags": ["animation", "recreation", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            },
+            {
+                "text": "Sun Animation Test",
+                "url": "test.html"
+            }
+        ]
+    },
+    {
+        "id": "006bbb93-86af-490e-857b-c583f3d73aa9",
+        "name": ".io game behaviour",
+        "dateStart": "2017-06-01",
+        "dateEnd": "2017-06-30",
+        "description": "Tried to mimic how .io games allow users to move a character with the mouse.",
+        "tags": ["html5", "canvas", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "6ec88bba-1d37-455d-b455-6c3e7325b300",
+        "name": "Flappy Bird",
+        "dateStart": "2017-05-01",
+        "dateEnd": "2017-05-31",
+        "description": "Flappy Bird game created for demo purposes at the Infocomm Club's booth during Hwa Chong's 2017 Open House.",
+        "tags": ["html5", "canvas", "recreation", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "534ea245-dd92-4353-95a3-ca1b910c5282",
+        "name": "FullUse",
+        "dateStart": "2017-01-01",
+        "dateEnd": "2017-12-31",
+        "description": "First try at making an Android app. Used this app for Project Work in 2017 and also for the [i.code] hackathon 2017 organized by Nanyang Polytechnic. There, it won 2nd Place and Best User Experience. FullUse is a to do list app that makes use of a novel concept of splitting your tasks into the short term and long term. By completing tasks, you keep your pet 'tree' alive - a concept adapted from ForestApp.",
+        "tags": ["android", "app development"],
+        "links": [
+            {
+                "text": "Project Website",
+                "url": "https://cheongalc.github.io/fulluse/"
+            },
+            {
+                "text": "GitHub",
+                "url": "https://github.com/cheongalc/fulluse"
+            }
+        ]
+    },
+    {
+        "id": "4b7d7e89-d381-4daa-bd58-ae08778a076f",
+        "name": "damn counter",
+        "dateStart": "2017-03-01",
+        "dateEnd": "2017-03-31",
+        "description": "Another project that makes use of `localStorage`. A half useless damn counter that allows you to give X number of damns about a certain topic",
+        "tags": ["localStorage", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "26d0cc76-7c5b-42d5-8cdf-7b3ec0d5eba4",
+        "name": "Win10 start screen",
+        "dateStart": "2017-02-01",
+        "dateEnd": "2017-02-28",
+        "description": "Attempt at recreating the Windows 10 Start Screen",
+        "tags": ["recreation", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "28d26865-2b39-4212-a548-b905e6721397",
+        "name": "Periodic Table",
+        "dateStart": "2017-01-01",
+        "dateEnd": "2017-01-31",
+        "description": "Attempt at recreating the Periodic Table found in [ptable.com](https://ptable.com/).",
+        "tags": ["recreation", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    },
+    {
+        "id": "0a2a740e-9d93-4565-99aa-f89e189003da",
+        "name": "localStorage Example",
+        "dateStart": "2017-01-01",
+        "dateEnd": "2017-01-31",
+        "description": "First time getting in touch with `localStorage`. The page remembers what color you have set the background to.",
+        "tags": ["localStorage", "web development"],
+        "links": [
+            {
+                "text": "Live Site",
+                "url": "index.html"
+            }
+        ]
+    }
+  ]
+}

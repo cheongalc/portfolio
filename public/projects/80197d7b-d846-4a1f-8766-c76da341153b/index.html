@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>proj-webgl_1</title>
+	<style type="text/css">
+		html, body {
+			margin: 0px;
+		}
+		canvas {
+			width: 100vw;
+			height: 100vh;
+			display: block;
+		}
+		#slideContainer {
+			width: 100%;
+			position: fixed;
+			top: 10px;
+			left: 0px;
+			background-color: rgba(0,0,0,0.5);
+		}
+		.translationTitle {
+			width: 100%;
+			font-family: 'Consolas';
+			color: #fff;
+			text-align: center;
+		}
+		.slider {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 15px;
+		    border-radius: 5px;
+		    background: #d3d3d3;
+		    outline: none;
+		    opacity: 0.7;
+		    -webkit-transition: .2s;
+		    transition: opacity .2s;
+		}
+		.slider:hover {
+		    opacity: 1;
+		}
+
+		.slider::-webkit-slider-thumb {
+		    -webkit-appearance: none;
+		    appearance: none;
+		    width: 25px;
+		    height: 25px;
+		    border-radius: 50%;
+		    background: #FFF;
+		    cursor: pointer;
+		}
+
+		.valsContainer {
+			z-index: 2;
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+			border: 1px solid #fff;
+			table-layout: fixed;
+			background-color: rgba(0,0,0, 0.5)
+		}
+
+		.valsContainer td {
+			width: 50%;
+		}
+
+		.valText {
+			font-family: 'Consolas';
+			color: #fff;
+			text-align: right;
+		}
+	</style>
+</head>
+<body>
+	<div id="slideContainer">
+		<div class="translationTitle" id="xTranslationTitle">xTranslate : 0.0</div>
+		<input type="range" min="-12" max="12" value="0" class="slider" id="xTranslationSliderRange">
+		<div class="translationTitle" id="yTranslationTitle">yTranslate : 0.0</div>
+		<input type="range" min="-12" max="12" value="0" class="slider" id="yTranslationSliderRange">
+		<div class="translationTitle" id="zTranslationTitle">ZTranslate : -6.0</div>
+		<input type="range" min="-100" max="10" value="-6.0" class="slider" id="zTranslationSliderRange">
+	</div>
+	<canvas id="glCanvas" width="1280" height="680"></canvas>
+	<table class="valsContainer">
+		<tr>
+			<td class="valText">Top Left Vertex <span id="valText_01">(-1.0, 1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_0"><input type="text" placeholder="yVal" id="input_vertexVal_1"><button onclick="update(0, 1)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Bottom Left Vertex <span id="valText_23">(-1.0, -1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_2"><input type="text" placeholder="yVal" id="input_vertexVal_3"><button onclick="update(2, 3)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Bottom Right Vertex <span id="valText_45">(1.0, -1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_4"><input type="text" placeholder="yVal" id="input_vertexVal_5"><button onclick="update(4, 5)">Update</button></td>
+		</tr>
+		<tr>
+			<td class="valText">Top Right Vertex <span id="valText_67">(1.0, 1.0)</span></td>
+			<td><input type="text" placeholder="xVal" id="input_vertexVal_6"><input type="text" placeholder="yVal" id="input_vertexVal_7"><button onclick="update(6, 7)">Update</button></td>
+		</tr>
+	</table>
+	<script src="gl-matrix.js"></script>
+	<script src="main.js"></script>
+	<script src="slider.js"></script>
+	<script src="polyshape.js"></script>
+</body>
+</html>
