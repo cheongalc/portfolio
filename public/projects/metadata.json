@@ -30,7 +30,12 @@
         "dateEnd": "ongoing",
         "description": "A recreation of the game Astro Party / Astro Duel, a multiplayer game where players control spaceships and try to shoot each other down. The original game was made by [Rusty Moyher](https://rustymoyher.com/astroparty/). I am recreating it as a personal project with AI assistance to learn more about game development, especially in the context of multiplayer games.",
         "tags": ["html5", "canvas", "typescript", "WIP", "game development"],
-        "links": []
+        "links": [
+            {
+                "text": "Live Site (Work in Progress)",
+                "url": "index.html"
+            }
+        ]
     },
     {
         "id": "970f3fa2-650e-45ca-9d57-bb144390029d",
