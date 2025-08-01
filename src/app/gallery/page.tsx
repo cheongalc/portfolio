@@ -5,10 +5,10 @@ import type { Metadata } from 'next';
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'Gallery | Alistair Cheong',
+  title: 'Gallery',
   description: 'A compilation of media from the blog, my own photography and music.',
   openGraph: {
-    title: 'Gallery | Alistair Cheong',
+    title: 'Gallery',
     description: 'A compilation of media from the blog, my own photography and music.',
     type: 'website',
   },

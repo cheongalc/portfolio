@@ -6,10 +6,10 @@ import { getPapersByYear } from '@/lib/papers';
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'Papers | Alistair Cheong',
+  title: 'Papers',
   description: 'Academic publications, research papers, and formal articles.',
   openGraph: {
-    title: 'Papers | Alistair Cheong',
+    title: 'Papers',
     description: 'Academic publications, research papers, and formal articles.',
     type: 'website',
   },

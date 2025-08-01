@@ -19,10 +19,10 @@ interface BlogPageProps {
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'Blog | Alistair Cheong',
+  title: 'Blog',
   description: 'Personal blog covering AI, computer science, technology, photography, music, and life.',
   openGraph: {
-    title: 'Blog | Alistair Cheong',
+    title: 'Blog',
     description: 'Personal blog covering AI, computer science, technology, photography, music, and life.',
     type: 'website',
   },

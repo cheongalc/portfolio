@@ -8,10 +8,9 @@ import { getRecentPapers } from '@/lib/papers';
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'Home | Alistair Cheong',
   description: 'Welcome to my personal portfolio. Learn about my background and explore my latest blog posts on technology, development, and more.',
   openGraph: {
-    title: 'Home | Alistair Cheong',
+    title: 'Alistair Cheong',
     description: 'Welcome to my personal portfolio. Learn about my background and explore my latest blog posts.',
     type: 'website',
   },
@@ -46,10 +45,13 @@ export default async function HomePage() {
           </h1>
           <div className="space-y-4 text-[var(--color-text)] leading-relaxed text-lg">
             <p>
-              Welcome to my digital space! Dummy text
+              I am a sophomore at the School of Computer Science, Carnegie Mellon University.
             </p>
             <p>
-              More dummy text
+              I care deeply about ensuring that Artificial Intelligence benefits humanity. My research interests are in meta-learning, open-endedness and scalable oversight.
+            </p>
+            <p>
+              My hometown is Singapore. <a href="https://maps.app.goo.gl/DrPEhnL1zZDdR81A7" className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors">Bak chor mee</a>, ramen, XO fish meehoon and beef rendang are some of my favorite foods. Outside of Computer Science, I enjoy photography (especially astrophotography), music (piano, guitar, <a href="https://www.instagram.com/alc_bbx/" className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors">beatboxing</a>), badminton, and cooking :)
             </p>
           </div>
         </section>

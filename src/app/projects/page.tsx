@@ -6,10 +6,10 @@ import { getProjectsByYear } from '@/lib/projects';
  * Provides SEO optimization and social media sharing information
  */
 export const metadata: Metadata = {
-  title: 'Projects - Alistair Cheong',
+  title: 'Projects',
   description: 'Personal projects, web development, mobile apps, and experimental work. Explore my coding journey from web development to AI applications.',
   openGraph: {
-    title: 'Projects - Alistair Cheong',
+    title: 'Projects',
     description: 'Personal projects, web development, mobile apps, and experimental work.',
     type: 'website',
   },
