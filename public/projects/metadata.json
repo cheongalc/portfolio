@@ -15,6 +15,24 @@
         ]
     },
     {
+        "id": "bf5c400f-5a6a-49c2-b358-f063a99a73d2",
+        "name": "Local Transcriber",
+        "dateStart": "2025-08-01",
+        "dateEnd": "ongoing",
+        "description": "A local audio transcription tool so that I quickly voice-dump my thoughts. Journaling is important as it helps me reflect. Reflection is very important for learning. But sometimes I'm bottelnecked by the keyboard, so a voice interface would be faster.",
+        "tags": ["ollama", "typescript", "WIP", "machine learning"],
+        "links": []
+    },
+    {
+        "id": "421358f1-6a7b-4515-a49e-93ceccb899f5",
+        "name": "Astro Party / Astro Duel Recreation",
+        "dateStart": "2025-08-01",
+        "dateEnd": "ongoing",
+        "description": "A recreation of the game Astro Party / Astro Duel, a multiplayer game where players control spaceships and try to shoot each other down. The original game was made by [Rusty Moyher](https://rustymoyher.com/astroparty/). I am recreating it as a personal project with AI assistance to learn more about game development, especially in the context of multiplayer games.",
+        "tags": ["html5", "canvas", "typescript", "WIP", "game development"],
+        "links": []
+    },
+    {
         "id": "970f3fa2-650e-45ca-9d57-bb144390029d",
         "name": "Tree Of Life",
         "dateStart": "2025-06-21",
