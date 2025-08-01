@@ -29,7 +29,7 @@ export default async function PapersPage() {
   const papersByYear = await getPapersByYear();
 
   return (
-    <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
+    <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
       {/* Header Section */}
       <section className="mb-16">
         <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
@@ -56,8 +56,9 @@ export default async function PapersPage() {
                 )}
                 
                 <article className="space-y-3 pb-6">
-                  <div className="flex items-start gap-4">
-                    <span className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                  {/* Desktop layout: year on left, content on right */}
+                  <div className="md:flex md:items-start md:gap-4">
+                    <span className="text-sm text-[var(--color-muted)] font-medium md:min-w-[5rem] hidden md:block">
                       {isFirstOfYear ? year : ''}
                     </span>
                     <div className="flex-1">
@@ -65,6 +66,11 @@ export default async function PapersPage() {
                       <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
                         {paper.title}
                       </h3>
+                      
+                      {/* Mobile layout: year underneath title */}
+                      <span className="text-sm text-[var(--color-muted)] font-medium block md:hidden mb-2">
+                        {year}
+                      </span>
                       
                       {/* Authors */}
                       <p 
@@ -109,6 +115,13 @@ export default async function PapersPage() {
                       )}
                     </div>
                   </div>
+                  
+                  {/* Mobile horizontal rule after each paper (except last in each year) */}
+                  {paperIndex < papers.filter(p => p.year === year).length - 1 && (
+                    <div className="md:hidden">
+                      <hr className="border-[var(--color-border)] mt-6 mb-6" />
+                    </div>
+                  )}
                 </article>
               </div>
             );

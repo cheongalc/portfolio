@@ -175,7 +175,7 @@ export default function BlogPageClient({
   }, [initialTag, showAllTags, sortedTags]);
 
   return (
-    <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
+    <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
       {/* Header Section */}
       <header className="mb-6">
         <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
@@ -266,8 +266,9 @@ export default function BlogPageClient({
           <div className="space-y-8">
             {filteredPosts.map(post => (
               <article key={post.slug} className="space-y-3 border-b border-[var(--color-border)] pb-8 last:border-b-0">
-                <div className="flex items-start gap-4">
-                  <time className="text-sm text-[var(--color-muted)] font-medium min-w-[6rem]">
+                {/* Desktop layout: date on left, content on right */}
+                <div className="md:flex md:items-start md:gap-4">
+                  <time className="text-sm text-[var(--color-muted)] font-medium md:min-w-[6rem] hidden md:block">
                     {post.date && new Date(post.date).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'short',
@@ -285,6 +286,15 @@ export default function BlogPageClient({
                         </Link>
                       </h2>
                     </div>
+                    
+                    {/* Mobile layout: date underneath title */}
+                    <time className="text-sm text-[var(--color-muted)] font-medium block md:hidden mb-2">
+                      {post.date && new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </time>
                     
                     {post.description && (
                       <p className="text-[var(--color-text)] leading-relaxed text-base mb-3">

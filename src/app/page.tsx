@@ -38,7 +38,7 @@ export default async function HomePage() {
     const { projects: recentProjects, totalCount: totalProjects } = await getRecentProjectsWithCount(3);
 
     return (
-      <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
+      <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
         {/* About Me Section */}
         <section className="mb-16">
           <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
@@ -67,8 +67,9 @@ export default async function HomePage() {
             <div className="space-y-6">
               {latestPosts.map(post => (
                 <article key={post.slug} className="space-y-2">
-                  <div className="flex items-start gap-4">
-                    <time className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                  {/* Desktop layout: date on left, content on right */}
+                  <div className="md:flex md:items-start md:gap-4">
+                    <time className="text-sm text-[var(--color-muted)] font-medium md:min-w-[5rem] hidden md:block">
                       {post.date && new Date(post.date).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -84,6 +85,15 @@ export default async function HomePage() {
                           {post.title || 'Untitled Post'}
                         </Link>
                       </h3>
+                      
+                      {/* Mobile layout: date underneath title */}
+                      <time className="text-sm text-[var(--color-muted)] font-medium block md:hidden mb-2">
+                        {post.date && new Date(post.date).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </time>
                       
                       {post.description && (
                         <p className="text-[var(--color-muted)] text-sm leading-relaxed line-clamp-2">
@@ -135,8 +145,9 @@ export default async function HomePage() {
             <div className="space-y-6">
               {recentPapers.map((paper, index) => (
                 <article key={index} className="space-y-2">
-                  <div className="flex items-start gap-4">
-                    <span className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                  {/* Desktop layout: date on left, content on right */}
+                  <div className="md:flex md:items-start md:gap-4">
+                    <span className="text-sm text-[var(--color-muted)] font-medium md:min-w-[5rem] hidden md:block">
                       {paper.year}
                     </span>
                     <div className="flex-1">
@@ -156,6 +167,12 @@ export default async function HomePage() {
                           </span>
                         )}
                       </h3>
+                      
+                      {/* Mobile layout: date underneath title */}
+                      <span className="text-sm text-[var(--color-muted)] font-medium block md:hidden mb-2">
+                        {paper.year}
+                      </span>
+                      
                       <p className="text-[var(--color-muted)] text-sm mt-1">
                         {paper.venue}
                       </p>
@@ -190,8 +207,10 @@ export default async function HomePage() {
             <div className="space-y-6">
               {recentProjects.map((project, index) => (
                 <article key={index} className="space-y-2">
-                  <div className="flex items-start gap-4">
-                    <span className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                  {/* Desktop layout: date on left, content on right */}
+                  <div className="md:flex md:items-start md:gap-4">
+                    {/* Date only visible on desktop */}
+                    <span className="text-sm text-[var(--color-muted)] font-medium md:min-w-[5rem] hidden md:block">
                       {project.year}
                     </span>
                     <div className="flex-1 space-y-2">
@@ -264,7 +283,7 @@ export default async function HomePage() {
     console.error('Error loading home page content:', error);
     
     return (
-      <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
+      <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
         <div className="text-center py-20">
           <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-6">
             Unable to Load Content

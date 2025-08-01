@@ -29,7 +29,7 @@ export default async function ProjectsPage() {
   const projectsByYear = await getProjectsByYear();
 
   return (
-    <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
+    <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
       {/* Header Section */}
       <section className="mb-16">
         <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
@@ -60,8 +60,10 @@ export default async function ProjectsPage() {
                 )}
                 
                 <article className="space-y-3 pb-6">
-                  <div className="flex items-start gap-4">
-                    <span className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                  {/* Desktop layout: year on left, content on right */}
+                  <div className="md:flex md:items-start md:gap-4">
+                    {/* Year only visible on desktop */}
+                    <span className="text-sm text-[var(--color-muted)] font-medium md:min-w-[5rem] hidden md:block">
                       {isFirstOfYear ? year : ''}
                     </span>
                     <div className="flex-1">
@@ -128,6 +130,13 @@ export default async function ProjectsPage() {
                       )}
                     </div>
                   </div>
+                  
+                  {/* Mobile horizontal rule after each project (except last in each year) */}
+                  {projectIndex < projects.filter(p => p.year === year).length - 1 && (
+                    <div className="md:hidden">
+                      <hr className="border-[var(--color-border)] mt-6 mb-6" />
+                    </div>
+                  )}
                 </article>
               </div>
             );

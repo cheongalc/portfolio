@@ -533,6 +533,13 @@ html.theme-transition * {
   }
 }
 
+/* Very small screens - align with mobile nav padding */
+@media (max-width: 480px) {
+  .main-content-mobile {
+    padding: 0 1rem 1rem 1rem; /* Match mobile nav px-4 (1rem) */
+  }
+}
+
 /* Print styles */
 @media print {
   .no-print {
