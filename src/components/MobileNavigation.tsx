@@ -55,7 +55,7 @@ export default function MobileNavigation() {
               </a>
             </h1>
             <p className="text-[var(--color-muted)] text-base mb-6">
-              your.email[at]domain.com
+              acheong[at]andrew.cmu.edu
             </p>
             
             {/* Social Links */}

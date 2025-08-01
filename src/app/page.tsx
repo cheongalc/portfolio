@@ -201,9 +201,10 @@ export default async function HomePage() {
                       <p className="text-[var(--color-muted)] text-sm">
                         {project.dateRange}
                       </p>
-                      <p className="text-[var(--color-text)] text-sm leading-relaxed">
-                        {project.description}
-                      </p>
+                      <div 
+                        className="text-[var(--color-text)] text-sm leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: project.descriptionHtml }}
+                      />
                       {project.tags && project.tags.length > 0 && (
                         <div className="flex flex-wrap gap-2 mt-2">
                           {project.tags.map(tag => (
