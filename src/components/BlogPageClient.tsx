@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { PostMetadata } from '@/lib/posts';
 import SearchInput from '@/components/SearchInput';
@@ -8,7 +9,7 @@ import SearchInput from '@/components/SearchInput';
 interface BlogPageClientProps {
   allPosts: PostMetadata[];
   availableTags: string[];
-  initialTag?: string;
+  initialTag?: string | string[];
 }
 
 /**
@@ -29,9 +30,41 @@ export default function BlogPageClient({
   availableTags, 
   initialTag 
 }: BlogPageClientProps) {
-  const [selectedTags, setSelectedTags] = useState<string[]>(initialTag ? [initialTag] : []);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  // Initialize selected tags from URL parameters
+  const [selectedTags, setSelectedTags] = useState<string[]>(() => {
+    if (initialTag) {
+      // Handle both string and array cases
+      return Array.isArray(initialTag) ? initialTag : [initialTag];
+    }
+    
+    // Get all 'tag' parameters from URL
+    const urlTags = searchParams.getAll('tag');
+    return urlTags.length > 0 ? urlTags : [];
+  });
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [showAllTags, setShowAllTags] = useState(false);
+  
+  // Update URL when selectedTags changes
+  useEffect(() => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    
+    // Remove all existing tag parameters
+    current.delete('tag');
+    
+    // Add current selected tags
+    selectedTags.forEach(tag => {
+      current.append('tag', tag);
+    });
+    
+    // Update URL without causing page reload
+    const search = current.toString();
+    const query = search ? `?${search}` : '';
+    router.replace(`/blog${query}`, { scroll: false });
+  }, [selectedTags, router, searchParams]);
   
   // Sort tags alphabetically
   const sortedTags = useMemo(() => {
@@ -118,8 +151,11 @@ export default function BlogPageClient({
   // Auto-expand if initial tag is hidden
   useEffect(() => {
     if (initialTag && !showAllTags && sortedTags.length > MAX_VISIBLE_TAGS) {
-      const isInitialTagHidden = !sortedTags.slice(0, MAX_VISIBLE_TAGS).includes(initialTag);
-      if (isInitialTagHidden) {
+      const initialTags = Array.isArray(initialTag) ? initialTag : [initialTag];
+      const visibleTagsSet = new Set(sortedTags.slice(0, MAX_VISIBLE_TAGS));
+      const hasHiddenInitialTag = initialTags.some(tag => !visibleTagsSet.has(tag));
+      
+      if (hasHiddenInitialTag) {
         setShowAllTags(true);
       }
     }

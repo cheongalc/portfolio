@@ -142,48 +142,67 @@ export default async function PostPage({ params }: PostPageProps) {
 
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
-        {/* Article Header */}
-        <header className="mb-16">
-          <h1 className="text-3xl font-bold text-[var(--color-text)] mb-8 leading-tight">
+        {/* Article Header - Front Matter */}
+        <header className="mb-12">
+          {/* Title */}
+          <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6 leading-tight">
             {frontMatter.title || 'Untitled Post'}
           </h1>
           
-          {/* Article Metadata */}
-          <div className="flex flex-wrap items-center gap-8 text-base text-[var(--color-muted)] mb-8">
-            {frontMatter.date && (
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                </svg>
-                <time dateTime={frontMatter.date}>
-                  {new Date(frontMatter.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-              </div>
-            )}
-            
-            {frontMatter.type && frontMatter.type !== 'article' && (
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
-                <span className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-full text-sm uppercase font-medium">
-                  {frontMatter.type}
-                </span>
-              </div>
-            )}
-          </div>
+          {/* Date */}
+          {frontMatter.date && (
+            <div className="mb-4">
+              <time 
+                dateTime={frontMatter.date}
+                className="text-base text-[var(--color-muted)]"
+              >
+                {new Date(frontMatter.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </div>
+          )}
 
-          {/* Article Description */}
-          {frontMatter.description && (
-            <p className="text-2xl text-[var(--color-muted)] leading-relaxed border-l-4 border-[var(--color-primary)] pl-8">
-              {frontMatter.description}
-            </p>
+          <>
+            {frontMatter.description && (
+              <p className="text-base text-[var(--color-text)] leading-relaxed mb-6 border-l-4 border-[var(--color-primary)] pl-6">
+                {String(frontMatter.description)}
+              </p>
+            )}
+          </>
+
+          {/* Tags */}
+          {frontMatter.tags && frontMatter.tags.length > 0 && (
+            <div className="mb-8">
+              <div className="flex flex-wrap gap-3">
+                {frontMatter.tags.map(tag => (
+                  <Link
+                    key={tag}
+                    href={`/blog?tag=${encodeURIComponent(tag)}`}
+                    className="text-sm transition-colors duration-300 relative inline-block group cursor-pointer text-[var(--color-muted)] hover:text-[var(--color-primary)]"
+                  >
+                    {tag}
+                    <span className="absolute bottom-0 left-0 right-0 h-px bg-[var(--color-border)] group-hover:bg-[var(--color-primary)] transition-colors duration-300"></span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Type badge if present and not article */}
+          {frontMatter.type && frontMatter.type !== 'article' && (
+            <div className="mb-8">
+              <span className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-full text-sm uppercase font-medium">
+                {String(frontMatter.type)}
+              </span>
+            </div>
           )}
         </header>
+
+        {/* Horizontal Rule */}
+        <hr className="border-[var(--color-border)] mb-12" />
 
         {/* Article Content */}
         <article className="prose-enhanced">
@@ -192,33 +211,13 @@ export default async function PostPage({ params }: PostPageProps) {
 
         {/* Article Footer */}
         <footer className="mt-20 pt-12 border-t border-[var(--color-border)] transition-colors duration-300">
-          {/* Tags */}
-          {frontMatter.tags && frontMatter.tags.length > 0 && (
-            <div className="mb-12">
-              <h3 className="text-base font-medium text-[var(--color-text)] mb-4">
-                Tagged with:
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {frontMatter.tags.map(tag => (
-                  <Link
-                    key={tag}
-                    href={`/blog?tag=${tag}`}
-                    className="inline-flex items-center px-4 py-2 bg-[var(--color-background)] text-[var(--color-muted)] rounded-full text-base hover:bg-gray-200 transition-colors duration-300"
-                  >
-                    #{tag}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* Post Navigation */}
           <div className="flex justify-between items-center gap-6">
             {/* Next Post (Newer) */}
             {nextPost ? (
               <Link 
                 href={`/blog/${nextPost.slug}`}
-                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-gray-200 transition-colors duration-300 group max-w-xs"
+                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-[var(--color-border)] transition-colors duration-300 group max-w-xs"
               >
                 <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -255,7 +254,7 @@ export default async function PostPage({ params }: PostPageProps) {
             {prevPost ? (
               <Link 
                 href={`/blog/${prevPost.slug}`}
-                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-gray-200 transition-colors duration-300 group max-w-xs"
+                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-[var(--color-border)] transition-colors duration-300 group max-w-xs"
               >
                 <div className="min-w-0 flex-1 text-right">
                   <div className="text-xs text-[var(--color-muted)]">Previous</div>

@@ -2,7 +2,6 @@
 title: "Welcome to My Portfolio"
 date: "2024-01-15"
 description: "An introduction to my new portfolio website built with Next.js, featuring a modern blog system with MDX support."
-type: "article"
 tags: ["portfolio", "nextjs", "mdx", "web-development"]
 draft: false
 ---

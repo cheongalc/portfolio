@@ -37,7 +37,7 @@ export default async function HomePage() {
       .slice(0, 3);
 
     // Get recent papers
-    const recentPapers = await getRecentPapers(2);
+    const recentPapers = await getRecentPapers(3);
 
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
@@ -56,11 +56,11 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Latest Posts Section */}
+        {/* Recent Posts Section */}
         {latestPosts.length > 0 && (
           <section className="mb-16">
             <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
-              Latest Posts
+              Recent Posts
             </h2>
             
             <div className="space-y-6">
@@ -143,15 +143,21 @@ export default async function HomePage() {
                       {paper.year}
                     </span>
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-[var(--color-text)] leading-tight">
-                        <a 
-                          href={paper.titleLink}
-                          className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {paper.title}
-                        </a>
+                      <h3 className="text-lg font-semibold leading-tight">
+                        {paper.links && paper.links.length > 0 && paper.links[0].url ? (
+                          <a 
+                            href={paper.links[0].url}
+                            className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {paper.title}
+                          </a>
+                        ) : (
+                          <span className="text-[var(--color-text)]">
+                            {paper.title}
+                          </span>
+                        )}
                       </h3>
                       <p className="text-[var(--color-muted)] text-sm mt-1">
                         {paper.venue}
@@ -181,7 +187,7 @@ export default async function HomePage() {
         {latestPosts.length === 0 && (
           <section>
             <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
-              Latest Posts
+              Recent Posts
             </h2>
             <div className="text-center py-12 border border-[var(--color-border)] rounded-lg">
               <p className="text-[var(--color-muted)] text-lg mb-4">

@@ -9,8 +9,8 @@ import BlogPageClient from '@/components/BlogPageClient';
 interface BlogPageProps {
   /** URL search parameters for filtering */
   searchParams?: Promise<{
-    /** Filter posts by tag */
-    tag?: string;
+    /** Filter posts by tag - can be single string or array */
+    tag?: string | string[];
   }>;
 }
 

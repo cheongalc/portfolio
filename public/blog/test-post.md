@@ -1,7 +1,6 @@
 ---
 title: "First time in San Francisco: lessons from my internship"
 date: 2025-07-26
-type: article           # article | project | publication
 tags: [life, internship]
 summary: "Notes I wish I'd had on day one."
 ---
