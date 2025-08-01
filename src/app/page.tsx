@@ -31,10 +31,8 @@ export default async function HomePage() {
     // Fetch all posts and get the latest 3
     const posts: PostMetadata[] = await getAllPosts();
     
-    // Get the latest 3 posts (excluding publications)
-    const latestPosts = posts
-      .filter(post => post.type !== 'publication')
-      .slice(0, 3);
+    // Get the latest 3 posts
+    const latestPosts = posts.slice(0, 3);
 
     // Get recent papers
     const recentPapers = await getRecentPapers(3);

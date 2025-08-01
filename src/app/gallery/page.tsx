@@ -6,10 +6,10 @@ import type { Metadata } from 'next';
  */
 export const metadata: Metadata = {
   title: 'Gallery | Alistair Cheong',
-  description: 'A compilation of media from blog, my own photography and music.',
+  description: 'A compilation of media from the blog, my own photography and music.',
   openGraph: {
     title: 'Gallery | Alistair Cheong',
-    description: 'A compilation of media from blog, my own photography and music.',
+    description: 'A compilation of media from the blog, my own photography and music.',
     type: 'website',
   },
 };
@@ -34,7 +34,7 @@ export default function GalleryPage() {
           Gallery
         </h1>
         <p className="text-xl text-[var(--color-muted)] leading-relaxed">
-          A compilation of media from blog, my own photography and music.
+          A compilation of media from the blog, my own photography and music.
         </p>
         <p className="text-lg text-[var(--color-muted)] leading-relaxed mt-4">
           This page is currently under construction.

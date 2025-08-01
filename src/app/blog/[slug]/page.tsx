@@ -165,13 +165,11 @@ export default async function PostPage({ params }: PostPageProps) {
             </div>
           )}
 
-          <>
-            {frontMatter.description && (
-              <p className="text-base text-[var(--color-text)] leading-relaxed mb-6 border-l-4 border-[var(--color-primary)] pl-6">
-                {String(frontMatter.description)}
-              </p>
-            )}
-          </>
+          {frontMatter.description && (
+            <p className="text-base text-[var(--color-text)] leading-relaxed mb-6 border-l-4 border-[var(--color-primary)] pl-6">
+              {String(frontMatter.description)}
+            </p>
+          )}
 
           {/* Tags */}
           {frontMatter.tags && frontMatter.tags.length > 0 && (
@@ -188,15 +186,6 @@ export default async function PostPage({ params }: PostPageProps) {
                   </Link>
                 ))}
               </div>
-            </div>
-          )}
-
-          {/* Type badge if present and not article */}
-          {frontMatter.type && frontMatter.type !== 'article' && (
-            <div className="mb-8">
-              <span className="px-4 py-2 bg-[var(--color-primary)] text-white rounded-full text-sm uppercase font-medium">
-                {String(frontMatter.type)}
-              </span>
             </div>
           )}
         </header>
