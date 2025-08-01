@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import type { PostMetadata } from '@/lib/posts';
 import SearchInput from '@/components/SearchInput';
@@ -29,16 +29,30 @@ export default function BlogPageClient({
   availableTags, 
   initialTag 
 }: BlogPageClientProps) {
-  const [selectedTag, setSelectedTag] = useState<string | undefined>(initialTag);
+  const [selectedTags, setSelectedTags] = useState<string[]>(initialTag ? [initialTag] : []);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showAllTags, setShowAllTags] = useState(false);
+  
+  // Sort tags alphabetically
+  const sortedTags = useMemo(() => {
+    return [...availableTags].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+  }, [availableTags]);
+  
+  // Determine which tags to show based on expand state
+  const MAX_VISIBLE_TAGS = 20;
+  const visibleTags = showAllTags ? sortedTags : sortedTags.slice(0, MAX_VISIBLE_TAGS);
+  const hiddenTags = sortedTags.slice(MAX_VISIBLE_TAGS);
+  const selectedHiddenCount = selectedTags.filter(tag => hiddenTags.includes(tag)).length;
   
   // Compute filtered posts based on both search and tag filter
   const filteredPosts = useMemo(() => {
     let posts = allPosts;
     
     // Apply tag filter first if selected
-    if (selectedTag) {
-      posts = posts.filter(post => post.tags?.includes(selectedTag));
+    if (selectedTags.length > 0) {
+      posts = posts.filter(post => 
+        selectedTags.some(selectedTag => post.tags?.includes(selectedTag))
+      );
     }
     
     // Then apply search filter if there's a search query
@@ -69,20 +83,47 @@ export default function BlogPageClient({
     }
     
     return posts;
-  }, [allPosts, selectedTag, searchQuery]);
+  }, [allPosts, selectedTags, searchQuery]);
 
   const handleSearchResults = useCallback((query: string) => {
     setSearchQuery(query);
   }, []);
 
+  // Handle escape key to reset selected tags
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && selectedTags.length > 0) {
+        setSelectedTags([]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedTags]);
+
   const handleTagClick = useCallback((tag: string) => {
-    if (selectedTag === tag) {
-      // If clicking the same tag, deselect it
-      setSelectedTag(undefined);
+    if (selectedTags.includes(tag)) {
+      // If tag is already selected, remove it
+      setSelectedTags(prev => prev.filter(t => t !== tag));
     } else {
-      setSelectedTag(tag);
+      // If tag is not selected, add it
+      setSelectedTags(prev => [...prev, tag]);
+      // If the selected tag is not in the visible list, expand to show it
+      if (!showAllTags && !visibleTags.includes(tag)) {
+        setShowAllTags(true);
+      }
     }
-  }, [selectedTag]);
+  }, [selectedTags, showAllTags, visibleTags]);
+
+  // Auto-expand if initial tag is hidden
+  useEffect(() => {
+    if (initialTag && !showAllTags && sortedTags.length > MAX_VISIBLE_TAGS) {
+      const isInitialTagHidden = !sortedTags.slice(0, MAX_VISIBLE_TAGS).includes(initialTag);
+      if (isInitialTagHidden) {
+        setShowAllTags(true);
+      }
+    }
+  }, [initialTag, showAllTags, sortedTags]);
 
   return (
     <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
@@ -92,8 +133,14 @@ export default function BlogPageClient({
           Blog
         </h1>
         <p className="text-xl text-[var(--color-muted)] leading-relaxed">
-          {selectedTag
-            ? `Posts tagged with "${selectedTag}"`
+          {selectedTags.length > 0
+            ? `Posts tagged with ${
+                selectedTags.length === 1
+                  ? `"${selectedTags[0]}"`
+                  : selectedTags.length === 2
+                  ? `"${selectedTags[0]}" and "${selectedTags[1]}"`
+                  : `"${selectedTags[0]}", "${selectedTags[1]}" and ${selectedTags.length - 2} more`
+              }`
             : 'Writing about AI, computer science, technology, photography, music, and life.'
           }
         </p>
@@ -107,32 +154,57 @@ export default function BlogPageClient({
         />
 
         {/* Filter Controls */}
-        {availableTags.length > 0 && (
-          <div className="flex items-center gap-3">
+        {sortedTags.length > 0 && (
+          <div className="flex items-start gap-3">
             <span className="text-sm font-medium text-[var(--color-text)]">Tags:</span>
-            <div className="flex flex-wrap gap-x-3 gap-y-2 max-w-3xl">
-              {availableTags.slice(0, 12).map(availableTag => (
+            <div className="flex-1">
+              <div className="flex flex-wrap gap-x-3 gap-y-2 max-w-3xl">
+                {visibleTags.map(availableTag => (
+                  <button
+                    key={availableTag}
+                    onClick={() => handleTagClick(availableTag)}
+                    className={`text-sm transition-colors duration-300 relative inline-block group ${
+                      selectedTags.includes(availableTag)
+                        ? 'text-[var(--color-primary)]' 
+                        : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
+                    }`}
+                  >
+                    {availableTag}
+                    <span className={`absolute bottom-0 left-0 right-0 h-px transition-colors duration-300 ${
+                      selectedTags.includes(availableTag)
+                        ? 'bg-[var(--color-primary)]' 
+                        : 'bg-[var(--color-border)] group-hover:bg-[var(--color-primary)]'
+                    }`}></span>
+                  </button>
+                ))}
+              </div>
+              
+              {sortedTags.length > MAX_VISIBLE_TAGS && (
                 <button
-                  key={availableTag}
-                  onClick={() => handleTagClick(availableTag)}
-                  className={`text-sm transition-colors duration-300 relative inline-block group ${
-                    selectedTag === availableTag 
-                      ? 'text-[var(--color-primary)]' 
-                      : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
-                  }`}
+                  onClick={() => setShowAllTags(!showAllTags)}
+                  className="mt-3 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 inline-flex items-center gap-1"
                 >
-                  {availableTag}
-                  <span className={`absolute bottom-0 left-0 right-0 h-px transition-colors duration-300 ${
-                    selectedTag === availableTag 
-                      ? 'bg-[var(--color-primary)]' 
-                      : 'bg-[var(--color-border)] group-hover:bg-[var(--color-primary)]'
-                  }`}></span>
+                  {showAllTags ? (
+                    <>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                      </svg>
+                      Show less
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                      Show {sortedTags.length - MAX_VISIBLE_TAGS} more
+                      {selectedHiddenCount > 0 && (
+                        <span className="ml-1 px-2 py-0.5 bg-[var(--color-primary)] text-white text-xs rounded-full">
+                          {selectedHiddenCount} selected
+                        </span>
+                      )}
+                    </>
+                  )}
                 </button>
-              ))}
-              {availableTags.length > 12 && (
-                <span className="text-sm text-[var(--color-muted)]">
-                  +{availableTags.length - 12} more
-                </span>
               )}
             </div>
           </div>
@@ -177,10 +249,18 @@ export default function BlogPageClient({
                           <button
                             key={postTag}
                             onClick={() => handleTagClick(postTag)}
-                            className="text-xs text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300 relative inline-block group"
+                            className={`text-xs transition-colors duration-300 relative inline-block group ${
+                              selectedTags.includes(postTag)
+                                ? 'text-[var(--color-primary)]'
+                                : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
+                            }`}
                           >
                             {postTag}
-                            <span className="absolute bottom-0 left-0 right-0 h-px bg-[var(--color-border)] group-hover:bg-[var(--color-primary)] transition-colors duration-300"></span>
+                            <span className={`absolute bottom-0 left-0 right-0 h-px transition-colors duration-300 ${
+                              selectedTags.includes(postTag)
+                                ? 'bg-[var(--color-primary)]'
+                                : 'bg-[var(--color-border)] group-hover:bg-[var(--color-primary)]'
+                            }`}></span>
                           </button>
                         ))}
                       </div>
@@ -196,18 +276,18 @@ export default function BlogPageClient({
         <section className="text-center py-20">
           <div className="max-w-lg mx-auto">
             <h2 className="text-2xl font-medium text-[var(--color-text)] mb-6">
-              {selectedTag || searchQuery ? 'No Posts Found' : 'No Posts Yet'}
+              {selectedTags.length > 0 || searchQuery ? 'No Posts Found' : 'No Posts Yet'}
             </h2>
             <p className="text-lg text-[var(--color-muted)] mb-8">
-              {selectedTag || searchQuery
+              {selectedTags.length > 0 || searchQuery
                 ? `No posts match the current filter criteria. Try adjusting your filters or browse all posts.`
                 : 'Blog posts will be listed here.'
               }
             </p>
-            {(selectedTag || searchQuery) && (
+            {(selectedTags.length > 0 || searchQuery) && (
               <button 
                 onClick={() => {
-                  setSelectedTag(undefined);
+                  setSelectedTags([]);
                   setSearchQuery('');
                 }}
                 className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors duration-300"
