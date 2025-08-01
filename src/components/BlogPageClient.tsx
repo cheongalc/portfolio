@@ -163,7 +163,7 @@ export default function BlogPageClient({
                   <button
                     key={availableTag}
                     onClick={() => handleTagClick(availableTag)}
-                    className={`text-sm transition-colors duration-300 relative inline-block group ${
+                    className={`text-sm transition-colors duration-300 relative inline-block group cursor-pointer ${
                       selectedTags.includes(availableTag)
                         ? 'text-[var(--color-primary)]' 
                         : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
@@ -182,7 +182,7 @@ export default function BlogPageClient({
               {sortedTags.length > MAX_VISIBLE_TAGS && (
                 <button
                   onClick={() => setShowAllTags(!showAllTags)}
-                  className="mt-3 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 inline-flex items-center gap-1"
+                  className="mt-3 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 inline-flex items-center gap-1 cursor-pointer"
                 >
                   {showAllTags ? (
                     <>
@@ -238,7 +238,7 @@ export default function BlogPageClient({
                     </div>
                     
                     {post.description && (
-                      <p className="text-[var(--color-muted)] leading-relaxed text-base mb-3">
+                      <p className="text-[var(--color-text)] leading-relaxed text-base mb-3">
                         {post.description}
                       </p>
                     )}
@@ -249,7 +249,7 @@ export default function BlogPageClient({
                           <button
                             key={postTag}
                             onClick={() => handleTagClick(postTag)}
-                            className={`text-xs transition-colors duration-300 relative inline-block group ${
+                            className={`text-xs transition-colors duration-300 relative inline-block group cursor-pointer ${
                               selectedTags.includes(postTag)
                                 ? 'text-[var(--color-primary)]'
                                 : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'

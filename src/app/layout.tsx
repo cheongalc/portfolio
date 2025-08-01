@@ -132,28 +132,28 @@ function Sidebar() {
           <nav className="space-y-3" role="navigation" aria-label="Main navigation">
             <a 
               href="/blog" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors text-base"
               aria-label="Blog posts"
             >
               blog
             </a>
             <a 
               href="/papers" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors text-base"
               aria-label="Papers and publications"
             >
               papers
             </a>
             <a 
               href="/projects" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors text-base"
               aria-label="Projects and work"
             >
               projects
             </a>
             <a 
               href="/gallery" 
-              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors underline text-base"
+              className="block text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors text-base"
               aria-label="Photo gallery"
             >
               gallery

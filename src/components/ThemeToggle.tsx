@@ -31,7 +31,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="flex items-center space-x-2 text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300 text-base group"
+      className="flex items-center space-x-2 text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300 text-base group cursor-pointer"
       disabled={isAnimating}
     >
       <svg
