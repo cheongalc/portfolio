@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPosts, type PostMetadata } from '@/lib/posts';
 import { getRecentPapers } from '@/lib/papers';
+import { getRecentProjects } from '@/lib/projects';
 
 /**
  * Metadata configuration for the home page
@@ -35,6 +36,9 @@ export default async function HomePage() {
 
     // Get recent papers
     const recentPapers = await getRecentPapers(3);
+
+    // Get recent projects
+    const recentProjects = await getRecentProjects(3);
 
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">
@@ -171,6 +175,64 @@ export default async function HomePage() {
                 className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 font-medium"
               >
                 View all papers
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </section>
+        )}
+        
+        {/* Recent Projects Section */}
+        {recentProjects.length > 0 && (
+          <section className="mb-16">
+            <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
+              Recent Projects
+            </h2>
+            
+            <div className="space-y-6">
+              {recentProjects.map((project, index) => (
+                <article key={index} className="space-y-2">
+                  <div className="flex items-start gap-4">
+                    <span className="text-sm text-[var(--color-muted)] font-medium min-w-[5rem]">
+                      {project.year}
+                    </span>
+                    <div className="flex-1 space-y-2">
+                      <h3 className="text-lg font-semibold leading-tight text-[var(--color-text)]">
+                        {project.name}
+                      </h3>
+                      <p className="text-[var(--color-muted)] text-sm">
+                        {project.dateRange}
+                      </p>
+                      <p className="text-[var(--color-text)] text-sm leading-relaxed">
+                        {project.description}
+                      </p>
+                      {project.tags && project.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {project.tags.map(tag => (
+                            <Link
+                              key={tag}
+                              href={`/projects?tag=${encodeURIComponent(tag)}`}
+                              className="text-xs text-[var(--color-muted)] border-b border-[var(--color-border)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors duration-300 cursor-pointer"
+                            >
+                              {tag}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            
+            {/* View All Projects Link */}
+            <div className="mt-8">
+              <Link 
+                href="/projects" 
+                className="inline-flex items-center text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 font-medium"
+              >
+                View all projects
                 <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
