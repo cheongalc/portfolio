@@ -90,19 +90,15 @@ export default async function HomePage() {
                       
                       {post.tags && post.tags.length > 0 && (
                         <div className="flex flex-wrap gap-3 mt-2">
-                          {post.tags.slice(0, 3).map(tag => (
-                            <span 
+                          {post.tags.map(tag => (
+                            <Link
                               key={tag}
-                              className="text-xs text-[var(--color-muted)] border-b border-[var(--color-border)] hover:text-[var(--color-primary)] transition-colors duration-300 cursor-default"
+                              href={`/blog?tag=${encodeURIComponent(tag)}`}
+                              className="text-xs text-[var(--color-muted)] border-b border-[var(--color-border)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)] transition-colors duration-300 cursor-pointer"
                             >
                               {tag}
-                            </span>
+                            </Link>
                           ))}
-                          {post.tags.length > 3 && (
-                            <span className="text-xs text-[var(--color-muted)]">
-                              +{post.tags.length - 3} more
-                            </span>
-                          )}
                         </div>
                       )}
                     </div>

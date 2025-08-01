@@ -174,17 +174,20 @@ export default async function PostPage({ params }: PostPageProps) {
           {/* Tags */}
           {frontMatter.tags && frontMatter.tags.length > 0 && (
             <div className="mb-8">
-              <div className="flex flex-wrap gap-3">
-                {frontMatter.tags.map(tag => (
-                  <Link
-                    key={tag}
-                    href={`/blog?tag=${encodeURIComponent(tag)}`}
-                    className="text-sm transition-colors duration-300 relative inline-block group cursor-pointer text-[var(--color-muted)] hover:text-[var(--color-primary)]"
-                  >
-                    {tag}
-                    <span className="absolute bottom-0 left-0 right-0 h-px bg-[var(--color-border)] group-hover:bg-[var(--color-primary)] transition-colors duration-300"></span>
-                  </Link>
-                ))}
+              <div className="flex items-start gap-3">
+                <span className="text-sm font-medium text-[var(--color-text)]">Tags:</span>
+                <div className="flex flex-wrap gap-3">
+                  {frontMatter.tags.map(tag => (
+                    <Link
+                      key={tag}
+                      href={`/blog?tag=${encodeURIComponent(tag)}`}
+                      className="text-sm transition-colors duration-300 relative inline-block group cursor-pointer text-[var(--color-muted)] hover:text-[var(--color-primary)]"
+                    >
+                      {tag}
+                      <span className="absolute bottom-0 left-0 right-0 h-px bg-[var(--color-border)] group-hover:bg-[var(--color-primary)] transition-colors duration-300"></span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           )}

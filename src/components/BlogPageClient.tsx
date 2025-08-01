@@ -176,7 +176,7 @@ export default function BlogPageClient({
                   : selectedTags.length === 2
                   ? `"${selectedTags[0]}" and "${selectedTags[1]}"`
                   : `"${selectedTags[0]}", "${selectedTags[1]}" and ${selectedTags.length - 2} more`
-              }`
+              }. Press Escape/click on the tag again to clear filters.`
             : 'Writing about AI, computer science, technology, photography, music, and life.'
           }
         </p>
