@@ -1,29 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface SearchInputProps {
   placeholder?: string;
   className?: string;
+  onSearchQueryChange: (query: string) => void;
 }
 
 export default function SearchInput({ 
   placeholder = "Search posts...", 
-  className = "" 
+  className = "",
+  onSearchQueryChange
 }: SearchInputProps) {
+  const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+
+  // Debounced search with 200ms delay
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      onSearchQueryChange(searchQuery);
+    }, 200);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery, onSearchQueryChange]);
 
   return (
     <div className="relative">
       <input
         type="text"
         placeholder={placeholder}
+        value={searchQuery}
         className={`w-full px-4 py-3 pl-12 text-[var(--color-text)] bg-[var(--color-background)] border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition-all duration-300 placeholder:text-[var(--color-muted)] ${className}`}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onChange={(e) => {
-          // Stub for future search implementation
-          console.log('Search query:', e.target.value);
+          setSearchQuery(e.target.value);
         }}
       />
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

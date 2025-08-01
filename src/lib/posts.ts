@@ -28,6 +28,8 @@ export interface PostMetadata {
   draft?: boolean;
   /** Post tags/categories */
   tags?: string[];
+  /** Post content for search purposes */
+  content?: string;
   /** Any additional frontmatter fields */
   [key: string]: unknown;
 }
@@ -50,34 +52,33 @@ export interface ProcessedPost {
 }
 
 /**
- * Retrieves and processes all blog posts from the blog directory
+ * Retrieves metadata for all published blog posts in the directory
  * 
- * @returns Promise that resolves to an array of post metadata, sorted by date (newest first)
- * @throws Will throw an error if the blog directory cannot be read
+ * @returns Promise that resolves to an array of all published posts' metadata, sorted by date (newest first)
  */
 export async function getAllPosts(): Promise<PostMetadata[]> {
   try {
-    // Check if directory exists
-    await fs.access(BLOG_DIR);
+    // Read all files in the blog directory
+    const files = await fs.readdir(BLOG_DIR);
     
-    // Read all files from the directory and filter for .md files only
-    const files = (await fs.readdir(BLOG_DIR)).filter(file => file.endsWith('.md'));
-    
-    // Process each markdown file to extract its frontmatter metadata
+    // Filter for markdown files and process each one in parallel
     const posts = await Promise.all(
-      files.map(async (filename) => {
-        // Read the raw markdown content
-        const raw = await fs.readFile(path.join(BLOG_DIR, filename), 'utf8');
-        
-        // Parse frontmatter using gray-matter (extracts YAML/metadata from top of file)
-        const { data } = matter(raw);
-        
-        // Create slug by removing .md extension and return combined metadata
-        return { 
-          slug: filename.replace(/\.md$/, ''), 
-          ...data 
-        } as PostMetadata;
-      })
+      files
+        .filter(file => file.endsWith('.md'))
+        .map(async (filename) => {
+          // Read the raw markdown content
+          const raw = await fs.readFile(path.join(BLOG_DIR, filename), 'utf8');
+          
+          // Parse frontmatter using gray-matter (extracts YAML/metadata from top of file)
+          const { data, content } = matter(raw);
+          
+          // Create slug by removing .md extension and return combined metadata
+          return { 
+            slug: filename.replace(/\.md$/, ''), 
+            content: content, // Include content for search purposes
+            ...data 
+          } as PostMetadata;
+        })
     );
     
     // Filter out draft posts and sort by date (newest first)
