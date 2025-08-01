@@ -131,3 +131,25 @@ export async function getPost(slug: string): Promise<ProcessedPost> {
     throw new Error(`Failed to load post: ${slug}`);
   }
 }
+
+/**
+ * Interface for recent posts with total count
+ */
+export interface RecentPostsWithCount {
+  posts: PostMetadata[];
+  totalCount: number;
+}
+
+/**
+ * Retrieves recent posts along with total count
+ * 
+ * @param limit - Maximum number of recent posts to return (default: 3)
+ * @returns Promise that resolves to an object with recent posts and total count
+ */
+export async function getRecentPostsWithCount(limit: number = 3): Promise<RecentPostsWithCount> {
+  const allPosts = await getAllPosts();
+  return {
+    posts: allPosts.slice(0, limit),
+    totalCount: allPosts.length
+  };
+}

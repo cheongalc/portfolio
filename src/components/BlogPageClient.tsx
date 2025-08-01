@@ -48,6 +48,19 @@ export default function BlogPageClient({
   const [searchQuery, setSearchQuery] = useState('');
   const [showAllTags, setShowAllTags] = useState(false);
   
+  // Calculate tag counts
+  const tagCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    allPosts.forEach(post => {
+      if (post.tags) {
+        post.tags.forEach(tag => {
+          counts[tag] = (counts[tag] || 0) + 1;
+        });
+      }
+    });
+    return counts;
+  }, [allPosts]);
+  
   // Update URL when selectedTags changes
   useEffect(() => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -205,7 +218,7 @@ export default function BlogPageClient({
                         : 'text-[var(--color-muted)] hover:text-[var(--color-primary)]'
                     }`}
                   >
-                    {availableTag}
+                    {availableTag} ({tagCounts[availableTag] || 0})
                     <span className={`absolute bottom-0 left-0 right-0 h-px transition-colors duration-300 ${
                       selectedTags.includes(availableTag)
                         ? 'bg-[var(--color-primary)]' 

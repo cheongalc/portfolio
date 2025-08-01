@@ -338,7 +338,33 @@ html.theme-transition * {
   .katex-display {
     margin: 1.5rem 0;
     overflow-x: auto;
-    overflow-y: visible; /* Explicitly prevent vertical scrollbar */
+    overflow-y: visible !important; /* Explicitly prevent vertical scrollbar */
+    height: auto !important; /* Allow natural height */
+    max-height: none !important; /* Remove any height constraints */
+  }
+
+  /* Fix any nested KaTeX elements that might have height constraints */
+  .katex-display .katex {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure the math content wrapper doesn't constrain height */
+  .katex-display .katex .katex-mathml,
+  .katex-display .katex .katex-html {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure article containers don't constrain math display */
+  article .katex-display,
+  .prose-enhanced .katex-display {
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
   }
 
 

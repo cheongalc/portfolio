@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts, type PostMetadata } from '@/lib/posts';
-import { getRecentPapers } from '@/lib/papers';
-import { getRecentProjects } from '@/lib/projects';
+import { getRecentPostsWithCount } from '@/lib/posts';
+import { getRecentPapersWithCount } from '@/lib/papers';
+import { getRecentProjectsWithCount } from '@/lib/projects';
 
 /**
  * Metadata configuration for the home page
@@ -28,17 +28,14 @@ export const metadata: Metadata = {
  */
 export default async function HomePage() {
   try {
-    // Fetch all posts and get the latest 3
-    const posts: PostMetadata[] = await getAllPosts();
-    
-    // Get the latest 3 posts
-    const latestPosts = posts.slice(0, 3);
+    // Get recent posts with total count
+    const { posts: latestPosts, totalCount: totalPosts } = await getRecentPostsWithCount(3);
 
-    // Get recent papers
-    const recentPapers = await getRecentPapers(3);
+    // Get recent papers with total count
+    const { papers: recentPapers, totalCount: totalPapers } = await getRecentPapersWithCount(3);
 
-    // Get recent projects
-    const recentProjects = await getRecentProjects(3);
+    // Get recent projects with total count
+    const { projects: recentProjects, totalCount: totalProjects } = await getRecentProjectsWithCount(3);
 
     return (
       <div className="flex-1 p-12 pt-32 max-w-4xl mx-auto">

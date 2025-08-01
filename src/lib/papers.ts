@@ -123,3 +123,25 @@ export async function getRecentPapers(limit: number = 3): Promise<ProcessedPaper
   const allPapers = await getAllPapers();
   return allPapers.slice(0, limit);
 }
+
+/**
+ * Interface for recent papers with total count
+ */
+export interface RecentPapersWithCount {
+  papers: ProcessedPaper[];
+  totalCount: number;
+}
+
+/**
+ * Retrieves recent papers along with total count
+ * 
+ * @param limit - Maximum number of recent papers to return (default: 3)
+ * @returns Promise that resolves to an object with recent papers and total count
+ */
+export async function getRecentPapersWithCount(limit: number = 3): Promise<RecentPapersWithCount> {
+  const allPapers = await getAllPapers();
+  return {
+    papers: allPapers.slice(0, limit),
+    totalCount: allPapers.length
+  };
+}

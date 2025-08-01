@@ -213,6 +213,28 @@ export async function getRecentProjects(limit: number = 3): Promise<ProcessedPro
 }
 
 /**
+ * Interface for recent projects with total count
+ */
+export interface RecentProjectsWithCount {
+  projects: ProcessedProject[];
+  totalCount: number;
+}
+
+/**
+ * Retrieves recent projects along with total count
+ * 
+ * @param limit - Maximum number of recent projects to return (default: 3)
+ * @returns Promise that resolves to an object with recent projects and total count
+ */
+export async function getRecentProjectsWithCount(limit: number = 3): Promise<RecentProjectsWithCount> {
+  const allProjects = await getAllProjects();
+  return {
+    projects: allProjects.slice(0, limit),
+    totalCount: allProjects.length
+  };
+}
+
+/**
  * Retrieves all unique tags from projects
  * 
  * @returns Promise that resolves to an array of unique tags
