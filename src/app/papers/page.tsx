@@ -44,6 +44,9 @@ export default async function PapersPage() {
             // Check if this is the first paper of a new year
             const isFirstOfYear = paperIndex === 0;
             
+            // Check if this is the last paper of the year
+            const isLastOfYear = paperIndex === papers.length - 1;
+            
             // Check if this paper should have a horizontal rule above it
             // (i.e., it's the first paper of a year that's not the very first year)
             const shouldHaveRule = isFirstOfYear && papersByYear.findIndex(y => y.year === year) > 0;
@@ -55,7 +58,7 @@ export default async function PapersPage() {
                   <hr className="border-[var(--color-border)] my-8" />
                 )}
                 
-                <article className="space-y-3 pb-6">
+                <article className={`space-y-3 ${isLastOfYear ? '' : 'md:pb-6'}`}>
                   {/* Desktop layout: year on left, content on right */}
                   <div className="md:flex md:items-start md:gap-4">
                     <span className="text-sm text-[var(--color-muted)] font-medium md:min-w-[5rem] hidden md:block">

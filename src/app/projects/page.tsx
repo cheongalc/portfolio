@@ -48,6 +48,9 @@ export default async function ProjectsPage() {
             // Check if this is the first project of a new year
             const isFirstOfYear = projectIndex === 0;
             
+            // Check if this is the last project of the year
+            const isLastOfYear = projectIndex === projects.length - 1;
+            
             // Check if this project should have a horizontal rule above it
             // (i.e., it's the first project of a year that's not the very first year)
             const shouldHaveRule = isFirstOfYear && projectsByYear.findIndex(y => y.year === year) > 0;
@@ -59,7 +62,7 @@ export default async function ProjectsPage() {
                   <hr className="border-[var(--color-border)] my-8" />
                 )}
                 
-                <article className="space-y-3 pb-6">
+                <article className={`space-y-3 ${isLastOfYear ? '' : 'md:pb-6'}`}>
                   {/* Desktop layout: year on left, content on right */}
                   <div className="md:flex md:items-start md:gap-4">
                     {/* Year only visible on desktop */}
