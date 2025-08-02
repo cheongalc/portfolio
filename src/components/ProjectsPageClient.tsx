@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import type { ProcessedProject } from '@/lib/projects';
 import SearchPageClient, { type SearchableItem } from '@/components/SearchPageClient';
@@ -32,6 +34,81 @@ export default function ProjectsPageClient({
   availableTags, 
   initialTag 
 }: ProjectsPageClientProps) {
+  const searchParams = useSearchParams();
+  const hasScrolledRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Handle smooth scrolling to projects using search params (e.g., ?scrollTo=uuid)
+  useEffect(() => {
+    const scrollToParam = searchParams.get('scrollTo');
+    if (!scrollToParam || hasScrolledRef.current) return;
+    
+    console.log('Setting up scroll for project:', scrollToParam);
+    
+    // Use MutationObserver to detect when DOM changes (projects get rendered)
+    const observer = new MutationObserver(() => {
+      const element = document.getElementById(scrollToParam);
+      if (element && !hasScrolledRef.current) {
+        console.log('Element found via MutationObserver:', element);
+        hasScrolledRef.current = true;
+        
+        // Stop observing
+        observer.disconnect();
+        
+        // Calculate offset
+        const isMobile = window.innerWidth < 1024;
+        const offset = isMobile ? 150 : 80;
+        
+        // Scroll after a small delay to ensure rendering is complete
+        setTimeout(() => {
+          // Find the scrollable container (the main element)
+          const scrollContainer = document.getElementById('main-content');
+          if (!scrollContainer) {
+            console.log('Main content container not found, falling back to window scroll');
+            return;
+          }
+          
+          const elementRect = element.getBoundingClientRect();
+          const containerRect = scrollContainer.getBoundingClientRect();
+          
+          // Calculate the element's position relative to the scrollable container
+          const elementTop = elementRect.top - containerRect.top + scrollContainer.scrollTop;
+          
+          // Calculate offset
+          const isMobile = window.innerWidth < 1024;
+          const offset = isMobile ? 150 : 80;
+          const targetPosition = Math.max(0, elementTop - offset);
+          
+          console.log('Scrolling container to:', targetPosition);
+          
+          // Smooth scroll the container
+          scrollContainer.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    });
+    
+    // Start observing for DOM changes
+    if (containerRef.current) {
+      observer.observe(containerRef.current, {
+        childList: true,
+        subtree: true
+      });
+    }
+    
+    // Cleanup
+    return () => {
+      observer.disconnect();
+    };
+  }, [searchParams, allProjects]);
+
+  // Reset scroll flag when search params change
+  useEffect(() => {
+    hasScrolledRef.current = false;
+  }, [searchParams]);
+
   // Convert projects to searchable items
   const searchableProjects: SearchableProject[] = allProjects.map(project => ({
     ...project,
@@ -102,7 +179,7 @@ export default function ProjectsPageClient({
     const shouldHaveRule = isFirstOfYear && sortedYears.findIndex(y => y === project.year) > 0;
 
     return (
-      <div key={`${project.year}-${projectIndex}`}>
+      <div key={`${project.year}-${projectIndex}`} id={project.id}>
         {/* Horizontal rule between years */}
         {shouldHaveRule && (
           <hr className="border-[var(--color-border)] my-8" />
@@ -201,17 +278,19 @@ export default function ProjectsPageClient({
   };
 
   return (
-    <SearchPageClient
-      allItems={searchableProjects}
-      availableTags={availableTags}
-      initialTag={initialTag}
-      pageTitle="Projects"
-      pageSubtitle="A collection of personal projects spanning web development, mobile applications, experimental work, and commissioned projects from my coding journey."
-      basePath="/projects"
-      renderItem={renderProject}
-      renderEmptyState={renderEmptyState}
-      searchPlaceholder="Search projects..."
-      getFilterDescription={getFilterDescription}
-    />
+    <div ref={containerRef}>
+      <SearchPageClient
+        allItems={searchableProjects}
+        availableTags={availableTags}
+        initialTag={initialTag}
+        pageTitle="Projects"
+        pageSubtitle="A collection of personal projects spanning web development, mobile applications, experimental work, and commissioned projects from my coding journey."
+        basePath="/projects"
+        renderItem={renderProject}
+        renderEmptyState={renderEmptyState}
+        searchPlaceholder="Search projects..."
+        getFilterDescription={getFilterDescription}
+      />
+    </div>
   );
 }

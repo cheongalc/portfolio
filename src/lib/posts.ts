@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypePrettyCode from 'rehype-pretty-code';
+import remarkProjectLinks from './remark-project-links';
 import type { Pluggable } from 'unified';
 
 /**
@@ -114,8 +115,9 @@ export async function getPost(slug: string): Promise<ProcessedPost> {
         mdxOptions: {
           // Remark plugins process the markdown AST
           remarkPlugins: [
-            remarkGfm,    // GitHub Flavored Markdown (tables, strikethrough, etc.)
-            remarkMath    // Math notation support (LaTeX-style)
+            remarkProjectLinks, // Transform UUID links to project scroll links
+            remarkGfm,          // GitHub Flavored Markdown (tables, strikethrough, etc.)
+            remarkMath          // Math notation support (LaTeX-style)
           ],
           // Rehype plugins process the HTML AST
           rehypePlugins: [
