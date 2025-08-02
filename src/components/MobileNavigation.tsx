@@ -62,7 +62,7 @@ export default function MobileNavigation() {
             <div className="mb-8">
             <nav className="flex space-x-4" role="navigation" aria-label="Social media links">
               <a 
-                href="https://twitter.com/yourusername" 
+                href="https://twitter.com/cheongalc" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="Twitter profile"
                 target="_blank"
@@ -73,7 +73,7 @@ export default function MobileNavigation() {
                 </svg>
               </a>
               <a 
-                href="https://linkedin.com/in/yourusername" 
+                href="https://linkedin.com/in/alistair-cheong" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="LinkedIn profile"
                 target="_blank"
@@ -84,7 +84,7 @@ export default function MobileNavigation() {
                 </svg>
               </a>
               <a 
-                href="https://scholar.google.com/citations?user=yourusername" 
+                href="https://scholar.google.com/citations?user=IWvm3i0AAAAJ&hl=en" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="Google Scholar profile"
                 target="_blank"
@@ -95,7 +95,7 @@ export default function MobileNavigation() {
                 </svg>
               </a>
               <a 
-                href="https://github.com/yourusername" 
+                href="https://github.com/cheongalc" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="GitHub profile"
                 target="_blank"
@@ -106,7 +106,7 @@ export default function MobileNavigation() {
                 </svg>
               </a>
               <a 
-                href="https://instagram.com/yourusername" 
+                href="https://instagram.com/cheongalc" 
                 className="text-[var(--color-muted)] hover:text-[var(--color-primary)] transition-colors duration-300"
                 aria-label="Instagram profile"
                 target="_blank"

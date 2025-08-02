@@ -240,41 +240,31 @@ export default function SearchPageClient<T extends SearchableItem>({
   // Default empty state
   const defaultEmptyState = (hasFilters: boolean, onClearFilters: () => void) => (
     <section className="py-16">
-      <div className="text-center">
-        <div className="mb-8">
-          <svg 
-            className="w-16 h-16 mx-auto text-[var(--color-muted)] mb-6" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={1} 
-              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" 
-            />
-          </svg>
-          <h2 className="text-2xl font-medium text-[var(--color-text)] mb-3">
+      <div className="flex items-start gap-6 justify-center">
+        <svg 
+          className="w-12 h-12 text-[var(--color-muted)] flex-shrink-0 mt-1" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={1} 
+            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" 
+          />
+        </svg>
+        <div>
+          <h2 className="text-2xl font-medium text-[var(--color-text)] mb-2">
             {hasFilters ? 'No Items Found' : 'No Items Yet'}
           </h2>
-          <p className="text-[var(--color-muted)] text-lg max-w-md mx-auto leading-relaxed">
+          <p className="text-[var(--color-muted)] text-lg leading-relaxed">
             {hasFilters
-              ? 'No items match your current search or filter criteria. Try adjusting your filters or search terms.'
+              ? 'No items match your current search or filter criteria.'
               : 'Items will appear here once they are available.'
             }
           </p>
         </div>
-        {hasFilters && (
-          <div className="space-y-3">
-            <button 
-              onClick={onClearFilters}
-              className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 font-medium"
-            >
-              Clear all filters
-            </button>
-          </div>
-        )}
       </div>
     </section>
   );

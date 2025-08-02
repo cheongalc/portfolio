@@ -60,9 +60,9 @@ export default async function HomePage() {
         {/* Recent Posts Section */}
         {latestPosts.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
+            <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-8">
               Recent Posts
-            </h2>
+            </h1>
             
             <div className="space-y-6">
               {latestPosts.map(post => (
@@ -138,9 +138,9 @@ export default async function HomePage() {
         {/* Recent Papers Section */}
         {recentPapers.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
+            <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-8">
               Recent Papers
-            </h2>
+            </h1>
             
             <div className="space-y-6">
               {recentPapers.map((paper, index) => (
@@ -200,9 +200,9 @@ export default async function HomePage() {
         {/* Recent Projects Section */}
         {recentProjects.length > 0 && (
           <section className="mb-16">
-            <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
+            <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-8">
               Recent Projects
-            </h2>
+            </h1>
             
             <div className="space-y-6">
               {recentProjects.map((project, index) => (
@@ -261,19 +261,33 @@ export default async function HomePage() {
         {/* No Posts Fallback */}
         {latestPosts.length === 0 && (
           <section>
-            <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-8">
+            <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-8">
               Recent Posts
-            </h2>
-            <div className="text-center py-12 border border-[var(--color-border)] rounded-lg">
-              <p className="text-[var(--color-muted)] text-lg mb-4">
-                No blog posts found yet.
-              </p>
-              <Link 
-                href="/blog" 
-                className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary-hover)] transition-colors duration-300"
-              >
-                Explore Writing
-              </Link>
+            </h1>
+            <div className="py-12">
+              <div className="flex items-start gap-6 justify-center">
+                <svg 
+                  className="w-12 h-12 text-[var(--color-muted)] flex-shrink-0 mt-1" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={1} 
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+                  />
+                </svg>
+                <div>
+                  <h2 className="text-2xl font-medium text-[var(--color-text)] mb-2">
+                    No Posts Yet
+                  </h2>
+                  <p className="text-[var(--color-muted)] text-lg leading-relaxed">
+                    Blog posts will appear here once they are published.
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
         )}
@@ -284,19 +298,30 @@ export default async function HomePage() {
     
     return (
       <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
-        <div className="text-center py-20">
-          <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-6">
-            Unable to Load Content
-          </h1>
-          <p className="text-lg text-[var(--color-text)] mb-8">
-            There was an error loading the content. Please check that your blog directory exists and contains valid Markdown files.
-          </p>
-          <Link 
-            href="/blog" 
-            className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors"
-          >
-            Try Blog Page
-          </Link>
+        <div className="py-20">
+          <div className="flex items-start gap-6 justify-center">
+            <svg 
+              className="w-12 h-12 text-[var(--color-muted)] flex-shrink-0 mt-1" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={1} 
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" 
+              />
+            </svg>
+            <div>
+              <h1 className="text-3xl font-semibold text-[var(--color-text)] mb-2">
+                Unable to Load Content
+              </h1>
+              <p className="text-[var(--color-muted)] text-lg leading-relaxed">
+                There was an error loading the content. Please check that your blog directory exists and contains valid Markdown files.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
