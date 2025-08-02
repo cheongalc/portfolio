@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import SharedSidebar from './SharedSidebar';
 
@@ -16,8 +16,39 @@ import SharedSidebar from './SharedSidebar';
 export default function MobileNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const openMenu = () => setIsMenuOpen(true);
-  const closeMenu = () => setIsMenuOpen(false);
+  const openMenu = () => {
+    console.log('Opening menu...');
+    setIsMenuOpen(true);
+  };
+  
+  const closeMenu = () => {
+    console.log('Closing menu...');
+    setIsMenuOpen(false);
+  };
+
+  console.log('isMenuOpen:', isMenuOpen); // Debug log
+
+  // Handle escape key to close menu
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('keydown', handleEscape);
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -38,15 +69,25 @@ export default function MobileNavigation() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div
-          className="mobile-menu-overlay lg:hidden"
-          onClick={closeMenu}
-        />
-      )}
+      <div
+        className="fixed inset-0 bg-black z-40 lg:hidden pointer-events-none"
+        style={{
+          opacity: isMenuOpen ? 0.5 : 0,
+          transition: 'opacity 0.3s ease-in-out',
+          pointerEvents: isMenuOpen ? 'auto' : 'none'
+        }}
+        onClick={closeMenu}
+      />
 
-      {/* Mobile Sidebar */}
-      <div className={`mobile-sidebar lg:hidden ${isMenuOpen ? 'open' : ''} transition-colors duration-300`}>
+      {/* Mobile Sidebar - Always rendered for smooth animations */}
+      <div 
+        className="fixed top-0 left-0 bottom-0 w-80 bg-[var(--color-background)] border-r border-[var(--color-border)] z-50 lg:hidden"
+        style={{
+          transform: `translateX(${isMenuOpen ? '0%' : '-100%'})`,
+          transition: 'transform 0.3s ease-in-out',
+          willChange: 'transform'
+        }}
+      >
         <SharedSidebar isMobile={true} onLinkClick={closeMenu} onClose={closeMenu} />
       </div>
     </>
