@@ -42,24 +42,44 @@ export default function BlogPageClient({
 
   // Custom empty state for posts
   const renderEmptyState = (hasFilters: boolean, onClearFilters: () => void) => (
-    <section className="text-center py-20">
-      <div className="max-w-lg mx-auto">
-        <h2 className="text-2xl font-medium text-[var(--color-text)] mb-6">
-          {hasFilters ? 'No Posts Found' : 'No Posts Yet'}
-        </h2>
-        <p className="text-lg text-[var(--color-muted)] mb-8">
-          {hasFilters
-            ? `No posts match the current filter criteria. Try adjusting your filters or browse all posts.`
-            : 'Blog posts will be listed here.'
-          }
-        </p>
-        {hasFilters && (
-          <button 
-            onClick={onClearFilters}
-            className="inline-flex items-center px-6 py-3 bg-[var(--color-primary)] text-white text-lg rounded-md hover:bg-[var(--color-primary-hover)] transition-colors duration-300"
+    <section className="py-16">
+      <div className="text-center">
+        <div className="mb-8">
+          <svg 
+            className="w-16 h-16 mx-auto text-[var(--color-muted)] mb-6" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
           >
-            Clear Filters
-          </button>
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={1} 
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
+            />
+          </svg>
+          <h2 className="text-2xl font-medium text-[var(--color-text)] mb-3">
+            {hasFilters ? 'No Posts Found' : 'No Posts Yet'}
+          </h2>
+          <p className="text-[var(--color-muted)] text-lg max-w-md mx-auto leading-relaxed">
+            {hasFilters
+              ? 'No posts match your current search or filter criteria. Try adjusting your filters or search terms.'
+              : 'Blog posts will appear here once they are published.'
+            }
+          </p>
+        </div>
+        {hasFilters && (
+          <div className="space-y-3">
+            <button 
+              onClick={onClearFilters}
+              className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300 font-medium"
+            >
+              Clear all filters
+            </button>
+            <div className="text-sm text-[var(--color-muted)]">
+              or <Link href="/blog" className="text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors duration-300">browse all posts</Link>
+            </div>
+          </div>
         )}
       </div>
     </section>
