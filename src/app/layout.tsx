@@ -58,7 +58,7 @@ function Sidebar() {
       <div className="flex-1 px-8 pt-32 pb-8">
         {/* Profile Section */}
         <div className="mb-12">
-          <h1 className="text-3xl font-bold text-[var(--color-text)] mb-6">
+          <h1 className="text-3xl lg:text-3xl max-lg:text-xl font-bold text-[var(--color-text)] mb-6">
             <a href="/" className="hover:text-[var(--color-primary)] transition-colors">
               Alistair Cheong
             </a>
