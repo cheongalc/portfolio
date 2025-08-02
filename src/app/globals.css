@@ -488,11 +488,55 @@ html.theme-transition * {
     display: none !important;
   }
 
-  body {
+  /* Force all containers to allow content flow */
+  html, body {
     font-size: 12pt;
     line-height: 1.4;
-    color: black;
-    background: white;
+    color: black !important;
+    background: white !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Only target main layout containers that prevent page flow */
+  .min-h-screen,
+  .h-screen {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Target specific flex containers that constrain content */
+  .flex.min-h-screen,
+  .flex.h-screen,
+  main.flex-1 {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Remove width constraints */
+  .max-w-4xl,
+  .max-w-7xl {
+    max-width: none !important;
+    width: 100% !important;
+  }
+
+  /* Reset main content */
+  main {
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+
+  /* Target the specific blog post container */
+  main > div {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   a {
@@ -504,6 +548,18 @@ html.theme-transition * {
     background: #f5f5f5 !important;
     color: black !important;
     border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  /* Ensure proper page breaks */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
   }
 }
 
