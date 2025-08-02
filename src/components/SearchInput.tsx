@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 
 interface SearchInputProps {
   placeholder?: string;
@@ -8,13 +8,22 @@ interface SearchInputProps {
   onSearchQueryChange: (query: string) => void;
 }
 
-export default function SearchInput({ 
+export interface SearchInputRef {
+  clear: () => void;
+}
+
+const SearchInput = forwardRef<SearchInputRef, SearchInputProps>(({ 
   placeholder = "Search posts...", 
   className = "",
   onSearchQueryChange
-}: SearchInputProps) {
+}, ref) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+
+  // Expose clear method via ref
+  useImperativeHandle(ref, () => ({
+    clear: () => setSearchQuery('')
+  }));
 
   // Debounced search with 200ms delay
   useEffect(() => {
@@ -52,4 +61,8 @@ export default function SearchInput({
       </div>
     </div>
   );
-}
+});
+
+SearchInput.displayName = 'SearchInput';
+
+export default SearchInput;
