@@ -25,29 +25,30 @@ export default function SharedSidebar({ isMobile = false, onLinkClick, onClose }
         : 'w-80 ml-16 sticky top-0 h-screen overflow-y-auto'
       }
     `}>
-      {/* Close button - only show on mobile */}
-      {isMobile && onClose && (
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-[var(--color-muted)] hover:text-[var(--color-text)] text-2xl z-10"
-          aria-label="Close menu"
-        >
-          ×
-        </button>
-      )}
-
       <div className={`flex-1 px-8 ${isMobile ? 'pt-8' : 'pt-32'} pb-8`}>
         {/* Profile Section */}
         <div className="mb-12">
-          <h1 className="text-3xl lg:text-3xl max-lg:text-xl font-bold text-[var(--color-text)] mb-6">
-            <Link 
-              href="/" 
-              className="hover:text-[var(--color-primary)] transition-colors duration-300"
-              onClick={onLinkClick}
-            >
-              Alistair Cheong
-            </Link>
-          </h1>
+          <div className="relative">
+            <h1 className="text-3xl lg:text-3xl max-lg:text-xl font-bold text-[var(--color-text)] mb-6">
+              <Link 
+                href="/" 
+                className="hover:text-[var(--color-primary)] transition-colors duration-300"
+                onClick={onLinkClick}
+              >
+                Alistair Cheong
+              </Link>
+            </h1>
+            {/* Close button - only show on mobile */}
+            {isMobile && onClose && (
+              <button
+                onClick={onClose}
+                className="absolute top-0 right-0 text-[var(--color-muted)] hover:text-[var(--color-text)] text-2xl z-10 leading-none flex items-center"
+                aria-label="Close menu"
+              >
+                ×
+              </button>
+            )}
+          </div>
           <p className="text-[var(--color-muted)] text-base mb-6">
             acheong[at]andrew.cmu.edu
           </p>
