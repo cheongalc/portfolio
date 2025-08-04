@@ -1,18 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { getAllPosts, type PostMetadata } from '@/lib/posts';
 import BlogPageClient from '@/components/BlogPageClient';
-
-/**
- * Props interface for the BlogPage component
- */
-interface BlogPageProps {
-  /** URL search parameters for filtering */
-  searchParams?: Promise<{
-    /** Filter posts by tag - can be single string or array */
-    tag?: string | string[];
-  }>;
-}
 
 /**
  * Metadata configuration for the blog page
@@ -33,18 +23,14 @@ export const metadata: Metadata = {
  * 
  * This component provides:
  * - Complete list of all published blog posts
- * - Filtering by tags
+ * - Filtering by tags (handled client-side)
  * - Clean layout optimized for reading
  * - Post metadata display (date, description, tags)
  * 
- * @param searchParams - URL parameters for filtering posts
  * @returns The rendered blog page with filtered post listings
  */
-export default async function BlogPage({ searchParams }: BlogPageProps) {
+export default async function BlogPage() {
   try {
-    const resolvedSearchParams = await searchParams;
-    const { tag } = resolvedSearchParams ?? {};
-    
     // Fetch all posts
     const allPosts: PostMetadata[] = await getAllPosts();
     
@@ -52,11 +38,24 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     const availableTags = [...new Set(allPosts.flatMap(p => p.tags || []))];
 
     return (
-      <BlogPageClient 
-        allPosts={allPosts} 
-        availableTags={availableTags} 
-        initialTag={tag} 
-      />
+      <Suspense fallback={
+        <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+            <div className="h-4 bg-gray-200 rounded w-3/4 mb-8"></div>
+            <div className="space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-20 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      }>
+        <BlogPageClient 
+          allPosts={allPosts} 
+          availableTags={availableTags} 
+        />
+      </Suspense>
     );
   } catch (error) {
     console.error('Error loading blog page:', error);

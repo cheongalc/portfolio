@@ -1,18 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { getAllProjects, getAllProjectTags } from '@/lib/projects';
 import ProjectsPageClient from '@/components/ProjectsPageClient';
-
-/**
- * Props interface for the ProjectsPage component
- */
-interface ProjectsPageProps {
-  /** URL search parameters for filtering */
-  searchParams?: Promise<{
-    /** Filter projects by tag - can be single string or array */
-    tag?: string | string[];
-  }>;
-}
 
 /**
  * Metadata configuration for the projects page
@@ -35,15 +25,12 @@ export const metadata: Metadata = {
  * - Projects organized by year from JSON data
  * - Web development, mobile apps, and experimental projects
  * - Links to live demos and source code
- * - Search and filtering capabilities
+ * - Search and filtering capabilities (handled client-side)
  * 
  * @returns The rendered projects page with personal projects
  */
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
+export default async function ProjectsPage() {
   try {
-    const resolvedSearchParams = await searchParams;
-    const { tag } = resolvedSearchParams ?? {};
-    
     // Fetch all projects
     const allProjects = await getAllProjects();
     
@@ -51,11 +38,24 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
     const availableTags = await getAllProjectTags();
 
     return (
-      <ProjectsPageClient 
-        allProjects={allProjects} 
-        availableTags={availableTags} 
-        initialTag={tag} 
-      />
+      <Suspense fallback={
+        <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+            <div className="h-4 bg-gray-200 rounded w-3/4 mb-8"></div>
+            <div className="space-y-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-20 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      }>
+        <ProjectsPageClient 
+          allProjects={allProjects} 
+          availableTags={availableTags} 
+        />
+      </Suspense>
     );
   } catch (error) {
     console.error('Error loading projects page:', error);

@@ -8,7 +8,6 @@ import SearchPageClient, { type SearchableItem } from '@/components/SearchPageCl
 interface ProjectsPageClientProps {
   allProjects: ProcessedProject[];
   availableTags: string[];
-  initialTag?: string | string[];
 }
 
 // Extend ProcessedProject to implement SearchableItem
@@ -30,8 +29,7 @@ interface SearchableProject extends SearchableItem {
 
 export default function ProjectsPageClient({ 
   allProjects, 
-  availableTags, 
-  initialTag 
+  availableTags
 }: ProjectsPageClientProps) {
   const searchParams = useSearchParams();
   const hasScrolledRef = useRef(false);
@@ -123,7 +121,7 @@ export default function ProjectsPageClient({
   };
 
   // Custom empty state for projects
-  const renderEmptyState = (hasFilters: boolean, onClearFilters: () => void) => (
+  const renderEmptyState = (hasFilters: boolean, _onClearFilters: () => void) => (
     <section className="py-16">
       <div className="flex items-start gap-6 justify-center">
         <svg 
@@ -277,7 +275,6 @@ export default function ProjectsPageClient({
       <SearchPageClient
         allItems={searchableProjects}
         availableTags={availableTags}
-        initialTag={initialTag}
         pageTitle="Projects"
         pageSubtitle="A collection of personal projects spanning web development, mobile applications, experimental work, and commissioned projects from my coding journey."
         basePath="/projects"

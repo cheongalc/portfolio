@@ -7,7 +7,6 @@ import SearchPageClient, { type SearchableItem } from '@/components/SearchPageCl
 interface BlogPageClientProps {
   allPosts: PostMetadata[];
   availableTags: string[];
-  initialTag?: string | string[];
 }
 
 // Extend PostMetadata to implement SearchableItem
@@ -18,8 +17,7 @@ interface SearchablePost extends PostMetadata, SearchableItem {
 
 export default function BlogPageClient({ 
   allPosts, 
-  availableTags, 
-  initialTag 
+  availableTags
 }: BlogPageClientProps) {
   // Convert posts to searchable items
   const searchablePosts: SearchablePost[] = allPosts.map(post => ({
@@ -142,7 +140,6 @@ export default function BlogPageClient({
     <SearchPageClient
       allItems={searchablePosts}
       availableTags={availableTags}
-      initialTag={initialTag}
       pageTitle="Blog"
       pageSubtitle="Writing about AI, computer science, technology, photography, music, and life."
       basePath="/blog"
