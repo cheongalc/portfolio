@@ -41,7 +41,7 @@ export default function BlogPageClient({
   };
 
   // Custom empty state for posts
-  const renderEmptyState = (hasFilters: boolean, onClearFilters: () => void) => (
+  const renderEmptyState = (hasFilters: boolean, _onClearFilters: () => void) => (
     <section className="py-16">
       <div className="flex items-start gap-6 justify-center">
         <svg 

@@ -43,7 +43,7 @@ const remarkProjectLinks: Plugin<[], Root> = () => {
         if (!node.data.hProperties) {
           node.data.hProperties = {};
         }
-        (node.data.hProperties as any)['data-project-link'] = 'true';
+        (node.data.hProperties as Record<string, unknown>)['data-project-link'] = 'true';
       }
     });
   };

@@ -29,13 +29,13 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   try {
     // Get recent posts with total count
-    const { posts: latestPosts, totalCount: totalPosts } = await getRecentPostsWithCount(3);
+    const { posts: latestPosts } = await getRecentPostsWithCount(3);
 
     // Get recent papers with total count
-    const { papers: recentPapers, totalCount: totalPapers } = await getRecentPapersWithCount(3);
+    const { papers: recentPapers } = await getRecentPapersWithCount(3);
 
     // Get recent projects with total count
-    const { projects: recentProjects, totalCount: totalProjects } = await getRecentProjectsWithCount(3);
+    const { projects: recentProjects } = await getRecentProjectsWithCount(3);
 
     return (
       <div className="flex-1 px-4 py-8 sm:p-8 md:p-12 pt-16 sm:pt-24 md:pt-32 max-w-4xl mx-auto">

@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import SearchInput, { type SearchInputRef } from '@/components/SearchInput';
 
 export interface SearchableItem {
@@ -17,7 +16,7 @@ export interface SearchableItem {
   /** Content to search in (optional) */
   content?: string;
   /** Additional data specific to the item type */
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface SearchPageClientProps<T extends SearchableItem> {
@@ -238,7 +237,7 @@ export default function SearchPageClient<T extends SearchableItem>({
   }, [selectedTags, pageSubtitle, getFilterDescription]);
 
   // Default empty state
-  const defaultEmptyState = (hasFilters: boolean, onClearFilters: () => void) => (
+  const defaultEmptyState = (hasFilters: boolean, _onClearFilters: () => void) => (
     <section className="py-16">
       <div className="flex items-start gap-6 justify-center">
         <svg 

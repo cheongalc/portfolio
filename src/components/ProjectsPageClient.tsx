@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import type { ProcessedProject } from '@/lib/projects';
 import SearchPageClient, { type SearchableItem } from '@/components/SearchPageClient';
 
@@ -54,10 +53,6 @@ export default function ProjectsPageClient({
         
         // Stop observing
         observer.disconnect();
-        
-        // Calculate offset
-        const isMobile = window.innerWidth < 1024;
-        const offset = isMobile ? 150 : 80;
         
         // Scroll after a small delay to ensure rendering is complete
         setTimeout(() => {

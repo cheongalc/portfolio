@@ -143,7 +143,6 @@ export async function getAllProjects(): Promise<ProcessedProject[]> {
     
     // Process projects and add computed fields
     const allProjects: ProcessedProject[] = projectsData.projects.map(project => {
-      const startDate = new Date(project.dateStart);
       const endDate = project.dateEnd === 'ongoing' ? new Date() : new Date(project.dateEnd);
       const year = endDate.getFullYear().toString();
       

@@ -293,7 +293,7 @@ export default async function PostPage({ params }: PostPageProps) {
             Post Not Found
           </h1>
           <p className="text-lg text-[var(--color-muted)] mb-8">
-            The blog post you're looking for doesn't exist or couldn't be loaded.
+            The blog post you&apos;re looking for doesn&apos;t exist or couldn&apos;t be loaded.
           </p>
           <Link 
             href="/blog" 

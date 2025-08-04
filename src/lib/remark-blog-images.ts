@@ -55,7 +55,7 @@ const remarkBlogImages: Plugin<[BlogImageOptions?], Root> = (options = {}) => {
         if (!node.data.hProperties) {
           node.data.hProperties = {};
         }
-        (node.data.hProperties as any)['data-blog-image'] = 'true';
+        (node.data.hProperties as Record<string, unknown>)['data-blog-image'] = 'true';
       }
     });
   };
