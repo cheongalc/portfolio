@@ -90,12 +90,22 @@ function processProjectLinks(links: ProjectLink[], projectId: string): Processed
       };
     } else {
       // It's a local file, construct the path
-      const localPath = `/projects/${projectId}/${link.url}`;
-      return {
-        text: link.text,
-        url: localPath,
-        isLocal: true
-      };
+      // For index.html files, link to the directory to ensure proper relative path resolution
+      if (link.url === 'index.html') {
+        const localPath = `/projects/${projectId}/`;
+        return {
+          text: link.text,
+          url: localPath,
+          isLocal: true
+        };
+      } else {
+        const localPath = `/projects/${projectId}/${link.url}`;
+        return {
+          text: link.text,
+          url: localPath,
+          isLocal: true
+        };
+      }
     }
   });
 }
