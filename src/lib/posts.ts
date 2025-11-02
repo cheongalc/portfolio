@@ -7,6 +7,7 @@ import rehypeKatex from 'rehype-katex';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkProjectLinks from './remark-project-links';
 import remarkBlogImages from './remark-blog-images';
+import remarkToc from './remark-toc';
 import type { Pluggable } from 'unified';
 
 /**
@@ -117,6 +118,7 @@ export async function getPost(slug: string): Promise<ProcessedPost> {
           // Remark plugins process the markdown AST
           remarkPlugins: [
             [remarkBlogImages, { slug }], // Transform simple filenames to media paths (must come first)
+            remarkToc,                    // Table of contents and wiki-style internal links
             remarkProjectLinks,           // Transform UUID links to project scroll links
             remarkGfm,                   // GitHub Flavored Markdown (tables, strikethrough, etc.)
             remarkMath                   // Math notation support (LaTeX-style)

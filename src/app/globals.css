@@ -298,6 +298,86 @@ html.theme-transition * {
     color: var(--color-text);
   }
 
+  /* Table of Contents specific styling */
+  .prose-enhanced .toc-heading {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-enhanced .table-of-contents-list {
+    list-style: none;
+    padding: 1rem 1.5rem; /* Balanced top/bottom padding */
+    margin: 1.5rem 0 2rem 0;
+    border-left: 3px solid rgb(59 130 246);
+    background-color: rgb(249 250 251);
+  }
+
+  :root.dark .prose-enhanced .table-of-contents-list {
+    background-color: rgb(23 23 23);
+  }
+
+  .prose-enhanced .table-of-contents-list .toc-item {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .prose-enhanced .table-of-contents-list .toc-item p {
+    margin: 0;
+  }
+
+  /* Indentation for different heading levels */
+  .prose-enhanced .table-of-contents-list .toc-depth-1 {
+    font-weight: 600;
+    padding-left: 0;
+  }
+
+  .prose-enhanced .table-of-contents-list .toc-depth-2 {
+    padding-left: 1.5rem;
+    font-weight: 500;
+  }
+
+  .prose-enhanced .table-of-contents-list .toc-depth-3 {
+    padding-left: 3rem;
+  }
+
+  .prose-enhanced .table-of-contents-list .toc-depth-4 {
+    padding-left: 4.5rem;
+  }
+
+  .prose-enhanced .table-of-contents-list .toc-depth-5 {
+    padding-left: 6rem;
+  }
+
+  .prose-enhanced .table-of-contents-list .toc-depth-6 {
+    padding-left: 7.5rem;
+  }
+
+  .prose-enhanced .table-of-contents-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .prose-enhanced .table-of-contents-list a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+
+  /* Smooth scroll for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Heading anchor offset for fixed headers */
+  .prose-enhanced h1[id],
+  .prose-enhanced h2[id],
+  .prose-enhanced h3[id],
+  .prose-enhanced h4[id],
+  .prose-enhanced h5[id],
+  .prose-enhanced h6[id] {
+    scroll-margin-top: 6rem; /* Adjust based on your header height */
+  }
+
   .prose-enhanced table {
     border: 1px solid rgb(64 64 64);
     border-radius: 0.5rem;
