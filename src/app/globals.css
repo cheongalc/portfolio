@@ -248,13 +248,21 @@ html.theme-transition * {
   }
 
   .prose-enhanced blockquote {
-    border-left: 4px solid rgb(59 130 246);
-    background-color: rgb(30 41 59);
-    padding: 1.5rem 2rem; /* Increased padding */
-    margin: 2rem 0; /* Increased margin */
+    border-left: 3px solid rgb(59 130 246);
+    background-color: rgb(243 244 246); /* Light theme background */
+    padding: 0.75rem 1rem; /* Smaller padding */
+    margin: 1.25rem 0;
     font-style: italic;
-    font-size: 1.125rem; /* Larger blockquote text */
+    font-size: 0.95rem; /* Consistent smaller size */
+    color: rgb(55 65 81); /* Light theme text color */
+    line-height: 1.6;
+  }
+
+  /* Dark theme blockquote styling - only colors change */
+  :root.dark .prose-enhanced blockquote {
+    background-color: rgb(30 41 59);
     color: rgb(203 213 225);
+    border-left-color: rgb(59 130 246); /* Keep same accent color */
   }
 
   .prose-enhanced ul {
