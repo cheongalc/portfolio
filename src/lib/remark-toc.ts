@@ -9,11 +9,17 @@
  */
 
 import { visit } from 'unist-util-visit';
-import type { Root, Heading, Text, Paragraph, Link } from 'mdast';
+import type { Root, Heading, Text, Paragraph, PhrasingContent, List, ListItem, Link as MdastLink } from 'mdast';
 import { toString } from 'mdast-util-to-string';
+import type { Data } from 'unist';
 
 interface HeadingNode extends Heading {
-  children: Array<Text | any>;
+  children: PhrasingContent[];
+}
+
+interface HProperties {
+  id?: string;
+  className?: string;
 }
 
 interface TocEntry {
@@ -56,7 +62,7 @@ function extractHeadings(tree: Root): TocEntry[] {
 /**
  * Generates a table of contents tree structure
  */
-function generateTocTree(headings: TocEntry[]): any {
+function generateTocTree(headings: TocEntry[]): List | Paragraph {
   if (headings.length === 0) {
     return {
       type: 'paragraph',
@@ -69,7 +75,18 @@ function generateTocTree(headings: TocEntry[]): any {
     };
   }
 
-  const tocItems = headings.map(heading => {
+  const tocItems: ListItem[] = headings.map(heading => {
+    const link: MdastLink = {
+      type: 'link',
+      url: `#${heading.id}`,
+      children: [
+        {
+          type: 'text',
+          value: heading.text
+        }
+      ]
+    };
+
     return {
       type: 'listItem',
       spread: false,
@@ -81,18 +98,7 @@ function generateTocTree(headings: TocEntry[]): any {
       children: [
         {
           type: 'paragraph',
-          children: [
-            {
-              type: 'link',
-              url: `#${heading.id}`,
-              children: [
-                {
-                  type: 'text',
-                  value: heading.text
-                }
-              ]
-            }
-          ]
+          children: [link]
         }
       ]
     };
@@ -129,7 +135,7 @@ export default function remarkToc() {
       if (!node.data.hProperties) {
         node.data.hProperties = {};
       }
-      (node.data.hProperties as any).id = id;
+      (node.data.hProperties as HProperties).id = id;
     });
     
     // Step 2: Replace [table-of-contents] with actual TOC
@@ -160,7 +166,7 @@ export default function remarkToc() {
           
           // Replace the paragraph with heading + TOC list
           if (parent && typeof index === 'number') {
-            (parent.children as any).splice(index, 1, tocHeading, tocTree);
+            (parent.children as Root['children']).splice(index, 1, tocHeading, tocTree);
           }
         }
       }
@@ -178,7 +184,7 @@ export default function remarkToc() {
       if (matches.length === 0) return;
       
       // Split text and create new nodes
-      const newNodes: any[] = [];
+      const newNodes: PhrasingContent[] = [];
       let lastIndex = 0;
       
       for (const match of matches) {
@@ -220,7 +226,7 @@ export default function remarkToc() {
       }
       
       // Replace the original text node with the new nodes
-      parent.children.splice(index, 1, ...newNodes);
+      (parent.children as PhrasingContent[]).splice(index, 1, ...newNodes);
     });
   };
 }
