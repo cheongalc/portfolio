@@ -310,7 +310,7 @@ html.theme-transition * {
 
   /* Math equation styling */
   .katex {
-    font-size: 1.25em !important; /* Increased from 1.1em */
+    font-size: 1em !important; /* Match text size for inline math */
     color: var(--color-text) !important;
   }
 
