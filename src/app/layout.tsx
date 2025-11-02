@@ -83,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className="min-h-screen antialiased">
-        <Providers attribute="class" defaultTheme="dark">
+        <Providers attribute="class" defaultTheme="light">
           {/* Skip link for accessibility */}
           <a
             href="#main-content"
