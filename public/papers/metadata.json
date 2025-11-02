@@ -2,13 +2,12 @@
   "2025": [
     {
       "title": "A Comparison of Chain-of-Thought Bypass Errors in Large Reasoning Models trained with RLVR vs. SFT",
-      "titleLink": "",
       "authors": "**Alistair Cheong**",
       "venue": "Mini Research Project done as part of CMU's Undergraduate First Year Writing Course",
       "links": [
         {
-            "text": "Blog Post Coming Soon",
-            "url": ""
+            "text": "Blog Post",
+            "url": "/blog/fyw-reasoning-llm-proj"
         }
       ]
     },
