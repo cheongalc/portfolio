@@ -204,12 +204,12 @@ export default async function PostPage({ params }: PostPageProps) {
         {/* Article Footer */}
         <footer className="mt-20 pt-12 border-t border-[var(--color-border)] transition-colors duration-300">
           {/* Post Navigation */}
-          <div className="flex justify-between items-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
             {/* Next Post (Newer) */}
             {nextPost ? (
               <Link 
                 href={`/blog/${nextPost.slug}`}
-                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-[var(--color-border)] transition-colors duration-300 group max-w-xs"
+                className="flex items-center gap-3 px-4 sm:px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-[var(--color-border)] transition-colors duration-300 group flex-1 min-w-0 sm:max-w-[45%]"
               >
                 <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -231,7 +231,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 </div>
               </Link>
             ) : (
-              <div className="flex items-center gap-3 px-6 py-3 text-[var(--color-muted)] opacity-50 max-w-xs">
+              <div className="flex items-center gap-3 px-4 sm:px-6 py-3 text-[var(--color-muted)] opacity-50 flex-1 min-w-0 sm:max-w-[45%]">
                 <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
@@ -246,7 +246,7 @@ export default async function PostPage({ params }: PostPageProps) {
             {prevPost ? (
               <Link 
                 href={`/blog/${prevPost.slug}`}
-                className="flex items-center gap-3 px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-[var(--color-border)] transition-colors duration-300 group max-w-xs"
+                className="flex items-center gap-3 px-4 sm:px-6 py-3 bg-[var(--color-background)] text-[var(--color-muted)] rounded-md hover:bg-[var(--color-border)] transition-colors duration-300 group flex-1 min-w-0 sm:max-w-[45%]"
               >
                 <div className="min-w-0 flex-1 text-right">
                   <div className="text-xs text-[var(--color-muted)]">Previous</div>
@@ -268,7 +268,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 </svg>
               </Link>
             ) : (
-              <div className="flex items-center gap-3 px-6 py-3 text-[var(--color-muted)] opacity-50 max-w-xs">
+              <div className="flex items-center gap-3 px-4 sm:px-6 py-3 text-[var(--color-muted)] opacity-50 flex-1 min-w-0 sm:max-w-[45%]">
                 <div className="min-w-0 flex-1 text-right">
                   <div className="text-xs">Previous</div>
                   <div className="text-sm">No previous post</div>
