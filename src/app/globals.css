@@ -640,20 +640,30 @@ html.theme-transition * {
   }
   
   .prose-enhanced h1 {
-    font-size: 2.25rem;
+    font-size: 1.75rem;
   }
   
   .prose-enhanced h2 {
-    font-size: 1.875rem;
+    font-size: 1.5rem;
   }
   
   .prose-enhanced h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+  
+  .prose-enhanced h4 {
+    font-size: 1.125rem;
   }
   
   .prose-enhanced p,
   .prose-enhanced li {
     font-size: 1rem;
+  }
+  
+  .prose-enhanced th,
+  .prose-enhanced td {
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
   }
 }
 
@@ -661,6 +671,33 @@ html.theme-transition * {
 @media (max-width: 480px) {
   .main-content-mobile {
     padding: 0 1rem 1rem 1rem; /* Match mobile nav px-4 (1rem) */
+  }
+  
+  .prose-enhanced h1 {
+    font-size: 1.5rem;
+  }
+  
+  .prose-enhanced h2 {
+    font-size: 1.25rem;
+  }
+  
+  .prose-enhanced h3 {
+    font-size: 1.125rem;
+  }
+  
+  .prose-enhanced h4 {
+    font-size: 1rem;
+  }
+  
+  .prose-enhanced p,
+  .prose-enhanced li {
+    font-size: 0.9375rem;
+  }
+  
+  .prose-enhanced th,
+  .prose-enhanced td {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
   }
 }
 
