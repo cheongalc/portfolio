@@ -8,6 +8,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import remarkProjectLinks from './remark-project-links';
 import remarkBlogImages from './remark-blog-images';
 import remarkToc from './remark-toc';
+import rehypeCitation from 'rehype-citation';
 import type { Pluggable } from 'unified';
 
 /**
@@ -109,6 +110,34 @@ export async function getPost(slug: string): Promise<ProcessedPost> {
     // Parse frontmatter and content separately
     const { content, data } = matter(raw);
 
+    // Optional bibliography support per-post
+    const bibliographyRelativePath = `public/media/blog/${slug}/references.bib`;
+    const bibliographyFullPath = path.join(process.cwd(), bibliographyRelativePath);
+    const cslRelativePath = 'public/media/blog/ieee.csl';
+    const rehypePlugins: Pluggable[] = [
+      // Render math equations with KaTeX
+      [rehypeKatex, { strict: false }],
+      // Syntax highlighting for code blocks
+      rehypePrettyCode
+    ];
+
+    try {
+      await fs.access(bibliographyFullPath);
+      rehypePlugins.unshift([
+        rehypeCitation,
+        {
+          bibliography: bibliographyRelativePath,
+          path: process.cwd(),
+          linkCitations: true,
+          // Use numeric bracketed style [1], [2] instead of author-date
+          // Local copy of IEEE numeric CSL served at /media/blog/ieee.csl
+          csl: cslRelativePath
+        }
+      ]);
+    } catch {
+      // No bibliography for this post; skip citation processing
+    }
+
     // Return raw content and options for RSC MDXRemote
     return { 
       frontMatter: { slug, ...data } as PostMetadata,
@@ -124,10 +153,7 @@ export async function getPost(slug: string): Promise<ProcessedPost> {
             remarkMath                   // Math notation support (LaTeX-style)
           ],
           // Rehype plugins process the HTML AST
-          rehypePlugins: [
-            [rehypeKatex, { strict: false }],  // Render math equations with KaTeX
-            rehypePrettyCode                   // Syntax highlighting for code blocks
-          ],
+          rehypePlugins,
         },
       }
     };
