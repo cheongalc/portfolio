@@ -26,6 +26,11 @@ interface TocEntry {
   depth: number;
   text: string;
   id: string;
+  children: PhrasingContent[];
+}
+
+function clonePhrasingContent(children: PhrasingContent[]): PhrasingContent[] {
+  return JSON.parse(JSON.stringify(children));
 }
 
 /**
@@ -49,10 +54,12 @@ function extractHeadings(tree: Root): TocEntry[] {
   visit(tree, 'heading', (node: HeadingNode) => {
     const text = toString(node);
     const id = slugify(text);
+    const children = clonePhrasingContent(node.children ?? []);
     headings.push({
       depth: node.depth,
       text,
-      id
+      id,
+      children
     });
   });
   
@@ -79,12 +86,14 @@ function generateTocTree(headings: TocEntry[]): List | Paragraph {
     const link: MdastLink = {
       type: 'link',
       url: `#${heading.id}`,
-      children: [
-        {
-          type: 'text',
-          value: heading.text
-        }
-      ]
+      children: heading.children.length > 0
+        ? heading.children
+        : [
+            {
+              type: 'text',
+              value: heading.text
+            }
+          ]
     };
 
     return {

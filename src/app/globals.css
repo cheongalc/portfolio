@@ -358,9 +358,24 @@ html.theme-transition * {
     transition: color 0.2s ease;
   }
 
+  /* Make sure inline math inside TOC links inherits link color */
+  .prose-enhanced .table-of-contents-list a .katex,
+  .prose-enhanced .table-of-contents-list a .katex * {
+    color: inherit !important;
+  }
+
   .prose-enhanced .table-of-contents-list a:hover {
     color: var(--color-primary-hover);
     text-decoration: underline;
+    text-decoration-color: currentColor;
+  }
+
+  /* Keep underline/color consistent across inline math fragments when hovering */
+  .prose-enhanced .table-of-contents-list a:hover .katex,
+  .prose-enhanced .table-of-contents-list a:hover .katex * {
+    color: inherit !important;
+    text-decoration: underline;
+    text-decoration-color: currentColor;
   }
 
   /* Smooth scroll for anchor links */
