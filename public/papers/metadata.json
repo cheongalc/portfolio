@@ -1,13 +1,28 @@
 {
   "2025": [
     {
+      "title": "Extending LLM Self-Improvement with Open-Ended Search",
+      "authors": "**Alistair Cheong**",
+      "venue": "Research Project done partly during CMU's 11-785 PhD Intro to Deep Learning Course",
+      "links": [
+        {
+          "text": "Summary Video",
+          "url": "https://www.youtube.com/watch?v=TFqM3zBNJOk"
+        },
+        {
+          "text": "Blog Post & Paper Coming Soon",
+          "url": ""
+        }
+      ]
+    },
+    {
       "title": "Do AI Scientists perform abductive reasoning, and what does that mean for how we should build AI Scientists?",
       "authors": "**Alistair Cheong**",
       "venue": "Philosophy White Paper written as part of CMU's 80-329 Philosophy And Causation Course",
       "links": [
         {
-            "text": "Blog Post",
-            "url": "/blog/phil-causation-proj"
+          "text": "Blog Post",
+          "url": "/blog/phil-causation-proj"
         }
       ]
     },
@@ -33,7 +48,7 @@
         },
         {
           "text": "C3NLP site",
-          "url": "https://c3nlp.github.io/#accept_papers"
+          "url": "https://c3nlp.github.io/2025/"
         },
         {
           "text": "GitHub",
