@@ -393,29 +393,51 @@ html.theme-transition * {
     scroll-margin-top: 6rem; /* Adjust based on your header height */
   }
 
-  .prose-enhanced table {
-    border: 1px solid rgb(64 64 64);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  .prose-enhanced .table-wrapper {
+    overflow-x: auto;
     margin: 1.5rem 0;
-    background-color: rgb(38 38 38);
+    max-width: 100%;
+  }
+
+  .prose-enhanced table {
+    border-collapse: collapse;
+    border: 2px solid rgb(209 213 219); /* Darker border for light theme */
+    margin: 0;
+    background-color: var(--color-background);
+    width: 100%;
   }
 
   .prose-enhanced th {
-    background-color: rgb(23 23 23);
+    background-color: rgb(243 244 246);
     font-weight: 600;
-    color: rgb(245 245 245);
-    border-bottom: 1px solid rgb(64 64 64);
-    padding: 1rem 1.25rem; /* Increased padding */
-    font-size: 1.125rem; /* Larger table header text */
+    color: var(--color-text);
+    border: 1px solid rgb(209 213 219); /* More visible borders */
+    padding: 1rem 1.25rem;
+    font-size: 1.125rem;
+    text-align: left;
   }
 
   .prose-enhanced td {
-    padding: 1rem 1.25rem; /* Increased padding */
-    border-bottom: 1px solid rgb(64 64 64);
-    font-size: 1.125rem; /* Larger table cell text */
+    padding: 1rem 1.25rem;
+    border: 1px solid rgb(209 213 219);
+    font-size: 1.125rem;
+    color: var(--color-text);
+  }
+
+  :root.dark .prose-enhanced table {
+    background-color: rgb(23 23 23);
+    border-color: rgb(82 82 91); /* More visible dark border */
+  }
+
+  :root.dark .prose-enhanced th {
+    background-color: rgb(30 30 30);
+    color: rgb(245 245 245);
+    border-color: rgb(82 82 91);
+  }
+
+  :root.dark .prose-enhanced td {
     color: rgb(212 212 216);
+    border-color: rgb(82 82 91);
   }
 
   /* Math equation styling */

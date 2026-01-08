@@ -9,6 +9,7 @@ import remarkProjectLinks from './remark-project-links';
 import remarkBlogImages from './remark-blog-images';
 import remarkToc from './remark-toc';
 import rehypeCitation from 'rehype-citation';
+import rehypeTableWrapper from './rehype-table-wrapper';
 import type { Pluggable } from 'unified';
 
 /**
@@ -118,7 +119,9 @@ export async function getPost(slug: string): Promise<ProcessedPost> {
       // Render math equations with KaTeX
       [rehypeKatex, { strict: false }],
       // Syntax highlighting for code blocks
-      rehypePrettyCode
+      rehypePrettyCode,
+      // Wrap tables in scrollable divs
+      rehypeTableWrapper
     ];
 
     try {
