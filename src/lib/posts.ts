@@ -10,6 +10,7 @@ import remarkBlogImages from './remark-blog-images';
 import remarkToc from './remark-toc';
 import rehypeCitation from 'rehype-citation';
 import rehypeTableWrapper from './rehype-table-wrapper';
+import rehypeCitationFormat from './rehype-citation-format';
 import type { Pluggable } from 'unified';
 
 /**
@@ -137,6 +138,8 @@ export async function getPost(slug: string): Promise<ProcessedPost> {
           csl: cslRelativePath
         }
       ]);
+      // Add citation formatting plugin after rehype-citation
+      rehypePlugins.push(rehypeCitationFormat);
     } catch {
       // No bibliography for this post; skip citation processing
     }

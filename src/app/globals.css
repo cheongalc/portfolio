@@ -399,6 +399,48 @@ html.theme-transition * {
     max-width: 100%;
   }
 
+  /* Citation references styling */
+  .prose-enhanced .references {
+    margin-top: 3rem;
+  }
+
+  .prose-enhanced .references::before {
+    content: "References";
+    display: block;
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .prose-enhanced .csl-entry {
+    display: flex;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .prose-enhanced .csl-left-margin {
+    flex-shrink: 0;
+    width: 3rem;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .prose-enhanced .csl-right-inline {
+    flex: 1;
+  }
+
+  .prose-enhanced .csl-right-inline a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    word-break: break-word;
+  }
+
+  .prose-enhanced .csl-right-inline a:hover {
+    color: var(--color-primary-hover);
+  }
+
   .prose-enhanced table {
     border-collapse: collapse;
     border: 2px solid rgb(209 213 219); /* Darker border for light theme */
