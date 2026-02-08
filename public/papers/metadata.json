@@ -1,39 +1,17 @@
 {
   "2025": [
     {
-      "title": "Extending LLM Self-Improvement with Open-Ended Search",
-      "authors": "**Alistair Cheong**",
+      "title": "Search over Self-Edit Strategies for LLM Adaptation",
+      "authors": "**Alistair Cheong**, Haolin Cong, Tyler Yang, Dustin Miao",
       "venue": "Research Project done partly during CMU's 11-785 PhD Intro to Deep Learning Course",
       "links": [
         {
-          "text": "Summary Video",
-          "url": "https://www.youtube.com/watch?v=TFqM3zBNJOk"
+          "text": "arXiv preprint",
+          "url": "https://arxiv.org/abs/2601.14532"
         },
         {
-          "text": "Blog Post & Paper Coming Soon",
+          "text": "Blog Post Coming Soon",
           "url": ""
-        }
-      ]
-    },
-    {
-      "title": "Do AI Scientists perform abductive reasoning, and what does that mean for how we should build AI Scientists?",
-      "authors": "**Alistair Cheong**",
-      "venue": "Philosophy White Paper written as part of CMU's 80-329 Philosophy And Causation Course",
-      "links": [
-        {
-          "text": "Blog Post",
-          "url": "/blog/phil-causation-proj"
-        }
-      ]
-    },
-    {
-      "title": "A Comparison of Chain-of-Thought Bypass Errors in Large Reasoning Models trained with RLVR vs. SFT",
-      "authors": "**Alistair Cheong**",
-      "venue": "Mini Research Project done as part of CMU's 76-101 Undergraduate First Year Writing Course",
-      "links": [
-        {
-            "text": "Blog Post",
-            "url": "/blog/fyw-reasoning-llm-proj"
         }
       ]
     },
