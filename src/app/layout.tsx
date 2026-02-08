@@ -92,13 +92,13 @@ export default function RootLayout({
             Skip to main content
           </a>
 
-          <div className="flex min-h-screen justify-center">
+          <div className="flex min-h-screen justify-center overflow-x-hidden">
             <div className="flex max-w-7xl w-full h-screen overflow-hidden">
               {/* Desktop Sidebar */}
               <Sidebar />
 
               {/* Main Content Area */}
-              <main id="main-content" className="flex-1 lg:ml-0 main-content-mobile overflow-y-auto">
+              <main id="main-content" className="flex-1 lg:ml-0 main-content-mobile overflow-y-auto overflow-x-hidden">
                 {/* Mobile Navigation Component */}
                 <MobileNavigation />
                 

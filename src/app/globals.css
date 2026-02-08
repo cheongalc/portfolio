@@ -74,6 +74,8 @@
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
     font-size: 18px; /* Larger base font size */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    max-width: 100vw; /* Ensure html doesn't exceed viewport */
   }
 
   /* Dark theme body styles */
@@ -89,6 +91,8 @@
   body {
     background-color: var(--color-background);
     color: var(--color-text);
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    max-width: 100vw; /* Ensure body doesn't exceed viewport */
   }
 
   /* Enable transitions only after .theme-transition is present on <html> */
@@ -154,6 +158,8 @@ html.theme-transition * {
     color: var(--color-text);
     line-height: 1.8;
     font-size: 1.125rem; /* Larger base text */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    word-wrap: break-word; /* Break long words */
   }
 
   .prose-enhanced h1 {
@@ -243,6 +249,8 @@ html.theme-transition * {
     border: 1px solid rgb(229 231 235); /* Light theme: light border */
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
     font-size: 0.95rem;
+    max-width: 100%; /* Constrain to container width */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
 
   /* Dark theme code blocks */
@@ -296,6 +304,14 @@ html.theme-transition * {
     margin: 0.75rem 0; /* Increased margin */
     font-size: 1.125rem; /* Larger list text */
     color: var(--color-text);
+  }
+
+  /* Ensure images and media don't overflow */
+  .prose-enhanced img,
+  .prose-enhanced video,
+  .prose-enhanced iframe {
+    max-width: 100%;
+    height: auto;
   }
 
   /* Table of Contents specific styling */
@@ -397,6 +413,9 @@ html.theme-transition * {
     overflow-x: auto;
     margin: 1.5rem 0;
     max-width: 100%;
+    width: 100%;
+    /* Ensure wrapper doesn't exceed viewport on mobile */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
 
   /* Citation references styling */
@@ -494,6 +513,8 @@ html.theme-transition * {
     overflow-y: visible !important; /* Explicitly prevent vertical scrollbar */
     height: auto !important; /* Allow natural height */
     max-height: none !important; /* Remove any height constraints */
+    max-width: 100%; /* Constrain to container width */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
 
   /* Fix any nested KaTeX elements that might have height constraints */
@@ -673,6 +694,13 @@ html.theme-transition * {
   .prose-enhanced .csl-entry {
     font-size: 0.9375rem;
   }
+
+  /* Mobile-specific overflow handling */
+  .prose-enhanced pre,
+  .prose-enhanced .table-wrapper,
+  .prose-enhanced .katex-display {
+    max-width: calc(100vw - 3rem); /* Account for mobile padding */
+  }
 }
 
 /* Very small screens - align with mobile nav padding */
@@ -714,6 +742,13 @@ html.theme-transition * {
   
   .prose-enhanced .csl-entry {
     font-size: 0.875rem;
+  }
+
+  /* Very small screen overflow handling */
+  .prose-enhanced pre,
+  .prose-enhanced .table-wrapper,
+  .prose-enhanced .katex-display {
+    max-width: calc(100vw - 2rem); /* Account for smaller mobile padding */
   }
 }
 
